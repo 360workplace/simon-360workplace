@@ -9,10 +9,18 @@ public class Register {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
+    @Column(name = "firstname")
     private String firstname;
+
+    @Column(name = "lastname")
     private String lastname;
+
+    @Column(name = "email")
     private String email;
-    private UUID role_id;
+
+    @Column(name = "role_id")
+    private UUID roleId;
 
     public UUID getId() {
         return id;
@@ -46,11 +54,11 @@ public class Register {
         this.email = email;
     }
 
-    public UUID getRole_id() {
-        return role_id;
+    public UUID getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(UUID role_id) {
-        this.role_id = role_id;
+    public void setRoleId(UUID roleId) {
+        this.roleId = roleId;
     }
 }
