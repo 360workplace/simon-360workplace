@@ -11,12 +11,8 @@ import java.util.UUID;
 
 @Service
 public class RegisterService {
-    private final RegisterRepository registerRepository;
-
     @Autowired
-    public RegisterService(RegisterRepository registerRepository) {
-        this.registerRepository = registerRepository;
-    }
+    private RegisterRepository registerRepository;
 
     public RegisterRepository getRegisterRepository() {
         return registerRepository;
