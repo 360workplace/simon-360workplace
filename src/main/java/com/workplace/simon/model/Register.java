@@ -19,6 +19,9 @@ public class Register {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "role_id")
     private UUID roleId;
 
@@ -60,5 +63,13 @@ public class Register {
 
     public void setRoleId(UUID roleId) {
         this.roleId = roleId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
