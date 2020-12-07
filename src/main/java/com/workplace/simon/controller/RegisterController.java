@@ -33,6 +33,6 @@ public class RegisterController {
 
         this.getRegisterService().save(register);
 
-        return "registered-user";
+        return "index";
     }
 }
