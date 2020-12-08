@@ -1,6 +1,7 @@
 package com.workplace.simon.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 @Entity
@@ -14,12 +15,15 @@ public class Register {
     private String firstname;
 
     @Column(name = "lastname")
+    @NotBlank(message = "lastname is mandatory")
     private String lastname;
 
     @Column(name = "email")
+    @NotBlank(message = "Email is mandatory")
     private String email;
 
     @Column(name = "password")
+    @NotBlank(message = "Password is mandatory")
     private String password;
 
     @Column(name = "role_id")

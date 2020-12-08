@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/register/")
 public class RegisterController {
@@ -26,7 +28,7 @@ public class RegisterController {
     }
 
     @PostMapping("add")
-    public String addUser(Register register, BindingResult bindingResult, Model model) {
+    public String addUser(@Valid Register register, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "signup-form";
         }
