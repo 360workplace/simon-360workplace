@@ -22,7 +22,6 @@ public class BaseLine {
     private String detail;
 
     @Column(name = "responsable")
-    @NotBlank(message = "The field Supervisor is mandatory")
     private Long supervisor;
 
     @Column(name = "fecha_inicial")

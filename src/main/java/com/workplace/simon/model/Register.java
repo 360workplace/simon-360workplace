@@ -32,7 +32,6 @@ public class Register {
     private Long roleId = Long.valueOf("2");
 
     @Column(name = "supervisor_id")
-    @NotBlank(message = "The field Supervisor is mandatory")
     private Long supervisor;
 
     public Long getId() {
