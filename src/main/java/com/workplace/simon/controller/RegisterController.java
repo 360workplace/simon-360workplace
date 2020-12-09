@@ -24,21 +24,24 @@ public class RegisterController {
 
     @GetMapping("signup")
     public String showSignupForm(Register register, Model model) {
-        model.addAttribute("allUsers", this.getRegisterService().findAll());
-
-        return "signup-form";
+        return getSignUpForm(model);
     }
 
     @PostMapping("add")
     public String addUser(@Valid Register register, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("allUsers", this.getRegisterService().findAll());
-
-            return "signup-form";
+            return getSignUpForm(model);
         }
 
         this.getRegisterService().save(register);
 
         return "index";
+    }
+
+    private String getSignUpForm(Model model) {
+        model.addAttribute("allUsers", this.getRegisterService().findAll());
+        model.addAttribute("simpleUser", 2);
+
+        return "signup-form";
     }
 }
