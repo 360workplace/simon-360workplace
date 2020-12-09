@@ -24,7 +24,8 @@
                                 <p th:text="${currentUser.roleId}" class="font-weight-light"></p>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-8">
                             <label for="title" class="col-form-label">Título</label> <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title"> <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
                         </div>
