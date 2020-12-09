@@ -32,9 +32,9 @@ public class BaseLineController {
         return registerService;
     }
 
-    @GetMapping("baseline/{userId}")
-    public String showBaselineForm(@PathVariable("userId") Optional<String> userId, BaseLine baseline, Model model) {
-        String nickname = userId.orElse("");
+    @GetMapping("baseline")
+    public String showBaselineForm(BaseLine baseline, Model model) {
+//        String nickname = userId.orElse("");
         model.addAttribute("allUsers", this.getRegisterService().findAll());
 
         return "baseline-form";
