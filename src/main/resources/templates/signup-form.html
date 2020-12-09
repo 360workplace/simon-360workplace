@@ -36,13 +36,13 @@
                             <label for="password" class="col-form-label">Password</label> <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password"> <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
                         </div>
 
-                        <input type="hidden" th:field="*{roleId}" th:value="${simpleUser}}">
+                        <input type="hidden" th:field="*{roleId}" th:value="${simpleUser}">
 
                         <div class="form-group col-md-8">
                             <select th:field="*{supervisorId}">
                                 <option th:each="user : ${allUsers}"
                                         th:value="${user.id}"
-                                        th:text="#{${user.firstname} + ' ' + ${user.lastname}}">user</option>
+                                        th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>
                             </select>
                         </div>
 
