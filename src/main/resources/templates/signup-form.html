@@ -39,11 +39,14 @@
                         <input type="hidden" th:field="*{roleId}" th:value="${simpleUser}">
 
                         <div class="form-group col-md-8">
-                            <select th:field="*{supervisor}">
+                            <label for="supervisor" class="col-form-label">Seleccione supervisor</label>
+                            <select th:field="*{supervisor}" id="supervisor">
+                                <option value="">-- Select --</option>
                                 <option th:each="user : ${allUsers}"
                                         th:value="${user.id}"
                                         th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>
                             </select>
+                            <span th:if="${#fields.hasErrors('supervisorId')}" th:errors="*{supervisorId}" class="text-danger"></span>
                         </div>
 
                         <div class="col-md-6">

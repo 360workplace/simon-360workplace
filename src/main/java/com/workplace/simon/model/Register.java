@@ -32,7 +32,7 @@ public class Register {
     private Long roleId = Long.valueOf("2");
 
     @Column(name = "supervisor_id")
-    private Long supervisorId;
+    private Long supervisor;
 
     public Long getId() {
         return id;
@@ -74,12 +74,12 @@ public class Register {
         this.roleId = roleId;
     }
 
-    public Long getSupervisorId() {
-        return supervisorId;
+    public Long getSupervisor() {
+        return supervisor;
     }
 
-    public void setSupervisorId(Long supervisorId) {
-        this.supervisorId = supervisorId;
+    public void setSupervisor(Long supervisor) {
+        this.supervisor = supervisor;
     }
 
     public String getLogin() {
