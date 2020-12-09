@@ -31,7 +31,7 @@
                                         th:value="${user.id}"
                                         th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>
                             </select>
-                            <span th:if="${#fields.hasErrors('supervisorId')}" th:errors="*{supervisorId}" class="text-danger"></span>
+                            <span th:if="${#fields.hasErrors('supervisor')}" th:errors="*{supervisor}" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-8">
