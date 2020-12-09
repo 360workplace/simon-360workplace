@@ -31,21 +31,25 @@ public class BaseLineController {
 
     @GetMapping("baseline")
     public String showBaselineForm(@RequestParam("user") Optional<String> user, Model model) {
-        String nickname = user.orElseGet(() -> "not provided");
-        model.addAttribute("baseline", new BaseLine());
-        model.addAttribute("allUsers", this.getRegisterService().findAll());
-
-        return "baseline-form";
+        return getBaselineForm(user, model);
     }
 
     @PostMapping("add")
-    public String addBaseline(@Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
+    public String addBaseline(@RequestParam("user") Optional<String> user, @Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "baseline-form";
+            return getBaselineForm(user, model);
         }
 
         this.getBaseLineService().save(baseLine);
 
         return "index";
+    }
+
+    private String getBaselineForm(@RequestParam("user") Optional<String> user, Model model) {
+        String nickname = user.orElseGet(() -> "not provided");
+        model.addAttribute("baseline", new BaseLine());
+        model.addAttribute("allUsers", this.getRegisterService().findAll());
+
+        return "baseline-form";
     }
 }
