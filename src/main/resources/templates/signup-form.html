@@ -39,7 +39,7 @@
                         <input type="hidden" th:field="*{roleId}" th:value="${simpleUser}">
 
                         <div class="form-group col-md-8">
-                            <select th:field="*{supervisorId}">
+                            <select th:field="*{supervisor}">
                                 <option th:each="user : ${allUsers}"
                                         th:value="${user.id}"
                                         th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>

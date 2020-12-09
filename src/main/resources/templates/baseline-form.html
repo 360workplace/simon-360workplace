@@ -24,7 +24,7 @@
                             <label for="detail" class="col-form-label">Detalle</label> <textarea th:field="*{detail}" class="form-control" id="detail" placeholder="Detail" /> <span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-8">
-                            <select th:field="*{supervisorId}">
+                            <select th:field="*{supervisor}">
                                 <option th:each="user : ${allUsers}"
                                         th:value="${user.id}"
                                         th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>
