@@ -74,4 +74,8 @@ public class BaseLine {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+
+    public void setStartDate(String startDate) {
+        this.startDate = Date.valueOf(startDate);
+    }
 }
