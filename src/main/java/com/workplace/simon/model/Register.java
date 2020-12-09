@@ -29,7 +29,7 @@ public class Register {
     private String password;
 
     @Column(name = "role_id")
-    private Long roleId;
+    private Long roleId = Long.valueOf("2");
 
     @Column(name = "supervisor_id")
     private Long supervisorId;
