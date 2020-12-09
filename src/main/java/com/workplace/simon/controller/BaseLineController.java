@@ -42,7 +42,6 @@ public class BaseLineController {
     @PostMapping("add")
     public String addBaseline(@Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("baseline", baseLine);
             model.addAttribute("allUsers", this.getRegisterService().findAll());
 
             return "baseline-form";
