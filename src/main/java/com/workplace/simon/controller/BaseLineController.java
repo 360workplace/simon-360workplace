@@ -46,7 +46,7 @@ public class BaseLineController {
     }
 
     private String getBaselineForm(@RequestParam("user") Optional<String> user, Model model) {
-        String nickname = user.orElseGet(() -> "not provided");
+        model.addAttribute("nickname", user.orElseGet(() -> ""));
         model.addAttribute("baseline", new BaseLine());
         model.addAttribute("allUsers", this.getRegisterService().findAll());
 
