@@ -14,6 +14,12 @@
 <div class="container my-5">
     <h3>Línea base</h3>
     <div class="card">
+        <div class="card-head">
+            <div class="col-md-10">
+                <p th:text="${currentUser.login}"></p>
+                <p th:text="${currentUser.rolId}"></p>
+            </div>
+        </div>
         <div class="card-body">
             <div class="col-md-10">
                 <form action="#" th:action="@{/data/add}" th:object="${baseLine}" method="post">
