@@ -35,6 +35,8 @@ public class BaseLineController {
     @GetMapping("baseline/{userId}")
     public String showBaselineForm(@PathVariable("userId") Optional<String> userId, BaseLine baseLine, Model model) {
         String nickname = userId.orElse("");
+        model.addAttribute("allUsers", this.getRegisterService().findAll());
+
         return "baseline-form";
     }
 
