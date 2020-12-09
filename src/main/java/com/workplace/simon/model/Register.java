@@ -2,14 +2,13 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 public class Register {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @Column(name = "firstname")
     private String firstname;
@@ -22,18 +21,24 @@ public class Register {
     @NotBlank(message = "Email is mandatory")
     private String email;
 
+    @Column(name = "login")
+    private String login;
+
     @Column(name = "password")
     @NotBlank(message = "Password is mandatory")
     private String password;
 
     @Column(name = "role_id")
-    private UUID roleId;
+    private Long roleId;
 
-    public UUID getId() {
+    @Column(name = "supervisor_id")
+    private Long supervisorId;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -61,12 +66,28 @@ public class Register {
         this.email = email;
     }
 
-    public UUID getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(UUID roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
+    }
+
+    public Long getSupervisorId() {
+        return supervisorId;
+    }
+
+    public void setSupervisorId(Long supervisorId) {
+        this.supervisorId = supervisorId;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {

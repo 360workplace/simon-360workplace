@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class RegisterService {
@@ -26,7 +25,7 @@ public class RegisterService {
         return this.getRegisterRepository().findAll();
     }
 
-    public Optional<Register> findById(UUID id) {
+    public Optional<Register> findById(Long id) {
         return this.getRegisterRepository().findById(id);
     }
 

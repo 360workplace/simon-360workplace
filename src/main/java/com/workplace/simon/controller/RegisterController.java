@@ -23,7 +23,9 @@ public class RegisterController {
     }
 
     @GetMapping("signup")
-    public String showSignupForm(Register register) {
+    public String showSignupForm(Register register, Model model) {
+        model.addAttribute("allUsers", this.getRegisterService().findAll());
+
         return "signup-form";
     }
 
