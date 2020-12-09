@@ -30,26 +30,26 @@ public class BaseLineController {
     }
 
     @GetMapping("baseline")
-    public String showBaselineForm(@RequestParam("user") Optional<String> user, Model model) {
-        return getBaselineForm(user, model);
+    public String showBaselineForm(@RequestParam("user") Optional<Integer> user, Model model) {
+        BaseLine baseLine = new BaseLine();
+        baseLine.setSource(Long.valueOf(user.orElseGet(() -> 0)));
+        model.addAttribute("baseline", baseLine);
+        model.addAttribute("allUsers", this.getRegisterService().findAll());
+
+        return "baseline-form";
     }
 
     @PostMapping("add")
-    public String addBaseline(@RequestParam("user") Optional<String> user, @Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
+    public String addBaseline(@Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return getBaselineForm(user, model);
+            model.addAttribute("baseline", baseLine);
+            model.addAttribute("allUsers", this.getRegisterService().findAll());
+
+            return "baseline-form";
         }
 
         this.getBaseLineService().save(baseLine);
 
         return "index";
-    }
-
-    private String getBaselineForm(@RequestParam("user") Optional<String> user, Model model) {
-        model.addAttribute("nickname", user.orElseGet(() -> ""));
-        model.addAttribute("baseline", new BaseLine());
-        model.addAttribute("allUsers", this.getRegisterService().findAll());
-
-        return "baseline-form";
     }
 }
