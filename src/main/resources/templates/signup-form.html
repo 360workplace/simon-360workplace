@@ -42,7 +42,7 @@
                             <select th:field="*{supervisorId}">
                                 <option th:each="user : ${allUsers}"
                                         th:value="${user.id}"
-                                        th:text="#{user.firstname + ' ' + user.lastname}">user</option>
+                                        th:text="#{${user.firstname} + ' ' + ${user.lastname}}">user</option>
                             </select>
                         </div>
 
