@@ -1,6 +1,7 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.BaseLine;
+import com.workplace.simon.model.Register;
 import com.workplace.simon.service.BaseLineService;
 import com.workplace.simon.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,11 @@ public class BaseLineController {
     public String showBaselineForm(@RequestParam("user") Optional<Integer> user, Model model) {
         BaseLine baseLine = new BaseLine();
         baseLine.setSource(Long.valueOf(user.orElseGet(() -> 0)));
-        model.addAttribute("currentUser", this.getRegisterService().findById(baseLine.getSource()));
+        Register currentUser = this.getRegisterService().findById(baseLine.getSource())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
+
         model.addAttribute("baseLine", baseLine);
+        model.addAttribute("currentUser", currentUser));
         model.addAttribute("allUsers", this.getRegisterService().findAll());
 
         return "baseline-form";
