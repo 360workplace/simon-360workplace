@@ -18,11 +18,8 @@
             <div class="col-md-10">
                 <form action="#" th:action="@{/data/add}" th:object="${baseLine}" method="post">
                     <div class="row">
-                        <div class="card-head">
-                            <div class="col-md-10">
-                                <p th:text="${currentUser.login}">Usuario: </p>
-                                <p th:text="${currentUser.roleId}" class="font-weight-light"></p>
-                            </div>
+                        <div class="col-md-8">
+                            <span class="font-weight-light">Usuario>: <span th:text="${currentUser.login}"></span></span>
                         </div>
                     </div>
                     <div class="row">
