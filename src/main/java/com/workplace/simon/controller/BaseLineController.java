@@ -33,7 +33,7 @@ public class BaseLineController {
     public String showBaselineForm(@RequestParam("user") Optional<Integer> user, Model model) {
         BaseLine baseLine = new BaseLine();
         baseLine.setSource(Long.valueOf(user.orElseGet(() -> 0)));
-        model.addAttribute("baseline", baseLine);
+        model.addAttribute("baseLine", baseLine);
         model.addAttribute("allUsers", this.getRegisterService().findAll());
 
         return "baseline-form";
