@@ -38,7 +38,7 @@ public class BaseLineController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
 
         model.addAttribute("baseLine", baseLine);
-        model.addAttribute("currentUser", currentUser));
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("allUsers", this.getRegisterService().findAll());
 
         return "baseline-form";
