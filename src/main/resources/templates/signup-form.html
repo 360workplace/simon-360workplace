@@ -40,7 +40,7 @@
 
                         <div class="form-group col-md-8">
                             <label for="supervisor" class="col-form-label">Seleccione supervisor</label>
-                            <select th:field="*{supervisor}" id="supervisor">
+                            <select th:field="*{supervisor}" class="form-control" id="supervisor">
                                 <option value="">-- Select --</option>
                                 <option th:each="user : ${allUsers}"
                                         th:value="${user.id}"
