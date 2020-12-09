@@ -32,6 +32,8 @@ public class RegisterController {
     @PostMapping("add")
     public String addUser(@Valid Register register, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("allUsers", this.getRegisterService().findAll());
+
             return "signup-form";
         }
 
