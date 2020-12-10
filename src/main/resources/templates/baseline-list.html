@@ -27,7 +27,7 @@
                                 <th>Fuente</th>
                                 <th>Detalle</th>
                                 <th>Responsable</th>
-                                <th>Fecha inicial</th>
+                                <th>Fecha_inicial</th>
                                 <th colspan="4"></th>
                             </tr>
                             </thead>
@@ -37,7 +37,7 @@
                                 <td th:text="${base.source}"></td>
                                 <td th:text="${base.detail}"></td>
                                 <td th:text="${base.supervisor}"></td>
-                                <td th:text="${#calendars.format(${base.startDate}, 'dd/MMM/yyyy HH:mm')}"></td>
+                                <td th:text="${base.startDate}"></td>
                                 <td><a th:href="@{#}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Mostrar"><i class="fa fa-eye"></i></a></td>
                                 <td><a th:href="@{#}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Asignación Gerencial"><i class="fa fa-trophy"></i></a></td>
                                 <td><a th:href="@{#}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Norma y Politica"><i class="fa fa fa-bullhorn"></i></a></td>
