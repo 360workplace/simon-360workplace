@@ -26,6 +26,7 @@ public class BaseLine {
     private Long supervisor;
 
     @Column(name = "fecha_inicial")
+    @NotBlank(message = "The start date is mandatory")
     private Date startDate;
 
     @OneToMany(mappedBy="baseLine")
