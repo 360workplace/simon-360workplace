@@ -3,6 +3,7 @@ package com.workplace.simon.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "Linea_Base")
@@ -26,6 +27,9 @@ public class BaseLine {
 
     @Column(name = "fecha_inicial")
     private Date startDate;
+
+    @OneToMany(mappedBy="baseLine")
+    private Set<BaseLineResource> resources;
 
     public Long getId() {
         return id;
@@ -77,5 +81,13 @@ public class BaseLine {
 
     public void setStartDate(String startDate) {
         this.startDate = Date.valueOf(startDate);
+    }
+
+    public Set<BaseLineResource> getResources() {
+        return resources;
+    }
+
+    public void setResources(Set<BaseLineResource> resources) {
+        this.resources = resources;
     }
 }
