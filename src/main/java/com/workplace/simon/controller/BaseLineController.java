@@ -47,6 +47,9 @@ public class BaseLineController {
     @PostMapping("add")
     public String addBaseline(@Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            Register currentUser = this.getRegisterService().findById(baseLine.getSource())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
+            model.addAttribute("currentUser", currentUser);
             model.addAttribute("allUsers", this.getRegisterService().findAll());
 
             return "baseline-form";
