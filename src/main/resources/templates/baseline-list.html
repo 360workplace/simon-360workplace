@@ -28,8 +28,7 @@
                                 <th>Detalle</th>
                                 <th>Responsable</th>
                                 <th>Fecha inicial</th>
-                                <th></th>
-                                <th></th>
+                                <th colspan="4"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,9 +38,10 @@
                                 <td th:text="${base.detail}"></td>
                                 <td th:text="${base.supervisor}"></td>
                                 <td th:text="${base.startDate}"></td>
-                                <td><a th:href="@{#}" class="btn btn-primary"><i class="fas fa-edit ml-2"></i></a></td>
+                                <td><a th:href="@{#}" class="btn btn-primary" title=""><i class="fas fa-edit ml-2"></i></a></td>
                                 <td><a th:href="@{#}" class="btn btn-primary"><i class="fa fa-trophy ml-2"></i></a></td>
-                                <td><a th:href="@{#}" class="btn btn-primary"><i class="fa fa-trash ml-2"></i></a></td>
+                                <td><a th:href="@{#}" class="btn btn-primary"><i class="fa fa fa-bullhorn ml-2"></i></a></td>
+                                <td><a th:href="@{#}" class="btn btn-primary"><i class="fa fa-unlock-alt ml-2"></i></a></td>
                             </tr>
                             </tbody>
                         </table>
