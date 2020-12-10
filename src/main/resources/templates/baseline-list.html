@@ -38,10 +38,10 @@
                                 <td th:text="${base.detail}"></td>
                                 <td th:text="${base.supervisor}"></td>
                                 <td th:text="${base.startDate}"></td>
-                                <td><a th:href="@{#}" class="btn btn-primary" title=""><i class="fas fa-edit ml-2"></i></a></td>
-                                <td><a th:href="@{#}" class="btn btn-primary"><i class="fa fa-trophy ml-2"></i></a></td>
-                                <td><a th:href="@{#}" class="btn btn-primary"><i class="fa fa fa-bullhorn ml-2"></i></a></td>
-                                <td><a th:href="@{#}" class="btn btn-primary"><i class="fa fa-unlock-alt ml-2"></i></a></td>
+                                <td><a th:href="@{#}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Mostrar"><i class="fa fa-eye ml-2"></i></a></td>
+                                <td><a th:href="@{#}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Asignación Gerencial"><i class="fa fa-trophy ml-2"></i></a></td>
+                                <td><a th:href="@{#}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Norma y Politica"><i class="fa fa fa-bullhorn ml-2"></i></a></td>
+                                <td><a th:href="@{#}" class="btn btn-danger btn-sm" data-placement="top" title="Archivar"><i class="fa fa-unlock-alt ml-2"></i></a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -52,6 +52,16 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>
 </body>
 
 </html>
