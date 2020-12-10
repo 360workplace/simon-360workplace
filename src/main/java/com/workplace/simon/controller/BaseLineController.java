@@ -57,6 +57,13 @@ public class BaseLineController {
 
         this.getBaseLineService().save(baseLine);
 
-        return "index";
+        return "redirect:list";
+    }
+
+    @GetMapping("baseline/list")
+    public String students(Model model) {
+        model.addAttribute("baseLine", this.getBaseLineService().findAll());
+
+        return "baseline-list";
     }
 }
