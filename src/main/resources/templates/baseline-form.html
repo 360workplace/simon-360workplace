@@ -20,6 +20,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <span class="font-weight-light">Usuario: <span th:text="${currentUser.login}"></span></span>
+                            <input type="hidden" th:field="*{source}" th:value="${source}">
                         </div>
                     </div>
                     <div class="row">
