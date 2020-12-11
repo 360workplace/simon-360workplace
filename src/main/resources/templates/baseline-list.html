@@ -39,8 +39,8 @@
                                 <td th:text="${base.supervisor}"></td>
                                 <td th:text="${base.startDate}"></td>
                                 <td><a th:href="@{#}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Mostrar"><i class="fa fa-eye"></i></a></td>
-                                <td><a th:href="@{#}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Asignación Gerencial"><i class="fa fa-trophy"></i></a></td>
-                                <td><a th:href="@{#}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Norma y Politica"><i class="fa fa fa-bullhorn"></i></a></td>
+                                <td><a th:href="@{/process/execution/creation/{source}({source=bl})/{id}(id=${base.id})}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Asignación Gerencial"><i class="fa fa-trophy"></i></a></td>
+                                <td><a th:href="#" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Norma y Politica"><i class="fa fa fa-bullhorn"></i></a></td>
                                 <td><a th:href="@{#}" class="btn btn-danger btn-sm" data-placement="top" title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
                             </tr>
                             </tbody>
