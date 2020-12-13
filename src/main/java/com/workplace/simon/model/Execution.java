@@ -25,8 +25,8 @@ public class Execution {
     @Column(name = "detail")
     private String detail;
 
-    @Column(name = "supervisor")
-    private Long supervisorId;
+//    @Column(name = "supervisor")
+//    private Long supervisorId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "supervisor", referencedColumnName = "id")
@@ -81,13 +81,13 @@ public class Execution {
         this.detail = detail;
     }
 
-    public Long getSupervisorId() {
-        return supervisorId;
-    }
+//    public Long getSupervisorId() {
+//        return supervisorId;
+//    }
 
-    public void setSupervisorId(Long supervisorId) {
-        this.supervisorId = supervisorId;
-    }
+//    public void setSupervisorId(Long supervisorId) {
+//        this.supervisorId = supervisorId;
+//    }
 
     public User getSupervisor() {
         return supervisor;
