@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<div class="container my-5">
+<div class="container">
     <h3>Registro</h3>
     <div class="card">
         <div class="card-body">
@@ -20,7 +20,7 @@
                 <form action="#" th:action="@{/register/add}" th:object="${register}" method="post">
                     <div class="row">
                         <div class="form-group col-md-8">
-                            <label for="firstname" class="col-form-label">Nombre</label> <input type="text" th:field="*{firstname}" class="form-control" id="firstname" placeholder="Firstname"> <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger"></span>
+                            <label for="title" class="col-form-label">Nombre</label> <input type="text" th:field="*{firstname}" class="form-control" id="firstname" placeholder="Firstname"> <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-8">
                             <label for="lastname" class="col-form-label">Apellido</label> <input type="text" th:field="*{lastname}" class="form-control" id="lastname" placeholder="Lastname"> <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="text-danger"></span>

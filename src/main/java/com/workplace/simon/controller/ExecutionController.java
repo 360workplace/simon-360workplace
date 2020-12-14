@@ -27,10 +27,26 @@ public class ExecutionController {
         return userRepository;
     }
 
+    /**
+     * Controller to manage the convert to source to assigns.
+     * @param source Label that is idicate the table from
+     * @param id This is the id from the table that will be gets the values. They can be BL, or ..
+     * @param model Model view to interact with the front.
+     * @return Name to the view.
+     */
     @GetMapping("execution/creation/{source}/{id}")
     public String processExecution(@PathVariable String source, @PathVariable Long id, Model model) {
         model.addAttribute("execution", new Execution());
 
+        // TODO - Get from source and the id the correct table and the values to the correct table.
+
+
         return "execution-creation-form";
+    }
+
+    public String processPolicy(@PathVariable String source, @PathVariable Long id, Model model) {
+
+
+        return "policy-creation-form";
     }
 }
