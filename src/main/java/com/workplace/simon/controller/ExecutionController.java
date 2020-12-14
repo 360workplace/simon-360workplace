@@ -11,8 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.ws.rs.QueryParam;
 
 @Controller
 @RequestMapping("process")
@@ -47,11 +48,11 @@ public class ExecutionController {
      * @param model       Model view to interact with the front.
      * @return Name to the view.
      */
-    @GetMapping("execution/creation/{sourceLabel}/{sourceId}/{userId}")
+    @GetMapping("execution/creation")
     public String processExecution(
-            @PathVariable String sourceLabel,
-            @PathVariable Long sourceId,
-            @PathVariable Long userId,
+            @QueryParam("sourceLabel") String sourceLabel,
+            @QueryParam("sourceId") Long sourceId,
+            @QueryParam("userId") Long userId,
             Model model) {
         Execution execution = new Execution();
         model.addAttribute("execution", execution);
@@ -74,11 +75,11 @@ public class ExecutionController {
         return "execution-creation-form";
     }
 
-    @GetMapping("policy/creation/")
+    @GetMapping("policy/creation")
     public String processPolicy(
-            @PathVariable String sourceLabel,
-            @PathVariable Long sourceId,
-            @PathVariable Long userId,
+            @QueryParam("sourceLabel") String sourceLabel,
+            @QueryParam("sourceId") Long sourceId,
+            @QueryParam("userId") Long userId,
             Model model) {
         Policy policy = new Policy();
         model.addAttribute("policy", policy);
