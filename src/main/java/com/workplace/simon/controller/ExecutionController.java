@@ -2,6 +2,7 @@ package com.workplace.simon.controller;
 
 import com.workplace.simon.model.BaseLine;
 import com.workplace.simon.model.Execution;
+import com.workplace.simon.model.Policy;
 import com.workplace.simon.model.User;
 import com.workplace.simon.repository.UserRepository;
 import com.workplace.simon.service.BaseLineService;
@@ -12,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping("process")
@@ -75,8 +74,14 @@ public class ExecutionController {
         return "execution-creation-form";
     }
 
-    public String processPolicy(@PathVariable String source, @PathVariable Long id, Model model) {
-
+    @GetMapping("policy/creation/")
+    public String processPolicy(
+            @PathVariable String sourceLabel,
+            @PathVariable Long sourceId,
+            @PathVariable Long userId,
+            Model model) {
+        Policy policy = new Policy();
+        model.addAttribute("policy", policy);
 
         return "policy-creation-form";
     }

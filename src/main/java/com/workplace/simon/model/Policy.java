@@ -15,9 +15,6 @@ public class Policy {
     @NotBlank(message = "Code is mandatory")
     private String codeFrom;
 
-//    @Column(name = "source")
-//    private Long source;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "source", referencedColumnName = "id")
     private User userSource;
@@ -53,14 +50,6 @@ public class Policy {
     public void setCodeFrom(String codeFrom) {
         this.codeFrom = codeFrom;
     }
-
-//    public Long getSource() {
-//        return source;
-//    }
-
-//    public void setSource(Long source) {
-//        this.source = source;
-//    }
 
     public User getUserSource() {
         return userSource;
