@@ -108,15 +108,15 @@ public class ExecutionController {
         BaseLine source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
-        model.addAttribute("sourceId", sourceId);
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("sourceId", sourceId);
             model.addAttribute("allUsers", this.getUserRepository().findAll());
 
             return "execution-creation-form";
         }
 
-        execution.setStatus(Status.OPEN.getLabel());
+        execution.setStatus(AssignationStatus.OPEN.getLabel());
         this.getExecutionService().save(execution);
 
         // TODO - needs the change it is necessary to select correct database.

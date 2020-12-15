@@ -65,7 +65,8 @@ public class BaseLineController {
             @PathVariable("id") Long id,
             @Valid BaseLine baseLine,
             BindingResult bindingResult,
-            Model model) {
+            Model model
+    ) {
         if (bindingResult.hasErrors()) {
             baseLine.setId(id);
             Register currentUser = this.getRegisterService().findById(baseLine.getSource())
@@ -91,7 +92,8 @@ public class BaseLineController {
     @GetMapping("baseline/show/{baseLineId}")
     public String showItem(
             @PathVariable("baseLineId") Long baseLineId,
-            Model model) {
+            Model model
+    ) {
         BaseLine baseLine = this.getBaseLineService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
         Register currentUser = this.getRegisterService().findById(baseLine.getSource())
@@ -107,7 +109,8 @@ public class BaseLineController {
     @GetMapping("baseline/trunk/{baseLineId}")
     public String moveToTrunk(
             @PathVariable("baseLineId") Long baseLineId,
-            Model model) {
+            Model model
+    ) {
         BaseLine baseLine = this.getBaseLineService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
         baseLine.setActive(false);
