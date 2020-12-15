@@ -126,16 +126,20 @@ public class ExecutionController {
             @Valid Policy policy,
             BindingResult bindingResult,
             Model model) {
-        if (bindingResult.hasErrors()) {
-            // TODO - It is necessary select the correct source in order to select the correct database to save data.
-            BaseLine source = this.getBaseLineService().findById(sourceId)
-                    .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
-            model.addAttribute("source", source);
+        // TODO - It is necessary select the correct source in order to select the correct database to save data.
+        BaseLine source = this.getBaseLineService().findById(sourceId)
+                .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
+        model.addAttribute("source", source);
 
+        if (bindingResult.hasErrors()) {
             return "policy-creation-form";
         }
 
         this.getPolicyService().save(policy);
+
+        // TODO - needs the change it is necessary to select correct database.
+        source.setActive(false);
+        this.getBaseLineService().save(source);
 
         return "redirect:/data/baseline/list";
     }
