@@ -31,6 +31,7 @@ public class BaseLine {
     @OneToMany(mappedBy="baseLine")
     private Set<BaseLineResource> resources;
 
+    @Column(name = "active")
     private Boolean active;
 
     public Long getId() {
@@ -91,5 +92,13 @@ public class BaseLine {
 
     public void setResources(Set<BaseLineResource> resources) {
         this.resources = resources;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
