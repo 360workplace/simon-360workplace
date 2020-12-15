@@ -60,6 +60,27 @@ public class BaseLineController {
         return "redirect:/";
     }
 
+    @PostMapping("update/{id}")
+    public String updateBaseline(
+            @PathVariable("id") Long id,
+            @Valid BaseLine baseLine,
+            BindingResult bindingResult,
+            Model model) {
+        if (bindingResult.hasErrors()) {
+            baseLine.setId(id);
+            Register currentUser = this.getRegisterService().findById(baseLine.getSource())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
+            model.addAttribute("currentUser", currentUser);
+            model.addAttribute("allUsers", this.getRegisterService().findAll());
+
+            return "baseline-form";
+        }
+
+        this.getBaseLineService().save(baseLine);
+
+        return "redirect:/data/baseline/list";
+    }
+
     @GetMapping("baseline/list")
     public String students(Model model) {
         model.addAttribute("baseLine", this.getBaseLineService().findAll());
