@@ -31,9 +31,9 @@ public class Policy {
     @NotBlank(message = "Title is mandatory")
     private String title;
 
+    @NotBlank(message = "The detail is mandatory")
     @Size(max = 1024, message = "The content is too long.")
     @Column(columnDefinition = "text")
-    @NotBlank(message = "The detail is mandatory")
     private String detail;
 
     public Long getId() {
