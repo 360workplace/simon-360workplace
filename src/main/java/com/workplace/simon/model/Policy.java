@@ -30,8 +30,7 @@ public class Policy {
     @NotBlank(message = "Title is mandatory")
     private String title;
 
-    @NotBlank(message = "The detail is mandatory")
-    @Column(columnDefinition = "text")
+    @Lob
     private String detail;
 
     public Long getId() {

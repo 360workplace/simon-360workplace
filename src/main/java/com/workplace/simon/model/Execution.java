@@ -21,7 +21,7 @@ public class Execution {
     @NotBlank(message = "title is mandatory")
     private String title;
 
-    @Column(columnDefinition = "text")
+    @Lob
     private String detail;
 
     @OneToOne(cascade = CascadeType.ALL)
