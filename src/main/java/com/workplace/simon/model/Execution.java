@@ -2,6 +2,7 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
@@ -22,7 +23,8 @@ public class Execution {
     @NotBlank(message = "title is mandatory")
     private String title;
 
-    @Column(name = "detail")
+    @Size(max = 1024, message = "The content is too long.")
+    @Column(name = "detail", columnDefinition = "text")
     private String detail;
 
     @OneToOne(cascade = CascadeType.ALL)

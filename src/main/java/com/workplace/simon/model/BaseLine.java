@@ -20,8 +20,8 @@ public class BaseLine {
     @NotBlank(message = "The Title is mandatory")
     private String title;
 
-    @Size(max = 1024)
-    @Column(columnDefinition = "text")
+    @Size(max = 1024, message = "The content is too long.")
+    @Column(name = "detail", columnDefinition = "text")
     private String detail;
 
     @Column(name = "responsable")
