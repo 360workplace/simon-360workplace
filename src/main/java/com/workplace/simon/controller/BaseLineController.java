@@ -31,9 +31,9 @@ public class BaseLineController {
     }
 
     @GetMapping("baseline")
-    public String showBaselineForm(@RequestParam("user") Optional<Integer> user, Model model) {
+    public String showBaselineForm(@RequestParam("user") Optional<Integer> userId, Model model) {
         BaseLine baseLine = new BaseLine();
-        baseLine.setSource(Long.valueOf(user.orElseGet(() -> 0)));
+        baseLine.setSource(Long.valueOf(userId.orElseGet(() -> 0)));
         Register currentUser = this.getRegisterService().findById(baseLine.getSource())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
 
@@ -65,5 +65,33 @@ public class BaseLineController {
         model.addAttribute("baseLine", this.getBaseLineService().findAll());
 
         return "baseline-list";
+    }
+
+    @GetMapping("baseline/show/{baseLineId}")
+    public String showItem(
+            @PathVariable("baseLineId") Long baseLineId,
+            Model model) {
+        BaseLine baseLine = this.getBaseLineService().findById(baseLineId)
+                .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
+        Register currentUser = this.getRegisterService().findById(baseLine.getSource())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
+
+        model.addAttribute("baseLine", baseLine);
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("allUsers", this.getRegisterService().findAll());
+
+        return "baseline-show";
+    }
+
+    @GetMapping("baseline/trunk/{baseLineId}")
+    public String moveToTrunk(
+            @PathVariable("baseLineId") Long baseLineId,
+            Model model) {
+        BaseLine baseLine = this.getBaseLineService().findById(baseLineId)
+                .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
+        baseLine.setActive(false);
+        this.getBaseLineService().save(baseLine);
+
+        return "redirect:baseline/list";
     }
 }
