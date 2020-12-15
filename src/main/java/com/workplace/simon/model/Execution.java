@@ -24,7 +24,7 @@ public class Execution {
     private String title;
 
     @Size(max = 1024, message = "The content is too long.")
-    @Column(name = "detail", columnDefinition = "text")
+    @Column(columnDefinition = "text")
     private String detail;
 
     @OneToOne(cascade = CascadeType.ALL)

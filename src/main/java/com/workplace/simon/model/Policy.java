@@ -32,7 +32,7 @@ public class Policy {
     private String title;
 
     @Size(max = 1024, message = "The content is too long.")
-    @Column(name = "detail", columnDefinition = "text")
+    @Column(columnDefinition = "text")
     @NotBlank(message = "The detail is mandatory")
     private String detail;
 
