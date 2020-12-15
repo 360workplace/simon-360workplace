@@ -92,6 +92,6 @@ public class BaseLineController {
         baseLine.setActive(false);
         this.getBaseLineService().save(baseLine);
 
-        return "redirect:baseline/list";
+        return "redirect:/data/baseline/list";
     }
 }
