@@ -36,7 +36,7 @@
                             <tr th:each="base : ${baseLine}">
                                 <td th:text="${base.title}"></td>
                                 <td th:text="${base.source}"></td>
-                                <td th:text="${T(org.jsoup.Jsoup).parse(base.detail).text()}"></td>
+                                <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
                                 <td th:text="${base.supervisor}"></td>
                                 <td th:text="${base.startDate}"></td>
                                 <td><a th:href="@{/data/baseline/show/{baseLineId}(baseLineId=${base.id})}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Mostrar"><i class="fa fa-eye"></i></a></td>
