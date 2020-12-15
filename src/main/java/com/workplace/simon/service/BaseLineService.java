@@ -22,7 +22,7 @@ public class BaseLineService {
     }
 
     public List<BaseLine> findAll() {
-        return this.getBaseLineRepository().findAll();
+        return this.getBaseLineRepository().findByActiveTrue();
     }
 
     public Optional<BaseLine> findById(Long id) {

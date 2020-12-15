@@ -32,6 +32,8 @@ public class BaseLine {
     @OneToMany(mappedBy="baseLine")
     private Set<BaseLineResource> resources;
 
+    private Boolean active;
+
     public Long getId() {
         return id;
     }
