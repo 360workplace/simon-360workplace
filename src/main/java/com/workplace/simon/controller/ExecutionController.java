@@ -71,28 +71,34 @@ public class ExecutionController {
 
         // TODO - Get from source and the id the correct table and the values to the correct table.
         execution.setCodeFrom(sourceLabel);
-        BaseLine baseLine = this.getBaseLineService().findById(sourceId)
+        BaseLine source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source is not defined in any table."));
-        model.addAttribute("source", baseLine);
+        model.addAttribute("source", source);
         model.addAttribute("sourceId", sourceId);
 
         User userSource = this.getUserRepository().findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("The userId can't gets any register."));
 
+        User userSupervisor = getUserSupervisor(source);
+
+        execution.setTitle(source.getTitle());
+        execution.setDetail(source.getDetail());
+        execution.setSource(userSource.getId());
+        execution.setSupervisor(userSupervisor);
+
+        return "execution-creation-form";
+    }
+
+    private User getUserSupervisor(BaseLine source) {
         User userSupervisor;
-        if (baseLine.getSupervisor() != null) {
-            userSupervisor = this.getUserRepository().findById(baseLine.getSupervisor())
+        if (source.getSupervisor() != null) {
+            userSupervisor = this.getUserRepository().findById(source.getSupervisor())
                     .orElse(new User());
         } else {
             userSupervisor = new User();
         }
 
-        execution.setTitle(baseLine.getTitle());
-        execution.setDetail(baseLine.getDetail());
-        execution.setSource(userSource.getId());
-        execution.setSupervisor(userSupervisor);
-
-        return "execution-creation-form";
+        return userSupervisor;
     }
 
     @PostMapping("execution/add/{id}")
@@ -108,6 +114,8 @@ public class ExecutionController {
         model.addAttribute("sourceId", sourceId);
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("allUsers", this.getUserRepository().findAll());
+
             return "execution-creation-form";
         }
 
