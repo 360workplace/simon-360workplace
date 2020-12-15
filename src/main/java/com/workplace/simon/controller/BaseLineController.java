@@ -57,7 +57,7 @@ public class BaseLineController {
 
         this.getBaseLineService().save(baseLine);
 
-        return "redirect:list";
+        return "redirect:baseline/list";
     }
 
     @GetMapping("baseline/list")

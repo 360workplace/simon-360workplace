@@ -32,7 +32,7 @@ public class BaseLine {
     private Set<BaseLineResource> resources;
 
     @Column(name = "active")
-    private Boolean active;
+    private Boolean active = true;
 
     public Long getId() {
         return id;
