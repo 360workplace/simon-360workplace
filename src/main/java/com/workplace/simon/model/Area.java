@@ -53,4 +53,12 @@ public class Area {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Set<Policy> getPolicies() {
+        return policies;
+    }
+
+    public void setPolicies(Set<Policy> policies) {
+        this.policies = policies;
+    }
 }

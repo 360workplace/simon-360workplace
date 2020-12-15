@@ -31,18 +31,12 @@ public class User {
     @Column(name = "role_id")
     private Long roleId;
 
-//    @Column(name = "supervisor_id")
-//    private Long supervisorId;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
     private User supervisor;
 
     @OneToOne(mappedBy = "supervisor")
     private User backSupervisor;
-
-//    @Column(name = "area_id")
-//    private Long areaId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "area_id", referencedColumnName = "id")
@@ -110,14 +104,6 @@ public class User {
         this.roleId = roleId;
     }
 
-//    public Long getSupervisorId() {
-//        return supervisorId;
-//    }
-
-//    public void setSupervisorId(Long supervisorId) {
-//        this.supervisorId = supervisorId;
-//    }
-
     public User getSupervisor() {
         return supervisor;
     }
@@ -133,14 +119,6 @@ public class User {
     public void setBackSupervisor(User backSupervisor) {
         this.backSupervisor = backSupervisor;
     }
-
-//    public Long getAreaId() {
-//        return areaId;
-//    }
-
-//    public void setAreaId(Long areaId) {
-//        this.areaId = areaId;
-//    }
 
     public Area getArea() {
         return area;
