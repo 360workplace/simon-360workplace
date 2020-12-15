@@ -13,7 +13,6 @@ public class Policy {
     private Long id;
 
     @Column(name = "code_from")
-    @NotBlank(message = "Code is mandatory")
     private String codeFrom;
 
     @OneToOne(cascade = CascadeType.ALL)

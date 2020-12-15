@@ -130,6 +130,7 @@ public class ExecutionController {
         BaseLine source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
+        model.addAttribute("sourceId", sourceId);
 
         if (bindingResult.hasErrors()) {
             return "policy-creation-form";
