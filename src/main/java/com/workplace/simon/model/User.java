@@ -38,9 +38,9 @@ public class User {
     @OneToOne(mappedBy = "supervisor")
     private User backSupervisor;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "area_id", referencedColumnName = "id")
-    private Area area;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "area_id", referencedColumnName = "id")
+//    private Area area;
 
     @OneToOne(mappedBy = "supervisor")
     private Execution execution;
@@ -120,13 +120,13 @@ public class User {
         this.backSupervisor = backSupervisor;
     }
 
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
+//    public Area getArea() {
+//        return area;
+//    }
+//
+//    public void setArea(Area area) {
+//        this.area = area;
+//    }
 
     public Execution getExecution() {
         return execution;
