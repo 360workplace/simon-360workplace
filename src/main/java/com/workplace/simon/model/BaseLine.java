@@ -21,7 +21,7 @@ public class BaseLine {
     private String title;
 
     @Size(max = 1024)
-    @Column(name = "detalle", length = 1024)
+    @Column(columnDefinition = "text")
     private String detail;
 
     @Column(name = "responsable")
