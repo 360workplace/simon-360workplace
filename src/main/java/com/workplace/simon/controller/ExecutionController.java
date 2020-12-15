@@ -95,7 +95,7 @@ public class ExecutionController {
         return "execution-creation-form";
     }
 
-    @PostMapping("execution/add/{userId}")
+    @PostMapping("execution/add/{id}")
     public String addExecution(
             @PathVariable("id") Long sourceId,
             @Valid Execution execution,
