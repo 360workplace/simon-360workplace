@@ -19,8 +19,8 @@ public class Area {
     @OneToOne(mappedBy = "area")
     private User user;
 
-    @ManyToMany(mappedBy = "areas", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Policy> policies;
+//    @ManyToMany(mappedBy = "areas", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+//    private Set<Policy> policies;
 
     public Long getId() {
         return id;
@@ -54,11 +54,11 @@ public class Area {
         this.user = user;
     }
 
-    public Set<Policy> getPolicies() {
-        return policies;
-    }
-
-    public void setPolicies(Set<Policy> policies) {
-        this.policies = policies;
-    }
+//    public Set<Policy> getPolicies() {
+//        return policies;
+//    }
+//
+//    public void setPolicies(Set<Policy> policies) {
+//        this.policies = policies;
+//    }
 }

@@ -19,13 +19,13 @@ public class Policy {
     @JoinColumn(name = "source", referencedColumnName = "id")
     private User userSource;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "Asignar_Norma_Politica",
-            joinColumns = {@JoinColumn(name = "policy_id")},
-            inverseJoinColumns = {@JoinColumn(name = "area_id")}
-    )
-    private Set<Area> areas;
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//    @JoinTable(
+//            name = "Asignar_Norma_Politica",
+//            joinColumns = {@JoinColumn(name = "policy_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "area_id")}
+//    )
+//    private Set<Area> areas;
 
     @Column(name = "title")
     @NotBlank(message = "Title is mandatory")
@@ -59,13 +59,13 @@ public class Policy {
         this.userSource = userSource;
     }
 
-    public Set<Area> getAreas() {
-        return areas;
-    }
-
-    public void setAreas(Set<Area> areas) {
-        this.areas = areas;
-    }
+//    public Set<Area> getAreas() {
+//        return areas;
+//    }
+//
+//    public void setAreas(Set<Area> areas) {
+//        this.areas = areas;
+//    }
 
     public String getTitle() {
         return title;
