@@ -2,7 +2,6 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.Set;
 
@@ -20,7 +19,6 @@ public class BaseLine {
     @NotBlank(message = "The Title is mandatory")
     private String title;
 
-    @Size(max = 1024, message = "The content is too long.")
     @Column(columnDefinition = "text")
     private String detail;
 

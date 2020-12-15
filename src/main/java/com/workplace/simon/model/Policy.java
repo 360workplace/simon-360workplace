@@ -2,7 +2,6 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -32,7 +31,6 @@ public class Policy {
     private String title;
 
     @NotBlank(message = "The detail is mandatory")
-    @Size(max = 1024, message = "The content is too long.")
     @Column(columnDefinition = "text")
     private String detail;
 
