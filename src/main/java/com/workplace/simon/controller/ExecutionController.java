@@ -1,9 +1,6 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.BaseLine;
-import com.workplace.simon.model.Execution;
-import com.workplace.simon.model.Policy;
-import com.workplace.simon.model.User;
+import com.workplace.simon.model.*;
 import com.workplace.simon.repository.UserRepository;
 import com.workplace.simon.service.BaseLineService;
 import com.workplace.simon.service.ExecutionService;
@@ -119,6 +116,7 @@ public class ExecutionController {
             return "execution-creation-form";
         }
 
+        execution.setStatus(Status.OPEN.getLabel());
         this.getExecutionService().save(execution);
 
         // TODO - needs the change it is necessary to select correct database.
