@@ -74,6 +74,7 @@ public class ExecutionController {
         BaseLine baseLine = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source is not defined in any table."));
         model.addAttribute("source", baseLine);
+        model.addAttribute("sourceId", sourceId);
 
         User userSource = this.getUserRepository().findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("The userId can't gets any register."));
@@ -92,6 +93,31 @@ public class ExecutionController {
         execution.setSupervisor(userSupervisor);
 
         return "execution-creation-form";
+    }
+
+    @PostMapping("execution/add/{userId}")
+    public String addExecution(
+            @PathVariable("id") Long sourceId,
+            @Valid Execution execution,
+            BindingResult bindingResult,
+            Model model) {
+        // TODO - It is necessary select the correct source in order to select the correct database to save data.
+        BaseLine source = this.getBaseLineService().findById(sourceId)
+                .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
+        model.addAttribute("source", source);
+        model.addAttribute("sourceId", sourceId);
+
+        if (bindingResult.hasErrors()) {
+            return "execution-creation-form";
+        }
+
+        this.getExecutionService().save(execution);
+
+        // TODO - needs the change it is necessary to select correct database.
+        source.setActive(false);
+        this.getBaseLineService().save(source);
+
+        return "redirect:/data/baseline/list";
     }
 
     @GetMapping("policy/creation/{sourceLabel}/{sourceId}/{userId}")
