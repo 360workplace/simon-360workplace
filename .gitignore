@@ -34,3 +34,4 @@ build/
 
 # Local files
 .local_enviroment
+.env
