@@ -31,12 +31,13 @@ public class User {
     @Column(name = "role_id")
     private Long roleId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
-    private User supervisor;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
+    @Column(name = "supervisor_id")
+    private Long supervisor;
 
-    @OneToOne(mappedBy = "supervisor")
-    private User backSupervisor;
+//    @OneToOne(mappedBy = "supervisor")
+//    private User backSupervisor;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "area_id", referencedColumnName = "id")
@@ -104,21 +105,21 @@ public class User {
         this.roleId = roleId;
     }
 
-    public User getSupervisor() {
+    public Long getSupervisor() {
         return supervisor;
     }
 
-    public void setSupervisor(User supervisor) {
+    public void setSupervisor(Long supervisor) {
         this.supervisor = supervisor;
     }
 
-    public User getBackSupervisor() {
-        return backSupervisor;
-    }
-
-    public void setBackSupervisor(User backSupervisor) {
-        this.backSupervisor = backSupervisor;
-    }
+//    public User getBackSupervisor() {
+//        return backSupervisor;
+//    }
+//
+//    public void setBackSupervisor(User backSupervisor) {
+//        this.backSupervisor = backSupervisor;
+//    }
 
 //    public Area getArea() {
 //        return area;
