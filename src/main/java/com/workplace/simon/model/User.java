@@ -43,8 +43,8 @@ public class User {
 //    @JoinColumn(name = "area_id", referencedColumnName = "id")
 //    private Area area;
 
-    @OneToOne(mappedBy = "supervisor")
-    private Execution execution;
+//    @OneToOne(mappedBy = "supervisor")
+//    private Execution execution;
 
     @OneToOne(mappedBy = "userSource")
     private Policy policy;
@@ -129,13 +129,13 @@ public class User {
 //        this.area = area;
 //    }
 
-    public Execution getExecution() {
-        return execution;
-    }
-
-    public void setExecution(Execution execution) {
-        this.execution = execution;
-    }
+//    public Execution getExecution() {
+//        return execution;
+//    }
+//
+//    public void setExecution(Execution execution) {
+//        this.execution = execution;
+//    }
 
     public Policy getPolicy() {
         return policy;
