@@ -24,9 +24,10 @@ public class Execution {
     @Lob
     private String detail;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "supervisor", referencedColumnName = "id")
-    private User supervisor;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "supervisor", referencedColumnName = "id")
+    @Column(name = "supervisor")
+    private Long supervisor;
 
     @Column(name = "priority")
     private String priority;
@@ -77,11 +78,11 @@ public class Execution {
         this.detail = detail;
     }
 
-    public User getSupervisor() {
+    public Long getSupervisor() {
         return supervisor;
     }
 
-    public void setSupervisor(User supervisor) {
+    public void setSupervisor(Long supervisor) {
         this.supervisor = supervisor;
     }
 

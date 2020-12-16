@@ -81,7 +81,7 @@ public class ExecutionController {
         execution.setTitle(source.getTitle());
         execution.setDetail(source.getDetail());
         execution.setSource(userSource.getId());
-        execution.setSupervisor(userSupervisor);
+        execution.setSupervisor(userSupervisor.getId());
 
         return "execution-creation-form";
     }
