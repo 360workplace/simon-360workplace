@@ -57,21 +57,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="row,rowStat : *{rows}">
+                                <tr th:each="row,rowStat : *{resources}">
                                     <td th:text="${rowStat.count}">1</td>
                                     <td>
-                                        <select th:field="*{rows[__${rowStat.index}__].variety}">
+                                        <select th:field="*{resources[__${rowStat.index}__].variety}">
                                             <option th:each="var : ${allVarieties}"
                                                     th:value="${var.id}"
                                                     th:text="${var.name}">Thymus Thymi</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" th:field="*{rows[__${rowStat.index}__].seedsPerCell}" />
+                                        <input type="text" th:field="*{resources[__${rowStat.index}__].seedsPerCell}" />
                                     </td>
                                     <td>
                                         <button type="submit" name="removeRow"
-                                                th:value="${rowStat.index}" th:text="#{seedstarter.row.remove}">Remove row</button>
+                                                th:value="${rowStat.index}" th:text="#{baseLine.row.remove}">Remove row</button>
                                     </td>
                                 </tr>
                                 </tbody>
