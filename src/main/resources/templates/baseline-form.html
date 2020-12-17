@@ -44,16 +44,43 @@
                             <label for="startDate" class="col-form-label">Fecha de inicio</label> <input type="date" th:field="*{startDate}" class="form-control" id="startDate" placeholder="Start Date" data-provide="datepicker"> <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="text-danger"></span>
                         </div>
 
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Row</th>
+                                    <th>Variety</th>
+                                    <th>Seeds per cell</th>
+                                    <th>
+                                        <button type="submit" name="addRow">Add row</button>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="row,rowStat : *{rows}">
+                                    <td th:text="${rowStat.count}">1</td>
+                                    <td>
+                                        <select th:field="*{rows[__${rowStat.index}__].variety}">
+                                            <option th:each="var : ${allVarieties}"
+                                                    th:value="${var.id}"
+                                                    th:text="${var.name}">Thymus Thymi</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" th:field="*{rows[__${rowStat.index}__].seedsPerCell}" />
+                                    </td>
+                                    <td>
+                                        <button type="submit" name="removeRow"
+                                                th:value="${rowStat.index}" th:text="#{seedstarter.row.remove}">Remove row</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                             <input type="submit" class="btn btn-primary" value="Registrar">
                         </div>
-
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
-
                     </div>
                 </form>
             </div>

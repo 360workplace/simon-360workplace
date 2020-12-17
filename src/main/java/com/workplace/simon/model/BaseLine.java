@@ -28,7 +28,7 @@ public class BaseLine {
     @Column(name = "fecha_inicial")
     private Date startDate;
 
-    @OneToMany(mappedBy="baseLine")
+    @OneToMany(mappedBy = "baseLine")
     private Set<BaseLineResource> resources;
 
     @Column(name = "active")

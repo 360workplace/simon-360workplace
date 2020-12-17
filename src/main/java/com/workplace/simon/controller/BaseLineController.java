@@ -1,6 +1,7 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.BaseLine;
+import com.workplace.simon.model.BaseLineResource;
 import com.workplace.simon.model.Register;
 import com.workplace.simon.service.BaseLineService;
 import com.workplace.simon.service.RegisterService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -117,5 +119,24 @@ public class BaseLineController {
         this.getBaseLineService().save(baseLine);
 
         return "redirect:/data/baseline/list";
+    }
+
+    @RequestMapping(value = "/seedstartermng", params = {"addRow"})
+    public String addRow(final BaseLine baseLine, final BindingResult bindingResult) {
+        baseLine.getResources().add(new BaseLineResource());
+
+        return "seedstartermng";
+    }
+
+    @RequestMapping(value = "/seedstartermng", params = {"removeRow"})
+    public String removeRow(
+            final BaseLine baseLine,
+            final BindingResult bindingResult,
+            final HttpServletRequest request
+    ) {
+        final Integer rowId = Integer.valueOf(request.getParameter("removeRow"));
+        baseLine.getResources().remove(rowId.intValue());
+
+        return "seedstartermng";
     }
 }

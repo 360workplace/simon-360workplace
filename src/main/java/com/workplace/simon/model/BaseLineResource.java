@@ -20,7 +20,6 @@ public class BaseLineResource {
     @Column(name = "user_id")
     private Long user;
 
-//    @Column(name = "linea_base_id")
     @ManyToOne
     @JoinColumn(name="linea_base_id", nullable=false)
     private BaseLine baseLine;
