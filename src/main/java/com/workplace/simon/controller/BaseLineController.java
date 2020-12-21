@@ -32,6 +32,9 @@ public class BaseLineController {
         return registerService;
     }
 
+    private static final String AJAX_HEADER_NAME = "X-Requested-With";
+    private static final String AJAX_HEADER_VALUE = "XMLHttpRequest";
+
     @GetMapping("baseline")
     public String showBaselineForm(@RequestParam("user") Optional<Integer> userId, Model model) {
         BaseLine baseLine = new BaseLine();
@@ -46,7 +49,7 @@ public class BaseLineController {
         return "baseline-form";
     }
 
-    @PostMapping("add")
+    @PostMapping(params = "save", path = {"add"})
     public String addBaseline(@Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             Register currentUser = this.getRegisterService().findById(baseLine.getSource())
@@ -60,6 +63,29 @@ public class BaseLineController {
         this.getBaseLineService().save(baseLine);
 
         return "redirect:/";
+    }
+
+    @RequestMapping(params = "addRow", path = {"add"})
+    public String addRow(BaseLine baseLine, HttpServletRequest request) {
+        baseLine.getResources().add(new BaseLineResource());
+
+        if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
+            return "baseline-form::#items";
+        } else {
+            return "baseline-form";
+        }
+    }
+
+    @RequestMapping(params = "removeItem", path = {"add"})
+    public String removeRow(
+            final BaseLine baseLine,
+            @RequestParam("removeItem") int index,
+            HttpServletRequest request
+    ) {
+        final Integer rowId = Integer.valueOf(request.getParameter("removeRow"));
+        baseLine.getResources().remove(rowId.intValue());
+
+        return "seedstartermng";
     }
 
     @PostMapping("update/{id}")
@@ -119,24 +145,5 @@ public class BaseLineController {
         this.getBaseLineService().save(baseLine);
 
         return "redirect:/data/baseline/list";
-    }
-
-    @RequestMapping(value = "/seedstartermng", params = {"addRow"})
-    public String addRow(final BaseLine baseLine, final BindingResult bindingResult) {
-        baseLine.getResources().add(new BaseLineResource());
-
-        return "seedstartermng";
-    }
-
-    @RequestMapping(value = "/seedstartermng", params = {"removeRow"})
-    public String removeRow(
-            final BaseLine baseLine,
-            final BindingResult bindingResult,
-            final HttpServletRequest request
-    ) {
-        final Integer rowId = Integer.valueOf(request.getParameter("removeRow"));
-        baseLine.getResources().remove(rowId.intValue());
-
-        return "seedstartermng";
     }
 }

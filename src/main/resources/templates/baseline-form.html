@@ -45,37 +45,17 @@
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <table class="table table-striped table-responsive table-responsive-md table-responsive-sm" style="width: 100%">
-                                <thead>
-                                <tr>
-                                    <th>Row</th>
-                                    <th>Variety</th>
-                                    <th>Seeds per cell</th>
-                                    <th>
-                                        <button type="submit" name="addRow">Add row</button>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="row,rowStat : *{resources}">
-                                    <td th:text="${rowStat.count}">1</td>
-                                    <td>
-                                        <select th:field="*{resources[__${rowStat.index}__].variety}">
-                                            <option th:each="var : ${allVarieties}"
-                                                    th:value="${var.id}"
-                                                    th:text="${var.name}">Thymus Thymi</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="text" th:field="*{resources[__${rowStat.index}__].seedsPerCell}" />
-                                    </td>
-                                    <td>
-                                        <button type="submit" name="removeRow"
-                                                th:value="${rowStat.index}" th:text="#{baseLine.row.remove}">Remove row</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <fieldset id="items">
+                                <div th:each=", stat : ${baseLine.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label th:for="|baseLine.resources[${stat.index}].detail|">Detalle</label>
+                                    <!-- This construct will render field name like this: "items[0].name" -->
+                                    <input th:field="${baseLine.resources[__${stat.index}__].detail}">
+
+                                    <button type="button" name="removeItem" th:value="${stat.index}" class="btn btn-danger">Remove item</button>
+                                </div>
+                            </fieldset>
+
+                            <button type="button" name="addItem" class="btn btn-secondary">Add item</button>
                         </div>
 
                         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
