@@ -46,6 +46,7 @@
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <fieldset id="items">
+                                <caption>Recursos asignados</caption>
                                 <div th:each="resource, stat : ${baseLine.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label th:for="|baseLine.resources[${stat.index}].detail|">Detalle</label>
                                     <!-- This construct will render field name like this: "items[0].name" -->
@@ -96,7 +97,7 @@
         // actual clicking the button, following line will add parameter to form
         // data.
         data += 'addItem';
-        $.post('/data/add', data, replaceItems);
+        $.post('/data/add/${userId}', data, replaceItems);
     });
 
     $('button[name="removeItem"]').click(function (event) {
@@ -104,7 +105,7 @@
         var data = $('form').serialize();
         // Add parameter and index of item that is going to be removed.
         data += 'removeItem=' + $(this).val();
-        $.post('/data/add', data, replaceItems);
+        $.post('/data/add/${userId}', data, replaceItems);
     });
 </script>
 </body>
