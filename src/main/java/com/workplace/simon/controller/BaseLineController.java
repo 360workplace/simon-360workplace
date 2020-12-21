@@ -35,7 +35,7 @@ public class BaseLineController {
     private static final String AJAX_HEADER_VALUE = "XMLHttpRequest";
 
     @GetMapping("baseline/{userId}")
-    public String showBaselineForm(@RequestParam("userId") Long userId, Model model) {
+    public String showBaselineForm(@PathVariable("userId") Long userId, Model model) {
         BaseLine baseLine = new BaseLine();
         baseLine.getResources().add(new BaseLineResource());
         baseLine.setSource(userId);
