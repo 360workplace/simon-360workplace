@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-body">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <form action="#" th:action="@{/data/add}" th:object="${baseLine}" method="post">
+                <form action="#" th:action="@{/data/add/{userId}(userId = ${userId})}" th:object="${baseLine}" method="post">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <span class="font-weight-light">Usuario: <span th:text="${currentUser.login}"></span></span>

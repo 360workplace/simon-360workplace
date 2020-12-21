@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/data/")
@@ -35,22 +34,23 @@ public class BaseLineController {
     private static final String AJAX_HEADER_NAME = "X-Requested-With";
     private static final String AJAX_HEADER_VALUE = "XMLHttpRequest";
 
-    @GetMapping("baseline")
-    public String showBaselineForm(@RequestParam("user") Optional<Integer> userId, Model model) {
+    @GetMapping("baseline/{userId}")
+    public String showBaselineForm(@RequestParam("userId") Long userId, Model model) {
         BaseLine baseLine = new BaseLine();
         baseLine.getResources().add(new BaseLineResource());
-        baseLine.setSource(Long.valueOf(userId.orElseGet(() -> 0)));
+        baseLine.setSource(userId);
         Register currentUser = this.getRegisterService().findById(baseLine.getSource())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
 
         model.addAttribute("baseLine", baseLine);
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("allUsers", this.getRegisterService().findAll());
+        model.addAttribute("userid", userId);
 
         return "baseline-form";
     }
 
-    @PostMapping(params = "save", path = {"add"})
+    @PostMapping(params = "save", path = {"add", "add/{userId}"})
     public String addBaseline(@Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             Register currentUser = this.getRegisterService().findById(baseLine.getSource())
@@ -66,7 +66,7 @@ public class BaseLineController {
         return "redirect:/";
     }
 
-    @RequestMapping(params = "addItem", path = {"add"})
+    @RequestMapping(params = "addItem", path = {"add", "add/{userId}"})
     public String addRow(BaseLine baseLine, HttpServletRequest request) {
         baseLine.getResources().add(new BaseLineResource());
 
@@ -77,7 +77,7 @@ public class BaseLineController {
         }
     }
 
-    @RequestMapping(params = "removeItem", path = {"add"})
+    @RequestMapping(params = "removeItem", path = {"add", "add/{userId}"})
     public String removeRow(
             final BaseLine baseLine,
             @RequestParam("removeItem") int index,
