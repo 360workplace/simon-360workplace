@@ -65,7 +65,7 @@ public class BaseLineController {
         return "redirect:/";
     }
 
-    @RequestMapping(params = "addRow", path = {"add"})
+    @RequestMapping(params = "addItem", path = {"add"})
     public String addRow(BaseLine baseLine, HttpServletRequest request) {
         baseLine.getResources().add(new BaseLineResource());
 
@@ -82,10 +82,13 @@ public class BaseLineController {
             @RequestParam("removeItem") int index,
             HttpServletRequest request
     ) {
-        final Integer rowId = Integer.valueOf(request.getParameter("removeRow"));
-        baseLine.getResources().remove(rowId.intValue());
+        baseLine.getResources().remove(index);
 
-        return "seedstartermng";
+        if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
+            return "baseline-form::#items";
+        } else {
+            return "baseline-form";
+        }
     }
 
     @PostMapping("update/{id}")
