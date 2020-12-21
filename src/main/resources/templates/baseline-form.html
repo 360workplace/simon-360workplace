@@ -46,7 +46,7 @@
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <fieldset id="items">
-                                <div th:each=", stat : ${baseLine.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div th:each="resource, stat : ${baseLine.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label th:for="|baseLine.resources[${stat.index}].detail|">Detalle</label>
                                     <!-- This construct will render field name like this: "items[0].name" -->
                                     <input th:field="${baseLine.resources[__${stat.index}__].detail}">
