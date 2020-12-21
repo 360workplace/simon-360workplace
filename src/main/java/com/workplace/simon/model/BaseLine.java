@@ -3,7 +3,8 @@ package com.workplace.simon.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Linea_Base")
@@ -29,7 +30,7 @@ public class BaseLine {
     private Date startDate;
 
     @OneToMany(mappedBy = "baseLine")
-    private Set<BaseLineResource> resources;
+    private List<BaseLineResource> resources;
 
     @Column(name = "active")
     private Boolean active = true;
@@ -86,11 +87,15 @@ public class BaseLine {
         this.startDate = Date.valueOf(startDate);
     }
 
-    public Set<BaseLineResource> getResources() {
+    public List<BaseLineResource> getResources() {
+        if (resources == null) {
+            resources = new ArrayList<>();
+        }
+
         return resources;
     }
 
-    public void setResources(Set<BaseLineResource> resources) {
+    public void setResources(List<BaseLineResource> resources) {
         this.resources = resources;
     }
 
