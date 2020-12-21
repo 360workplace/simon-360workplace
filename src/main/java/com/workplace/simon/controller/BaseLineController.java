@@ -38,6 +38,7 @@ public class BaseLineController {
     @GetMapping("baseline")
     public String showBaselineForm(@RequestParam("user") Optional<Integer> userId, Model model) {
         BaseLine baseLine = new BaseLine();
+        baseLine.getResources().add(new BaseLineResource());
         baseLine.setSource(Long.valueOf(userId.orElseGet(() -> 0)));
         Register currentUser = this.getRegisterService().findById(baseLine.getSource())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
