@@ -140,7 +140,10 @@
             <div class="container-fluid">
                 <div class="section">
                     <div class="card">
-                        <h4 class="card-title">Línea Base</h4>
+                        <div class="card-header ">
+                            <h4 class="card-title">Línea Base</h4>
+                            <p class="card-category">Registros recientes</p>
+                        </div>
                         <div class="card-body table-full-width table-responsive">
                             <div class="col-md-12">
                                 <h2 th:case="null">No registers yet!</h2>
@@ -170,17 +173,20 @@
                                                         class="fa fa-eye"></i></a></td>
                                             <td>
                                                 <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
-                                                   class="btn btn-secondary btn-sm" data-placement="top"
+                                                   class="btn btn-secondary btn-sm" data-toggle="tooltip"
+                                                   data-placement="top"
                                                    title="Convertir a Asignación Gerencial"><i
                                                         class="fa fa-trophy"></i></a></td>
                                             <td>
                                                 <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
-                                                   class="btn btn-secondary btn-sm" data-placement="top"
+                                                   class="btn btn-secondary btn-sm" data-toggle="tooltip"
+                                                   data-placement="top"
                                                    title="Convertir a Norma y Politica"><i
                                                         class="fa fa fa-bullhorn"></i></a></td>
                                             <td>
                                                 <a th:href="@{@{/data/baseline/trunk/{baseLineId}(baseLineId=${base.id})}}"
-                                                   class="btn btn-danger btn-sm" data-placement="top"
+                                                   class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                   data-placement="top"
                                                    title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
                                         </tr>
                                         </tbody>
@@ -221,6 +227,7 @@
                         ©
                         <script>
                                 document.write(new Date().getFullYear())
+
                         </script>
                         <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                     </p>
@@ -252,6 +259,5 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
-
 </script>
 </html>
