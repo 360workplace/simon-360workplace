@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="/assets/img/favicon.ico">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>List of Base Line</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
     <!-- CSS Files -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="/assets/css/demo.css" rel="stylesheet" />
+    <link href="/assets/css/demo.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="wrapper">
@@ -57,8 +58,9 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg " color-on-scroll="500">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#pablo">Template</a>
-                <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="#">Línea Base</a>
+                <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar burger-lines"></span>
                     <span class="navbar-toggler-bar burger-lines"></span>
                     <span class="navbar-toggler-bar burger-lines"></span>
@@ -99,7 +101,8 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="no-icon">Dropdown</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -151,10 +154,25 @@
                                                 <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
                                                 <td th:text="${base.supervisor}"></td>
                                                 <td th:text="${base.startDate}"></td>
-                                                <td><a th:href="@{/data/baseline/show/{baseLineId}(baseLineId=${base.id})}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Mostrar"><i class="fa fa-eye"></i></a></td>
-                                                <td><a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Asignación Gerencial"><i class="fa fa-trophy"></i></a></td>
-                                                <td><a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}" class="btn btn-secondary btn-sm" data-placement="top" title="Convertir a Norma y Politica"><i class="fa fa fa-bullhorn"></i></a></td>
-                                                <td><a th:href="@{@{/data/baseline/trunk/{baseLineId}(baseLineId=${base.id})}}" class="btn btn-danger btn-sm" data-placement="top" title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
+                                                <td>
+                                                    <a th:href="@{/data/baseline/show/{baseLineId}(baseLineId=${base.id})}"
+                                                       class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                                       data-placement="top" title="Mostrar"><i
+                                                            class="fa fa-eye"></i></a></td>
+                                                <td>
+                                                    <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
+                                                       class="btn btn-secondary btn-sm" data-placement="top"
+                                                       title="Convertir a Asignación Gerencial"><i
+                                                            class="fa fa-trophy"></i></a></td>
+                                                <td>
+                                                    <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
+                                                       class="btn btn-secondary btn-sm" data-placement="top"
+                                                       title="Convertir a Norma y Politica"><i
+                                                            class="fa fa fa-bullhorn"></i></a></td>
+                                                <td>
+                                                    <a th:href="@{@{/data/baseline/trunk/{baseLineId}(baseLineId=${base.id})}}"
+                                                       class="btn btn-danger btn-sm" data-placement="top"
+                                                       title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -197,7 +215,7 @@
                         ©
                         <script>
                                 document.write(new Date().getFullYear())
-                            </script>
+                        </script>
                         <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                     </p>
                 </nav>
@@ -228,5 +246,6 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });
+
 </script>
 </html>

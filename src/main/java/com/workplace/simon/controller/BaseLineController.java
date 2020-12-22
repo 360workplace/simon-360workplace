@@ -51,12 +51,18 @@ public class BaseLineController {
     }
 
     @PostMapping(params = "save", path = {"add", "add/{userId}"})
-    public String addBaseline(@Valid BaseLine baseLine, BindingResult bindingResult, Model model) {
+    public String addBaseline(
+            @PathVariable("userId") Long userId,
+            @Valid BaseLine baseLine,
+            BindingResult bindingResult,
+            Model model
+    ) {
         if (bindingResult.hasErrors()) {
             Register currentUser = this.getRegisterService().findById(baseLine.getSource())
                     .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("allUsers", this.getRegisterService().findAll());
+            model.addAttribute("userid", userId);
 
             return "baseline-form";
         }
@@ -67,7 +73,11 @@ public class BaseLineController {
     }
 
     @RequestMapping(params = "addItem", path = {"add", "add/{userId}"})
-    public String addRow(BaseLine baseLine, HttpServletRequest request) {
+    public String addRow(
+            @PathVariable("userId") Long userId,
+            BaseLine baseLine,
+            HttpServletRequest request
+    ) {
         baseLine.getResources().add(new BaseLineResource());
 
         if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
@@ -79,6 +89,7 @@ public class BaseLineController {
 
     @RequestMapping(params = "removeItem", path = {"add", "add/{userId}"})
     public String removeRow(
+            @PathVariable("userId") Long userId,
             final BaseLine baseLine,
             @RequestParam("removeItem") int index,
             HttpServletRequest request
