@@ -136,64 +136,59 @@
             </div>
         </nav>
         <!-- End Navbar -->
-        <div class="content">
+        <div class="content" th:switch="${baseLine}">
             <div class="container-fluid">
                 <div class="section">
-
-                    <h3>Línea Base</h3>
                     <div class="card">
+                        <h4 class="card-title">Línea Base</h4>
                         <div class="card-body table-full-width table-responsive">
-                            <div th:switch="${baseLine}" class="container">
-
-                                <div class="col-md-12">
-                                    <h2 th:case="null">No registers yet!</h2>
-                                    <div th:case="*">
-                                        <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
-                                            <thead>
-                                            <tr>
-                                                <th>Título</th>
-                                                <th>Fuente</th>
-                                                <th>Detalle</th>
-                                                <th>Responsable</th>
-                                                <th>Fecha_inicial</th>
-                                                <th colspan="4"></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="base : ${baseLine}">
-                                                <td th:text="${base.title}"></td>
-                                                <td th:text="${base.source}"></td>
-                                                <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
-                                                <td th:text="${base.supervisor}"></td>
-                                                <td th:text="${base.startDate}"></td>
-                                                <td>
-                                                    <a th:href="@{/data/baseline/show/{baseLineId}(baseLineId=${base.id})}"
-                                                       class="btn btn-primary btn-sm" data-toggle="tooltip"
-                                                       data-placement="top" title="Mostrar"><i
-                                                            class="fa fa-eye"></i></a></td>
-                                                <td>
-                                                    <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
-                                                       class="btn btn-secondary btn-sm" data-placement="top"
-                                                       title="Convertir a Asignación Gerencial"><i
-                                                            class="fa fa-trophy"></i></a></td>
-                                                <td>
-                                                    <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
-                                                       class="btn btn-secondary btn-sm" data-placement="top"
-                                                       title="Convertir a Norma y Politica"><i
-                                                            class="fa fa fa-bullhorn"></i></a></td>
-                                                <td>
-                                                    <a th:href="@{@{/data/baseline/trunk/{baseLineId}(baseLineId=${base.id})}}"
-                                                       class="btn btn-danger btn-sm" data-placement="top"
-                                                       title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <div class="col-md-12">
+                                <h2 th:case="null">No registers yet!</h2>
+                                <div th:case="*">
+                                    <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
+                                        <thead>
+                                        <tr>
+                                            <th>Título</th>
+                                            <th>Fuente</th>
+                                            <th>Detalle</th>
+                                            <th>Responsable</th>
+                                            <th>Fecha_inicial</th>
+                                            <th colspan="4"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="base : ${baseLine}">
+                                            <td th:text="${base.title}"></td>
+                                            <td th:text="${base.source}"></td>
+                                            <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
+                                            <td th:text="${base.supervisor}"></td>
+                                            <td th:text="${base.startDate}"></td>
+                                            <td>
+                                                <a th:href="@{/data/baseline/show/{baseLineId}(baseLineId=${base.id})}"
+                                                   class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                                   data-placement="top" title="Mostrar"><i
+                                                        class="fa fa-eye"></i></a></td>
+                                            <td>
+                                                <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
+                                                   class="btn btn-secondary btn-sm" data-placement="top"
+                                                   title="Convertir a Asignación Gerencial"><i
+                                                        class="fa fa-trophy"></i></a></td>
+                                            <td>
+                                                <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
+                                                   class="btn btn-secondary btn-sm" data-placement="top"
+                                                   title="Convertir a Norma y Politica"><i
+                                                        class="fa fa fa-bullhorn"></i></a></td>
+                                            <td>
+                                                <a th:href="@{@{/data/baseline/trunk/{baseLineId}(baseLineId=${base.id})}}"
+                                                   class="btn btn-danger btn-sm" data-placement="top"
+                                                   title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
