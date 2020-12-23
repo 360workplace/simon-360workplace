@@ -15,7 +15,15 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="/assets/css/main.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendor/daterangepicker/daterangepicker.css">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
 </head>
 <body>
 <div class="limiter">
@@ -35,7 +43,7 @@
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input name="password" type="password" class="form-control" placeholder="Password"/>
+                    <input name="password" type="password" class="form-control input100" placeholder="Password"/>
                     <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     <span class="has-error" th:text="${error}"></span>
 
@@ -51,13 +59,13 @@
                     <button class="login100-form-btn">
                         Login
                     </button>
-                    <h4 class="text-center"><a href="/registration">Create an account</a></h4>
                 </div>
                 <div class="text-center p-t-90">
                     <a class="txt1" href="#">
                         Forgot Password?
                     </a>
                 </div>
+                <h4 class="text-center"><a href="/registration">Create an account</a></h4>
             </form>
         </div>
     </div>
@@ -74,10 +82,11 @@
 <!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>-->
 <!--  Chartist Plugin  -->
 <!--<script src="/assets/js/plugins/chartist.min.js"></script>-->
-<!--  Notifications Plugin    -->
-<script src="/assets/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="/assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
-<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="/assets/js/demo.js"></script>
+
+<script src="/assets/vendor/animsition/js/animsition.min.js"></script>
+<script src="/assets/vendor/select2/select2.min.js"></script>
+<script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+<script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="/assets/vendor/countdowntime/countdowntime.js"></script>
+<script src="/assets/js/main.js"></script>
 </html>
