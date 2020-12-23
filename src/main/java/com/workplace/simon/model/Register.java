@@ -3,6 +3,7 @@ package com.workplace.simon.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Deprecated
 @Entity
 @Table(name = "users")
 public class Register {

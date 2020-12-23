@@ -2,6 +2,7 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -13,6 +14,9 @@ public class Role {
     @Column(name = "name")
     @NotBlank(message = "Role name is mandatory")
     private String name;
+
+    @ManyToMany
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -28,5 +32,13 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

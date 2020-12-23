@@ -2,6 +2,7 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -22,14 +23,17 @@ public class User {
     private String email;
 
     @Column(name = "login")
-    private String login;
+    private String username;
 
     @Column(name = "password")
     @NotBlank(message = "Password is mandatory")
     private String password;
 
-    @Column(name = "role_id")
-    private Long roleId;
+    @Transient
+    private String passwordConfirm;
+
+    @ManyToMany
+    private Set<Role> roles;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
@@ -81,12 +85,12 @@ public class User {
         this.email = email;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -97,13 +101,29 @@ public class User {
         this.password = password;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    //    public Long getRoleId() {
+//        return roleId;
+//    }
+//
+//    public void setRoleId(Long roleId) {
+//        this.roleId = roleId;
+//    }
 
     public Long getSupervisor() {
         return supervisor;

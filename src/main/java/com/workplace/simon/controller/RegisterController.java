@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+@Deprecated
 @Controller
 @RequestMapping("/register/")
 public class RegisterController {
