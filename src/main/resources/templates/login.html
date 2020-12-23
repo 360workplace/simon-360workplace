@@ -5,7 +5,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="/assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>List of Base Line</title>
+    <title>SIMON - Login</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <!--     Fonts and icons     -->
@@ -21,25 +21,6 @@
 <div class="limiter">
     <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
         <div class="wrap-login100">
-
-            <form class="form-signin">
-                <h2 class="form-heading">Log in</h2>
-
-                <div class="form-group">
-
-                    <input name="username" type="text" class="form-control" placeholder="Username"
-                           autofocus="true"/>
-
-                    <input name="password" type="password" class="form-control" placeholder="Password"/>
-                    <span class="has-error" th:text="${error}"></span>
-
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-                    <h4 class="text-center"><a href="/registration">Create an account</a></h4>
-                </div>
-            </form>
-
             <form class="login100-form validate-form" method="POST" th:action="@{/login}">
                 <span class="login100-form-logo">
                 <i class="zmdi zmdi-landscape"></i>
