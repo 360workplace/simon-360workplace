@@ -43,15 +43,15 @@ public class UserController {
 
         model.addAttribute("userForm", new User());
 
-        return "registration";
+        return getSignUpForm(model);
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         this.getUserValidator().validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return getSignUpForm(model);
         }
 
         this.getUserService().save(userForm);
@@ -59,6 +59,13 @@ public class UserController {
         this.getSecurityService().autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 
         return "redirect:/dashboard";
+    }
+
+    private String getSignUpForm(Model model) {
+        model.addAttribute("allUsers", this.getUserService().findAll());
+        model.addAttribute("simpleUser", 2);
+
+        return "registration";
     }
 
     @GetMapping("/login")
