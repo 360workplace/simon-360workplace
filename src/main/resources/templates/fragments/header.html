@@ -10,7 +10,7 @@
                 SIMON
             </a>
         </div>
-        <ul class="nav" sec:authorize="hasRole('EMPLOYEE')">
+        <ul class="nav" th:if="${#request.isUserInRole('EMPLOYEE')}">
             <li class="nav-item active">
                 <a class="nav-link" href="/data/baseline/2">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
@@ -32,7 +32,7 @@
             </li>
         </ul>
 
-        <ul class="nav" sec:authorize="hasRole('MANAGER')">
+        <ul class="nav" th:if="${#request.isUserInRole('MANAGER')}">
             <li class="nav-item active">
                 <a class="nav-link" href="/data/baseline/2">
                     <i class="nc-icon nc-notes"></i>
@@ -66,7 +66,7 @@
             </li>
         </ul>
 
-        <ul class="nav" sec:authorize="hasRole('ADMIN')">
+        <ul class="nav" th:if="${#request.isUserInRole('ADMIN')}">
             <li class="nav-item active">
                 <a class="nav-link" href="/registration">
                     <i class="nc-icon nc-notes"></i>
