@@ -10,24 +10,74 @@
                 SIMON
             </a>
         </div>
-        <ul class="nav">
+        <ul class="nav" sec:authorize="hasRole('EMPLOYEE')">
             <li class="nav-item active">
-                <a class="nav-link" href="dashboard.html">
+                <a class="nav-link" href="/data/baseline/2">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
-                    <p>First example</p>
+                    <p>Agregar Línea base</p>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="./user.html">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>Second example</p>
+                <a class="nav-link" href="/data/management/2">
+                    <i class="nc-icon nc-icon nc-paper-2"></i>
+                    <p>Solicitud de Asignación</p>
                 </a>
             </li>
 
             <li class="nav-item active active-pro">
                 <a class="nav-link active" href="javascript:;">
                     <i class="nc-icon nc-alien-33"></i>
-                    <p>Upgrade plan</p>
+                    <p>Informe Semanal</p>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav" sec:authorize="hasRole('MANAGER')">
+            <li class="nav-item active">
+                <a class="nav-link" href="/data/baseline/2">
+                    <i class="nc-icon nc-notes"></i>
+                    <p>Listado de Asignaciones</p>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="/data/management/2">
+                    <i class="nc-icon nc-notes"></i>
+                    <p>Asignaciones Activas</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/data/baseline/2">
+                    <i class="nc-icon nc-icon nc-paper-2"></i>
+                    <p>Actas Gerenciales</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/data/baseline/2">
+                    <i class="nc-icon nc-icon nc-paper-2"></i>
+                    <p>Actas SIMON </p>
+                </a>
+            </li>
+
+            <li class="nav-item active active-pro">
+                <a class="nav-link active" href="javascript:;">
+                    <i class="nc-icon nc-alien-33"></i>
+                    <p>Cierre de Asignaciones</p>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav" sec:authorize="hasRole('ADMIN')">
+            <li class="nav-item active">
+                <a class="nav-link" href="/registration">
+                    <i class="nc-icon nc-notes"></i>
+                    <p>Crear Usuario</p>
+                </a>
+            </li>
+
+            <li class="nav-item active active-pro">
+                <a class="nav-link active" href="javascript:;">
+                    <i class="nc-icon nc-alien-33"></i>
+                    <p>Listado de usuarios</p>
                 </a>
             </li>
         </ul>

@@ -31,6 +31,11 @@ public class UserValidator implements Validator {
     public void validate(Object object, Errors errors) {
         User user = (User) object;
 
+        validateUsernameAndPassword(errors, user);
+        validateEmail(errors, user);
+    }
+
+    private void validateUsernameAndPassword(Errors errors, User user) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
         if (user.getUsername().length() < MIN_USERNAME_LENGTH || user.getUsername().length() > MAX_USERNAME_LENGTH) {
             errors.rejectValue("username", "Size.userForm.username");
@@ -47,6 +52,14 @@ public class UserValidator implements Validator {
 
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+        }
+    }
+
+    private void validateEmail(Errors errors, User user) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty");
+
+        if (this.getUserService().findByUsername(user.getUsername()) != null) {
+            errors.rejectValue("email", "Duplicate.userForm.email");
         }
     }
 }
