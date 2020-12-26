@@ -15,8 +15,8 @@ public class Role {
     @NotBlank(message = "Role name is mandatory")
     private String name;
 
-    @ManyToMany
-    private Set<Role> roles;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class Role {
         this.name = name;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<User> getRoles() {
+        return users;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Set<User> users) {
+        this.users = users;
     }
 }

@@ -50,9 +50,6 @@ public class User {
 //    @OneToOne(mappedBy = "supervisor")
 //    private Execution execution;
 
-    @OneToOne(mappedBy = "userSource")
-    private Policy policy;
-
     public Long getId() {
         return id;
     }
@@ -156,12 +153,4 @@ public class User {
 //    public void setExecution(Execution execution) {
 //        this.execution = execution;
 //    }
-
-    public Policy getPolicy() {
-        return policy;
-    }
-
-    public void setPolicy(Policy policy) {
-        this.policy = policy;
-    }
 }

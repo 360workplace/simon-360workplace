@@ -139,7 +139,7 @@ public class ExecutionController {
 
         User userSource = this.getUserRepository().findById(userId)
                 .orElseThrow(() -> new  IllegalArgumentException("The user id is not valid " + userId));
-        policy.setUserSource(userSource);
+        policy.setUserSource(userSource.getId());
 
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
         BaseLine source = this.getBaseLineService().findById(sourceId)

@@ -2,7 +2,6 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Entity
 @Table(name = "Norma_Politica")
@@ -14,9 +13,8 @@ public class Policy {
     @Column(name = "code_from")
     private String codeFrom;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "source", referencedColumnName = "id")
-    private User userSource;
+    @Column(name = "source")
+    private Long userSource;
 
 //    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 //    @JoinTable(
@@ -49,11 +47,11 @@ public class Policy {
         this.codeFrom = codeFrom;
     }
 
-    public User getUserSource() {
+    public Long getUserSource() {
         return userSource;
     }
 
-    public void setUserSource(User userSource) {
+    public void setUserSource(Long userSource) {
         this.userSource = userSource;
     }
 
