@@ -11,7 +11,7 @@
                 SIMON
             </a>
         </div>
-        <ul class="nav" sec:authorize="hasRole('EMPLOYEE')">
+        <ul class="nav" sec:authorize="isAuthenticated()">
             <li class="nav-item active">
                 <a class="nav-link" href="/data/baseline/2">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
