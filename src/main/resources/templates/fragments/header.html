@@ -1,4 +1,5 @@
-<div class="sidebar" data-image="/assets/img/sidebar-5.jpg" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+<div class="sidebar" data-image="/assets/img/sidebar-5.jpg" th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
     <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -10,7 +11,7 @@
                 SIMON
             </a>
         </div>
-        <ul class="nav" th:if="${#request.isUserInRole('EMPLOYEE')}">
+        <ul class="nav" sec:authorize="hasRole('EMPLOYEE')">
             <li class="nav-item active">
                 <a class="nav-link" href="/data/baseline/2">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
@@ -32,7 +33,7 @@
             </li>
         </ul>
 
-        <ul class="nav" th:if="${#request.isUserInRole('MANAGER')}">
+        <ul class="nav" sec:authorize="hasRole('MANAGER')">
             <li class="nav-item active">
                 <a class="nav-link" href="/data/baseline/2">
                     <i class="nc-icon nc-notes"></i>
@@ -66,7 +67,7 @@
             </li>
         </ul>
 
-        <ul class="nav" th:if="${#request.isUserInRole('ADMIN')}">
+        <ul class="nav" sec:authorize="hasRole('ROLE_ADMIN')">
             <li class="nav-item active">
                 <a class="nav-link" href="/registration">
                     <i class="nc-icon nc-notes"></i>
