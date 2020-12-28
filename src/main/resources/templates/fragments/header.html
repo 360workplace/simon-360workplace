@@ -7,26 +7,26 @@
     -->
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="/" class="simple-text">
+            <a th:href="@{/}" class="simple-text">
                 SIMON
             </a>
         </div>
         <ul class="nav" sec:authorize="hasAuthority('EMPLOYEE')">
-            <li class="nav-item active">
-                <a class="nav-link" href="/data/baseline/2">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/data/baseline/{userId}(userId = ${currentUser.id})}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Agregar Línea base</p>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="/data/management/${currentUser.id}">
+                <a class="nav-link" th:href="@{/data/management/{userId}(userId = ${currentUser.id})}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Solicitud de Asignación</p>
                 </a>
             </li>
 
             <li class="nav-item active active-pro">
-                <a class="nav-link active" href="javascript:;">
+                <a class="nav-link active" th:href="@{#}">
                     <i class="nc-icon nc-alien-33"></i>
                     <p>Informe Semanal</p>
                 </a>
@@ -34,33 +34,33 @@
         </ul>
 
         <ul class="nav" sec:authorize="hasAuthority('MANAGER')">
-            <li class="nav-item active">
-                <a class="nav-link" href="/data/baseline/2">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/data/baseline/list}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Listado de Asignaciones</p>
                 </a>
             </li>
-            <li>
-                <a class="nav-link" href="/data/management/${currentUser.id}">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{#}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Asignaciones Activas</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/data/baseline/${currentUser.id}">
+                <a class="nav-link" th:href="@{#}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Actas Gerenciales</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/data/baseline/${currentUser.id}">
+                <a class="nav-link" th:href="@{#}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Actas SIMON </p>
                 </a>
             </li>
 
             <li class="nav-item active active-pro">
-                <a class="nav-link active" href="javascript:;">
+                <a class="nav-link active" th:href="@{#}">
                     <i class="nc-icon nc-alien-33"></i>
                     <p>Cierre de Asignaciones</p>
                 </a>
@@ -68,15 +68,15 @@
         </ul>
 
         <ul class="nav" sec:authorize="hasAuthority('ADMIN')">
-            <li class="nav-item active">
-                <a class="nav-link" href="/admin/registration">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/registration}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Crear Usuario</p>
                 </a>
             </li>
 
-            <li class="nav-item active active-pro">
-                <a class="nav-link active" href="javascript:;">
+            <li class="nav-item active-pro">
+                <a class="nav-link active" th:href="@{#}">
                     <i class="nc-icon nc-alien-33"></i>
                     <p>Listado de usuarios</p>
                 </a>
