@@ -37,19 +37,28 @@ public class UserController {
         return userValidator;
     }
 
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        if (this.getSecurityService().isAuthenticated()) {
-            return "redirect:/";
-        }
+    @GetMapping("/admin/registration")
+    public String registration(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+        setCurrentUser(model, currentUser);
 
         model.addAttribute("userForm", new User());
 
         return getSignUpForm(model);
     }
 
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+    private void setCurrentUser(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+        User user = this.getUserService().findByUsername(currentUser.getUsername());
+        model.addAttribute("currentUser", user);
+    }
+
+    @PostMapping("/admin/registration")
+    public String registration(
+            @ModelAttribute("userForm") User userForm,
+            BindingResult bindingResult,
+            Model model,
+            @AuthenticationPrincipal UserDetails currentUser
+    ) {
+        setCurrentUser(model, currentUser);
         this.getUserValidator().validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -87,10 +96,9 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping({"/", "/dashboard"})
+    @GetMapping({"/", "/dashboard", "/admin"})
     public String dashboard(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        User user = (User) this.getUserService().findByUsername(currentUser.getUsername());
-        model.addAttribute("currentUser", user);
+        setCurrentUser(model, currentUser);
 
         return "dashboard";
     }

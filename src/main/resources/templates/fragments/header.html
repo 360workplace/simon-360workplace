@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="/data/management/${currentUser.id}}">
+                <a class="nav-link" href="/data/management/${currentUser.id}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Solicitud de Asignación</p>
                 </a>
@@ -41,19 +41,19 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="/data/management/2">
+                <a class="nav-link" href="/data/management/${currentUser.id}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Asignaciones Activas</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/data/baseline/2">
+                <a class="nav-link" href="/data/baseline/${currentUser.id}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Actas Gerenciales</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/data/baseline/2">
+                <a class="nav-link" href="/data/baseline/${currentUser.id}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Actas SIMON </p>
                 </a>
@@ -69,7 +69,7 @@
 
         <ul class="nav" sec:authorize="hasAuthority('ADMIN')">
             <li class="nav-item active">
-                <a class="nav-link" href="/registration">
+                <a class="nav-link" href="/admin/registration">
                     <i class="nc-icon nc-notes"></i>
                     <p>Crear Usuario</p>
                 </a>

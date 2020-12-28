@@ -61,7 +61,8 @@ public class ExecutionController {
             @PathVariable("sourceLabel") String sourceLabel,
             @PathVariable("sourceId") Long sourceId,
             @PathVariable("userId") Long userId,
-            Model model) {
+            Model model
+    ) {
         Execution execution = new Execution();
         model.addAttribute("execution", execution);
         model.addAttribute("allUsers", this.getUserRepository().findAll());
@@ -103,7 +104,8 @@ public class ExecutionController {
             @PathVariable("id") Long sourceId,
             @Valid Execution execution,
             BindingResult bindingResult,
-            Model model) {
+            Model model
+    ) {
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
         BaseLine source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
@@ -131,7 +133,8 @@ public class ExecutionController {
             @PathVariable("sourceLabel") String sourceLabel,
             @PathVariable("sourceId") Long sourceId,
             @PathVariable("userId") Long userId,
-            Model model) {
+            Model model
+    ) {
         Policy policy = new Policy();
         policy.setCodeFrom(sourceLabel);
         model.addAttribute("policy", policy);
@@ -157,7 +160,8 @@ public class ExecutionController {
             @PathVariable("id") Long sourceId,
             @Valid Policy policy,
             BindingResult bindingResult,
-            Model model) {
+            Model model
+    ) {
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
         BaseLine source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
