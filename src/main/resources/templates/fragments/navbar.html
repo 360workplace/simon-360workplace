@@ -1,5 +1,6 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg " color-on-scroll="500" th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+<nav class="navbar navbar-expand-lg " color-on-scroll="500" th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Template</a>
         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,7 +8,7 @@
             <span class="navbar-toggler-bar burger-lines"></span>
             <span class="navbar-toggler-bar burger-lines"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+        <div class="collapse navbar-collapse justify-content-end" id="navigation" sec:authorize="isAuthenticated()">
             <ul class="nav navbar-nav mr-auto">
                 <li class="nav-item">
                     <a href="#" class="nav-link" data-toggle="dropdown">
@@ -59,7 +60,7 @@
                     <form id="logoutForm" method="POST" th:action="@{/logout}">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
-                    <a class="nav-link" onclick="document.forms['logoutForm'].submit()">
+                    <a class="nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer;">
                         <span class="no-icon">Log out</span>
                     </a>
                 </li>

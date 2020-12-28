@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements UserServiceInterface {
+public class UserService implements UserServiceInterface, FindUserService {
     @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -26,25 +26,27 @@ public class UserService implements UserServiceInterface {
         return roleRepository;
     }
 
-    public BCryptPasswordEncoder getbCryptPasswordEncoder() {
-        return bCryptPasswordEncoder;
+    public BCryptPasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
     }
 
     public UserRepository getUserRepository() {
         return userRepository;
     }
 
+    @Override
     public List<User> findAll() {
         return this.getUserRepository().findAll();
     }
 
+    @Override
     public Optional<User> findById(Long id) {
         return this.getUserRepository().findById(id);
     }
 
     @Override
     public void save(User user) {
-        user.setPassword(this.getbCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(this.getPasswordEncoder().encode(user.getPassword()));
         user.setRoles(new HashSet<>(this.getRoleRepository().findAll()));
         this.getUserRepository().save(user);
     }
