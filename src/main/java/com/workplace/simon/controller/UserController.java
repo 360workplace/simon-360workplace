@@ -5,6 +5,8 @@ import com.workplace.simon.service.SecurityService;
 import com.workplace.simon.service.UserService;
 import com.workplace.simon.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -86,7 +88,10 @@ public class UserController {
     }
 
     @GetMapping({"/", "/dashboard"})
-    public String dashboard(Model model) {
+    public String dashboard(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+        User user = (User) this.getUserService().findByUsername(currentUser.getUsername());
+        model.addAttribute("currentUser", user);
+
         return "dashboard";
     }
 }

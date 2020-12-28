@@ -11,7 +11,7 @@
                 SIMON
             </a>
         </div>
-        <ul class="nav" sec:authorize="isAuthenticated()">
+        <ul class="nav" sec:authorize="hasAuthority('EMPLOYEE')">
             <li class="nav-item active">
                 <a class="nav-link" href="/data/baseline/2">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="/data/management/2">
+                <a class="nav-link" href="/data/management/${currentUser.id}}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Solicitud de Asignación</p>
                 </a>
@@ -33,7 +33,7 @@
             </li>
         </ul>
 
-        <ul class="nav" sec:authorize="hasRole('MANAGER')">
+        <ul class="nav" sec:authorize="hasAuthority('MANAGER')">
             <li class="nav-item active">
                 <a class="nav-link" href="/data/baseline/2">
                     <i class="nc-icon nc-notes"></i>
@@ -67,7 +67,7 @@
             </li>
         </ul>
 
-        <ul class="nav" sec:authorize="hasRole('ADMIN')">
+        <ul class="nav" sec:authorize="hasAuthority('ADMIN')">
             <li class="nav-item active">
                 <a class="nav-link" href="/registration">
                     <i class="nc-icon nc-notes"></i>
