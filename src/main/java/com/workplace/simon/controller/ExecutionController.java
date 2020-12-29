@@ -2,7 +2,7 @@ package com.workplace.simon.controller;
 
 import com.workplace.simon.model.*;
 import com.workplace.simon.repository.UserRepository;
-import com.workplace.simon.service.BaseLineService;
+import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.ExecutionService;
 import com.workplace.simon.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class ExecutionController {
     private UserRepository userRepository;
 
     @Autowired
-    private BaseLineService baseLineService;
+    private SourceService sourceService;
 
     public ExecutionService getExecutionService() {
         return executionService;
@@ -43,8 +43,8 @@ public class ExecutionController {
         return userRepository;
     }
 
-    public BaseLineService getBaseLineService() {
-        return baseLineService;
+    public SourceService getBaseLineService() {
+        return sourceService;
     }
 
     /**
@@ -69,7 +69,7 @@ public class ExecutionController {
 
         // TODO - Get from source and the id the correct table and the values to the correct table.
         execution.setCodeFrom(sourceLabel);
-        BaseLine source = this.getBaseLineService().findById(sourceId)
+        Source source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source is not defined in any table."));
         model.addAttribute("source", source);
         model.addAttribute("sourceId", sourceId);
@@ -87,10 +87,10 @@ public class ExecutionController {
         return "execution-creation-form";
     }
 
-    private User getUserSupervisor(BaseLine source) {
+    private User getUserSupervisor(Source source) {
         User userSupervisor;
-        if (source.getSupervisor() != null) {
-            userSupervisor = this.getUserRepository().findById(source.getSupervisor())
+        if (source.getUserSupervisor() != null) {
+            userSupervisor = this.getUserRepository().findById(source.getUserSupervisor())
                     .orElse(new User());
         } else {
             userSupervisor = new User();
@@ -107,7 +107,7 @@ public class ExecutionController {
             Model model
     ) {
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        BaseLine source = this.getBaseLineService().findById(sourceId)
+        Source source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
 
@@ -145,7 +145,7 @@ public class ExecutionController {
         policy.setUserSource(userSource.getId());
 
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        BaseLine source = this.getBaseLineService().findById(sourceId)
+        Source source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
 
@@ -163,7 +163,7 @@ public class ExecutionController {
             Model model
     ) {
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        BaseLine source = this.getBaseLineService().findById(sourceId)
+        Source source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
         model.addAttribute("sourceId", sourceId);

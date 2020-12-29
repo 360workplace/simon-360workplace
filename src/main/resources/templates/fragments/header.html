@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/data/management/{userId}(userId = ${currentUser.id})}">
+                <a class="nav-link" th:href="@{/assign/request}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Solicitud de Asignación</p>
                 </a>
@@ -55,7 +55,7 @@
 
         <ul class="nav" sec:authorize="hasAuthority('ASSISTANT')">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{#}">
+                <a class="nav-link" th:href="@{/act/management}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Actas Gerenciales</p>
                 </a>

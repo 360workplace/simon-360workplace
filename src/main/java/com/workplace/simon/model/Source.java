@@ -8,13 +8,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "Linea_Base")
-public class BaseLine {
+public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "fuente")
-    private Long source;
+    private Long userId;
 
     @Column(name = "titulo")
     @NotBlank(message = "The Title is mandatory")
@@ -24,13 +24,13 @@ public class BaseLine {
     private String detail;
 
     @Column(name = "responsable")
-    private Long supervisor;
+    private Long userSupervisor;
 
     @Column(name = "fecha_inicial")
     private Date startDate;
 
     @OneToMany(mappedBy = "baseLine")
-    private List<BaseLineResource> resources;
+    private List<Resource> resources;
 
     @Column(name = "active")
     private Boolean active = true;
@@ -43,12 +43,12 @@ public class BaseLine {
         this.id = id;
     }
 
-    public Long getSource() {
-        return source;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setSource(Long source) {
-        this.source = source;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -67,12 +67,12 @@ public class BaseLine {
         this.detail = detail;
     }
 
-    public Long getSupervisor() {
-        return supervisor;
+    public Long getUserSupervisor() {
+        return userSupervisor;
     }
 
-    public void setSupervisor(Long supervisor) {
-        this.supervisor = supervisor;
+    public void setUserSupervisor(Long userSupervisor) {
+        this.userSupervisor = userSupervisor;
     }
 
     public Date getStartDate() {
@@ -87,7 +87,7 @@ public class BaseLine {
         this.startDate = Date.valueOf(startDate);
     }
 
-    public List<BaseLineResource> getResources() {
+    public List<Resource> getResources() {
         if (resources == null) {
             resources = new ArrayList<>();
         }
@@ -95,7 +95,7 @@ public class BaseLine {
         return resources;
     }
 
-    public void setResources(List<BaseLineResource> resources) {
+    public void setResources(List<Resource> resources) {
         this.resources = resources;
     }
 

@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Recurso_Linea_Base")
-public class BaseLineResource {
+public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,7 +22,7 @@ public class BaseLineResource {
 
     @ManyToOne
     @JoinColumn(name="linea_base_id", nullable=false)
-    private BaseLine baseLine;
+    private Source baseLine;
 
     public Long getId() {
         return id;
@@ -56,11 +56,11 @@ public class BaseLineResource {
         this.user = user;
     }
 
-    public BaseLine getBaseLine() {
+    public Source getBaseLine() {
         return baseLine;
     }
 
-    public void setBaseLine(BaseLine baseLine) {
+    public void setBaseLine(Source baseLine) {
         this.baseLine = baseLine;
     }
 }

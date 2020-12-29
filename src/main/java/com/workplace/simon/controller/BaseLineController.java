@@ -1,9 +1,9 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.BaseLine;
-import com.workplace.simon.model.BaseLineResource;
+import com.workplace.simon.model.Source;
+import com.workplace.simon.model.Resource;
 import com.workplace.simon.model.User;
-import com.workplace.simon.service.BaseLineService;
+import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.RegisterService;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @RequestMapping("/data/")
 public class BaseLineController {
     @Autowired
-    private BaseLineService baseLineService;
+    private SourceService sourceService;
 
     @Autowired
     private RegisterService registerService;
@@ -27,10 +27,11 @@ public class BaseLineController {
     @Autowired
     private UserService userService;
 
-    public BaseLineService getBaseLineService() {
-        return baseLineService;
+    public SourceService getBaseLineService() {
+        return sourceService;
     }
 
+    @Deprecated
     public RegisterService getRegisterService() {
         return registerService;
     }
@@ -47,15 +48,15 @@ public class BaseLineController {
             @PathVariable("userId") Long userId,
             Model model
     ) {
-        BaseLine baseLine = new BaseLine();
-        baseLine.getResources().add(new BaseLineResource());
-        baseLine.setSource(userId);
-        User currentUser = this.getUserService().findById(baseLine.getSource())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
+        Source baseLine = new Source();
+        baseLine.getResources().add(new Resource());
+        baseLine.setUserId(userId);
+        User currentUser = this.getUserService().findById(baseLine.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
 
         model.addAttribute("baseLine", baseLine);
         model.addAttribute("currentUser", currentUser);
-        model.addAttribute("allUsers", this.getRegisterService().findAll());
+        model.addAttribute("allUsers", this.getUserService().findAll());
         model.addAttribute("userid", userId);
 
         return "baseline-form";
@@ -64,15 +65,15 @@ public class BaseLineController {
     @PostMapping(params = "save", path = {"add", "add/{userId}"})
     public String addBaseline(
             @PathVariable("userId") Long userId,
-            @Valid BaseLine baseLine,
+            @Valid Source baseLine,
             BindingResult bindingResult,
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            User currentUser = this.getUserService().findById(baseLine.getSource())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
+            User currentUser = this.getUserService().findById(baseLine.getUserId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
             model.addAttribute("currentUser", currentUser);
-            model.addAttribute("allUsers", this.getRegisterService().findAll());
+            model.addAttribute("allUsers", this.getUserService().findAll());
             model.addAttribute("userid", userId);
 
             return "baseline-form";
@@ -86,10 +87,10 @@ public class BaseLineController {
     @RequestMapping(params = "addItem", path = {"add", "add/{userId}"})
     public String addRow(
             @PathVariable("userId") Long userId,
-            BaseLine baseLine,
+            Source baseLine,
             HttpServletRequest request
     ) {
-        baseLine.getResources().add(new BaseLineResource());
+        baseLine.getResources().add(new Resource());
 
         if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
             return "baseline-form::#items";
@@ -101,7 +102,7 @@ public class BaseLineController {
     @RequestMapping(params = "removeItem", path = {"add", "add/{userId}"})
     public String removeRow(
             @PathVariable("userId") Long userId,
-            final BaseLine baseLine,
+            final Source baseLine,
             @RequestParam("removeItem") int index,
             HttpServletRequest request
     ) {
@@ -117,16 +118,16 @@ public class BaseLineController {
     @PostMapping("update/{id}")
     public String updateBaseline(
             @PathVariable("id") Long id,
-            @Valid BaseLine baseLine,
+            @Valid Source baseLine,
             BindingResult bindingResult,
             Model model
     ) {
         if (bindingResult.hasErrors()) {
             baseLine.setId(id);
-            User currentUser = this.getUserService().findById(baseLine.getSource())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
+            User currentUser = this.getUserService().findById(baseLine.getUserId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
             model.addAttribute("currentUser", currentUser);
-            model.addAttribute("allUsers", this.getRegisterService().findAll());
+            model.addAttribute("allUsers", this.getUserService().findAll());
 
             return "baseline-form";
         }
@@ -148,14 +149,14 @@ public class BaseLineController {
             @PathVariable("baseLineId") Long baseLineId,
             Model model
     ) {
-        BaseLine baseLine = this.getBaseLineService().findById(baseLineId)
+        Source baseLine = this.getBaseLineService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
-        User currentUser = this.getUserService().findById(baseLine.getSource())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getSource()));
+        User currentUser = this.getUserService().findById(baseLine.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
 
         model.addAttribute("baseLine", baseLine);
         model.addAttribute("currentUser", currentUser);
-        model.addAttribute("allUsers", this.getRegisterService().findAll());
+        model.addAttribute("allUsers", this.getUserService().findAll());
 
         return "baseline-show";
     }
@@ -165,7 +166,7 @@ public class BaseLineController {
             @PathVariable("baseLineId") Long baseLineId,
             Model model
     ) {
-        BaseLine baseLine = this.getBaseLineService().findById(baseLineId)
+        Source baseLine = this.getBaseLineService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
         baseLine.setActive(false);
         this.getBaseLineService().save(baseLine);
