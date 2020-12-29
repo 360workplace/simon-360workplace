@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
 <head>
     <title>Create an account</title>
 </head>
@@ -10,7 +11,7 @@
             <h3>Línea base</h3>
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/registration}">
+                    <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/admin/registration}">
                         <div class="row">
                             <div class="form-group col-md-8">
                                 <label for="firstname" class="col-form-label">Nombre</label> <input type="text" th:field="*{firstname}" class="form-control" id="firstname" placeholder="Firstname"> <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger"></span>
