@@ -8,8 +8,11 @@
 <div class="content" layout:fragment="content">
     <div class="container-fluid">
         <div class="section">
-            <h3>Línea base</h3>
             <div class="card">
+                <div class="card-header ">
+                    <h4 class="card-title">Usuario</h4>
+                    <p class="card-category">Crear nuevo usuario</p>
+                </div>
                 <div class="card-body">
                     <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/admin/registration}">
                         <div class="row">

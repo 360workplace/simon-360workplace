@@ -8,9 +8,11 @@
 <div class="content" layout:fragment="content">
     <div class="container-fluid">
         <div class="section">
-
-            <h3>Línea base</h3>
             <div class="card">
+                <div class="card-header ">
+                    <h4 class="card-title">Línea Base</h4>
+                    <p class="card-category">Actualizar datos</p>
+                </div>
                 <div class="card-body">
                     <div class="col-md-10">
                         <form action="#" th:action="@{/data/update/{id}(id=${baseLine.id})}" th:object="${baseLine}" method="post">

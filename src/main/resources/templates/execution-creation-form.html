@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
 <head>
     <title>SIMON - Assignation form add</title>
 </head>
@@ -7,8 +8,11 @@
 <div class="content" layout:fragment="content">
     <div class="container-fluid">
         <div class="section">
-            <h3>Asignación</h3>
             <div class="card">
+                <div class="card-header ">
+                    <h4 class="card-title">Asignación</h4>
+                    <p class="card-category">Asignar tarea</p>
+                </div>
                 <div class="card-body">
                     <div class="col-md-10">
                         <form action="#" th:action="@{/process/execution/add/{id}(id = ${sourceId})}" th:object="${execution}" method="post">
@@ -56,7 +60,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

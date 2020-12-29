@@ -8,8 +8,11 @@
 <div class="content" layout:fragment="content">
     <div class="container-fluid">
         <div class="section">
-            <h3>Línea base</h3>
             <div class="card">
+                <div class="card-header ">
+                    <h4 class="card-title">Línea Base</h4>
+                    <p class="card-category">Agregar nuevo registro</p>
+                </div>
                 <div class="card-body">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <form action="#" th:action="@{/data/add/{userId}(userId = ${userId})}" th:object="${baseLine}" method="post">
