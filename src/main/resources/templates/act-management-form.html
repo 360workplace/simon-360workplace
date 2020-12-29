@@ -47,10 +47,10 @@
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <fieldset id="items">
                                         <caption>Recursos asignados</caption>
-                                        <div th:each="resource, stat : ${baseLine.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <label th:for="|baseLine.resources[${stat.index}].detail|">Detalle</label>
+                                        <div th:each="resource, stat : ${act.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <label th:for="|act.resources[${stat.index}].detail|">Detalle</label>
                                             <!-- This construct will render field name like this: "items[0].name" -->
-                                            <input th:field="${baseLine.resources[__${stat.index}__].detail}">
+                                            <input th:field="${act.resources[__${stat.index}__].detail}">
 
                                             <button type="button" name="removeItem" th:value="${stat.index}" class="btn btn-danger">Remove item</button>
                                         </div>

@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/layout}">
 <head>
-    <title>Act Management Add</title>
+    <title>Assign request Add</title>
 </head>
 <body>
 <div class="content" layout:fragment="content">
@@ -10,7 +10,7 @@
         <div class="section">
             <div class="card">
                 <div class="card-header ">
-                    <h4 class="card-title">Acta Gerencial</h4>
+                    <h4 class="card-title">Solicitud de Asignación</h4>
                     <p class="card-category">Agregar nuevo registro</p>
                 </div>
                 <div class="card-body">
@@ -42,21 +42,6 @@
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="startDate" class="col-form-label">Fecha de inicio</label> <input type="date" th:field="*{startDate}" class="form-control" id="startDate" placeholder="Start Date" data-provide="datepicker"> <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <fieldset id="items">
-                                        <caption>Recursos asignados</caption>
-                                        <div th:each="resource, stat : ${baseLine.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <label th:for="|baseLine.resources[${stat.index}].detail|">Detalle</label>
-                                            <!-- This construct will render field name like this: "items[0].name" -->
-                                            <input th:field="${baseLine.resources[__${stat.index}__].detail}">
-
-                                            <button type="button" name="removeItem" th:value="${stat.index}" class="btn btn-danger">Remove item</button>
-                                        </div>
-                                    </fieldset>
-
-                                    <button type="button" name="addItem" class="btn btn-secondary">Add item</button>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
