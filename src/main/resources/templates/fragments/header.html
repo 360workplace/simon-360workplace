@@ -18,16 +18,15 @@
                     <p>Agregar Línea base</p>
                 </a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/data/management/{userId}(userId = ${currentUser.id})}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Solicitud de Asignación</p>
                 </a>
             </li>
-
-            <li class="nav-item active active-pro">
-                <a class="nav-link active" th:href="@{#}">
-                    <i class="nc-icon nc-alien-33"></i>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{#}">
+                    <i class="nc-icon nc-notes"></i>
                     <p>Informe Semanal</p>
                 </a>
             </li>
@@ -48,6 +47,15 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{#}">
+                    <i class="nc-icon nc-alien-33"></i>
+                    <p>Cierre de Asignaciones</p>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav" sec:authorize="hasAuthority('ASSISTANT')">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{#}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Actas Gerenciales</p>
                 </a>
@@ -56,13 +64,6 @@
                 <a class="nav-link" th:href="@{#}">
                     <i class="nc-icon nc-icon nc-paper-2"></i>
                     <p>Actas SIMON </p>
-                </a>
-            </li>
-
-            <li class="nav-item active active-pro">
-                <a class="nav-link active" th:href="@{#}">
-                    <i class="nc-icon nc-alien-33"></i>
-                    <p>Cierre de Asignaciones</p>
                 </a>
             </li>
         </ul>
@@ -74,11 +75,17 @@
                     <p>Crear Usuario</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{#}">
+                    <i class="nc-icon nc-notes"></i>
+                    <p>Listado de usuarios</p>
+                </a>
+            </li>
 
             <li class="nav-item active-pro">
                 <a class="nav-link active" th:href="@{#}">
                     <i class="nc-icon nc-alien-33"></i>
-                    <p>Listado de usuarios</p>
+                    <p>Vaciar Cahce</p>
                 </a>
             </li>
         </ul>
