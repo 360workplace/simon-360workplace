@@ -68,10 +68,11 @@
     </div>
 </div>
 </body>
-
-<script type="text/javascript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    });
-</script>
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+</th:block>
 </html>
