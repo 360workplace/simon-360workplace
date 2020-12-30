@@ -2,6 +2,7 @@ package com.workplace.simon.controller;
 
 import com.workplace.simon.model.Source;
 import com.workplace.simon.model.Resource;
+import com.workplace.simon.model.SourceType;
 import com.workplace.simon.model.User;
 import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.RegisterService;
@@ -50,6 +51,7 @@ public class BaseLineController {
     ) {
         Source baseLine = new Source();
         baseLine.getResources().add(new Resource());
+        baseLine.setType(SourceType.BASE_LINE);
         baseLine.setUserId(userId);
         User currentUser = this.getUserService().findById(baseLine.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
@@ -137,7 +139,7 @@ public class BaseLineController {
         return "redirect:/data/baseline/list";
     }
 
-    @GetMapping("baseline/list")
+    @GetMapping("source/list")
     public String students(Model model) {
         model.addAttribute("baseLine", this.getBaseLineService().findAll());
 

@@ -35,6 +35,9 @@ public class Source {
     @Column(name = "active")
     private Boolean active = true;
 
+    @Column(name = "type")
+    private SourceType type;
+
     public Long getId() {
         return id;
     }
@@ -105,5 +108,13 @@ public class Source {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public SourceType getType() {
+        return type;
+    }
+
+    public void setType(SourceType type) {
+        this.type = type;
     }
 }

@@ -25,7 +25,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{#}">
+                <a class="nav-link" th:href="@{/employee/week/report}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Informe Semanal</p>
                 </a>
@@ -34,7 +34,7 @@
 
         <ul class="nav" sec:authorize="hasAuthority('MANAGER')">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/data/baseline/list}">
+                <a class="nav-link" th:href="@{/data/source/list}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Listado de Asignaciones</p>
                 </a>
