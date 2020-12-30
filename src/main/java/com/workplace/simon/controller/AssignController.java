@@ -24,6 +24,7 @@ public class AssignController {
     @Autowired
     private UserService userService;
 
+    @Autowired
     private SourceService sourceService;
 
     public UserService getUserService() {
