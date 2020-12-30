@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Linea_Base")
+@Table(name = "linea_base")
 public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +35,8 @@ public class Source {
     @Column(name = "active")
     private Boolean active = true;
 
-    @Column(name = "type")
+    @Enumerated
+    @Column(columnDefinition = "smallint")
     private SourceType type;
 
     public Long getId() {
