@@ -4,6 +4,7 @@ import com.workplace.simon.model.Resource;
 import com.workplace.simon.model.Source;
 import com.workplace.simon.model.SourceType;
 import com.workplace.simon.model.User;
+import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,8 +24,14 @@ public class AssignController {
     @Autowired
     private UserService userService;
 
+    private SourceService sourceService;
+
     public UserService getUserService() {
         return userService;
+    }
+
+    public SourceService getSourceService() {
+        return sourceService;
     }
 
     @GetMapping("request")
@@ -61,6 +68,8 @@ public class AssignController {
 
             return "assign-request-form";
         }
+
+        this.getSourceService().save(assign);
 
         return "redirect:/";
     }

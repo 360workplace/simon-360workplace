@@ -28,7 +28,7 @@ public class BaseLineController {
     @Autowired
     private UserService userService;
 
-    public SourceService getBaseLineService() {
+    public SourceService getSourceService() {
         return sourceService;
     }
 
@@ -81,7 +81,7 @@ public class BaseLineController {
             return "baseline-form";
         }
 
-        this.getBaseLineService().save(baseLine);
+        this.getSourceService().save(baseLine);
 
         return "redirect:/";
     }
@@ -134,14 +134,14 @@ public class BaseLineController {
             return "baseline-form";
         }
 
-        this.getBaseLineService().save(baseLine);
+        this.getSourceService().save(baseLine);
 
         return "redirect:/data/baseline/list";
     }
 
     @GetMapping("source/list")
     public String students(Model model) {
-        model.addAttribute("baseLine", this.getBaseLineService().findAll());
+        model.addAttribute("baseLine", this.getSourceService().findAll());
 
         return "baseline-list";
     }
@@ -151,7 +151,7 @@ public class BaseLineController {
             @PathVariable("baseLineId") Long baseLineId,
             Model model
     ) {
-        Source baseLine = this.getBaseLineService().findById(baseLineId)
+        Source baseLine = this.getSourceService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
         User currentUser = this.getUserService().findById(baseLine.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
@@ -168,10 +168,10 @@ public class BaseLineController {
             @PathVariable("baseLineId") Long baseLineId,
             Model model
     ) {
-        Source baseLine = this.getBaseLineService().findById(baseLineId)
+        Source baseLine = this.getSourceService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
         baseLine.setActive(false);
-        this.getBaseLineService().save(baseLine);
+        this.getSourceService().save(baseLine);
 
         return "redirect:/data/baseline/list";
     }
