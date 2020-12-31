@@ -34,6 +34,8 @@
                                     <label for="detail" class="col-form-label">Detalle</label> <textarea th:field="*{detail}" class="form-control textarea-editor" id="detail" placeholder="Detail" /> <span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" class="text-danger"></span>
                                 </div>
 
+                                <input type="hidden" th:field="*{userId}" th:value="${userId}">
+                                <input type="hidden" th:field="*{type}">
                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                     <input type="submit" class="btn btn-primary" name="save" value="Registrar">
                                 </div>
