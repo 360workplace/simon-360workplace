@@ -11,8 +11,9 @@ public class Execution {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "code_from")
-    private String codeFrom;
+    @Enumerated
+    @Column(columnDefinition = "smallint", name = "code_from")
+    private SourceType codeFrom;
 
     @Column(name = "source")
     private Long source;
@@ -46,11 +47,11 @@ public class Execution {
         this.id = id;
     }
 
-    public String getCodeFrom() {
+    public SourceType getCodeFrom() {
         return codeFrom;
     }
 
-    public void setCodeFrom(String codeFrom) {
+    public void setCodeFrom(SourceType codeFrom) {
         this.codeFrom = codeFrom;
     }
 

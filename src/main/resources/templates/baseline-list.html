@@ -41,13 +41,13 @@
                                            data-placement="top" title="Editar"><i
                                                 class="fa fa-edit"></i></a></td>
                                     <td>
-                                        <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
+                                        <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.type}, sourceId = ${base.id}, userId = ${base.userId})}"
                                            class="btn btn-secondary btn-sm" data-toggle="tooltip"
                                            data-placement="top"
                                            title="Convertir a Asignación Gerencial"><i
                                                 class="fa fa-trophy"></i></a></td>
                                     <td>
-                                        <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = 'BL', sourceId = ${base.id}, userId = ${base.source})}"
+                                        <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.type}, sourceId = ${base.id}, userId = ${base.userId})}"
                                            class="btn btn-secondary btn-sm" data-toggle="tooltip"
                                            data-placement="top"
                                            title="Convertir a Norma y Politica"><i

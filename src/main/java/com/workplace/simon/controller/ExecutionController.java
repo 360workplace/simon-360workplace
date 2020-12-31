@@ -58,7 +58,7 @@ public class ExecutionController {
      */
     @GetMapping("execution/creation/{sourceLabel}/{sourceId}/{userId}")
     public String processExecution(
-            @PathVariable("sourceLabel") String sourceLabel,
+            @PathVariable("sourceLabel") Integer sourceLabel,
             @PathVariable("sourceId") Long sourceId,
             @PathVariable("userId") Long userId,
             Model model
@@ -68,7 +68,7 @@ public class ExecutionController {
         model.addAttribute("allUsers", this.getUserRepository().findAll());
 
         // TODO - Get from source and the id the correct table and the values to the correct table.
-        execution.setCodeFrom(sourceLabel);
+        execution.setCodeFrom(SourceType.of(sourceLabel));
         BaseSource source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source is not defined in any table."));
         model.addAttribute("source", source);
@@ -130,13 +130,13 @@ public class ExecutionController {
 
     @GetMapping("policy/creation/{sourceLabel}/{sourceId}/{userId}")
     public String processPolicy(
-            @PathVariable("sourceLabel") String sourceLabel,
+            @PathVariable("sourceLabel") Integer sourceLabel,
             @PathVariable("sourceId") Long sourceId,
             @PathVariable("userId") Long userId,
             Model model
     ) {
         Policy policy = new Policy();
-        policy.setCodeFrom(sourceLabel);
+        policy.setCodeFrom(SourceType.of(sourceLabel));
         model.addAttribute("policy", policy);
         model.addAttribute("sourceId", sourceId);
 
