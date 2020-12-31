@@ -22,7 +22,7 @@ public class Resource {
 
     @ManyToOne
     @JoinColumn(name="linea_base_id", nullable=false)
-    private Source baseLine;
+    private BaseSource baseLine;
 
     public Long getId() {
         return id;
@@ -56,11 +56,11 @@ public class Resource {
         this.user = user;
     }
 
-    public Source getBaseLine() {
+    public BaseSource getBaseLine() {
         return baseLine;
     }
 
-    public void setBaseLine(Source baseLine) {
+    public void setBaseLine(BaseSource baseLine) {
         this.baseLine = baseLine;
     }
 }

@@ -69,7 +69,7 @@ public class ExecutionController {
 
         // TODO - Get from source and the id the correct table and the values to the correct table.
         execution.setCodeFrom(sourceLabel);
-        Source source = this.getBaseLineService().findById(sourceId)
+        BaseSource source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source is not defined in any table."));
         model.addAttribute("source", source);
         model.addAttribute("sourceId", sourceId);
@@ -87,7 +87,7 @@ public class ExecutionController {
         return "execution-creation-form";
     }
 
-    private User getUserSupervisor(Source source) {
+    private User getUserSupervisor(BaseSource source) {
         User userSupervisor;
         if (source.getUserSupervisor() != null) {
             userSupervisor = this.getUserRepository().findById(source.getUserSupervisor())
@@ -107,7 +107,7 @@ public class ExecutionController {
             Model model
     ) {
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        Source source = this.getBaseLineService().findById(sourceId)
+        BaseSource source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
 
@@ -145,7 +145,7 @@ public class ExecutionController {
         policy.setUserSource(userSource.getId());
 
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        Source source = this.getBaseLineService().findById(sourceId)
+        BaseSource source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
 
@@ -163,7 +163,7 @@ public class ExecutionController {
             Model model
     ) {
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        Source source = this.getBaseLineService().findById(sourceId)
+        BaseSource source = this.getBaseLineService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
         model.addAttribute("sourceId", sourceId);

@@ -1,6 +1,6 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.Source;
+import com.workplace.simon.model.BaseSource;
 import com.workplace.simon.model.Resource;
 import com.workplace.simon.model.SourceType;
 import com.workplace.simon.model.User;
@@ -49,7 +49,7 @@ public class BaseLineController {
             @PathVariable("userId") Long userId,
             Model model
     ) {
-        Source baseLine = new Source();
+        BaseSource baseLine = new BaseSource();
         baseLine.getResources().add(new Resource());
         baseLine.setType(SourceType.BASE_LINE);
         baseLine.setUserId(userId);
@@ -67,7 +67,7 @@ public class BaseLineController {
     @PostMapping(params = "save", path = {"add", "add/{userId}"})
     public String addBaseline(
             @PathVariable("userId") Long userId,
-            @Valid Source baseLine,
+            @Valid BaseSource baseLine,
             BindingResult bindingResult,
             Model model
     ) {
@@ -89,7 +89,7 @@ public class BaseLineController {
     @RequestMapping(params = "addItem", path = {"add", "add/{userId}"})
     public String addRow(
             @PathVariable("userId") Long userId,
-            Source baseLine,
+            BaseSource baseLine,
             HttpServletRequest request
     ) {
         baseLine.getResources().add(new Resource());
@@ -104,7 +104,7 @@ public class BaseLineController {
     @RequestMapping(params = "removeItem", path = {"add", "add/{userId}"})
     public String removeRow(
             @PathVariable("userId") Long userId,
-            final Source baseLine,
+            final BaseSource baseLine,
             @RequestParam("removeItem") int index,
             HttpServletRequest request
     ) {
@@ -120,7 +120,7 @@ public class BaseLineController {
     @PostMapping("update/{id}")
     public String updateBaseline(
             @PathVariable("id") Long id,
-            @Valid Source baseLine,
+            @Valid BaseSource baseLine,
             BindingResult bindingResult,
             Model model
     ) {
@@ -151,7 +151,7 @@ public class BaseLineController {
             @PathVariable("baseLineId") Long baseLineId,
             Model model
     ) {
-        Source baseLine = this.getSourceService().findById(baseLineId)
+        BaseSource baseLine = this.getSourceService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
         User currentUser = this.getUserService().findById(baseLine.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
@@ -168,7 +168,7 @@ public class BaseLineController {
             @PathVariable("baseLineId") Long baseLineId,
             Model model
     ) {
-        Source baseLine = this.getSourceService().findById(baseLineId)
+        BaseSource baseLine = this.getSourceService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
         baseLine.setActive(false);
         this.getSourceService().save(baseLine);

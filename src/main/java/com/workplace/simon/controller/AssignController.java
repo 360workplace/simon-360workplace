@@ -1,7 +1,7 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.Resource;
-import com.workplace.simon.model.Source;
+import com.workplace.simon.model.BaseSource;
 import com.workplace.simon.model.SourceType;
 import com.workplace.simon.model.User;
 import com.workplace.simon.service.SourceService;
@@ -40,7 +40,7 @@ public class AssignController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        Source source = new Source();
+        BaseSource source = new BaseSource();
         source.getResources().add(new Resource());
         User user = this.getUserService().findByUsername(userDetails.getUsername());
         source.setUserId(user.getId());
@@ -57,7 +57,7 @@ public class AssignController {
     @PostMapping(params = "save", path = "add")
     public String addBaseline(
             @AuthenticationPrincipal UserDetails userDetails,
-            @Valid Source assign,
+            @Valid BaseSource assign,
             BindingResult bindingResult,
             Model model
     ) {

@@ -1,6 +1,6 @@
 package com.workplace.simon.service;
 
-import com.workplace.simon.model.Source;
+import com.workplace.simon.model.BaseSource;
 import com.workplace.simon.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,19 +17,19 @@ public class SourceService {
         return baseLineRepository;
     }
 
-    public Source save(Source source) {
+    public BaseSource save(BaseSource source) {
         return this.getBaseLineRepository().save(source);
     }
 
-    public List<Source> findAll() {
+    public List<BaseSource> findAll() {
         return this.getBaseLineRepository().findByActiveTrue();
     }
 
-    public Optional<Source> findById(Long id) {
+    public Optional<BaseSource> findById(Long id) {
         return this.getBaseLineRepository().findById(id);
     }
 
-    public void delete(Source source) {
+    public void delete(BaseSource source) {
         this.getBaseLineRepository().delete(source);
     }
 }
