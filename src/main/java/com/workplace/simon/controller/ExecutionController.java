@@ -125,7 +125,7 @@ public class ExecutionController {
         source.setActive(false);
         this.getBaseLineService().save(source);
 
-        return "redirect:/data/baseline/list";
+        return "redirect:/data/source/list";
     }
 
     @GetMapping("policy/creation/{sourceLabel}/{sourceId}/{userId}")
@@ -178,6 +178,6 @@ public class ExecutionController {
         source.setActive(false);
         this.getBaseLineService().save(source);
 
-        return "redirect:/data/baseline/list";
+        return "redirect:/data/source/list";
     }
 }

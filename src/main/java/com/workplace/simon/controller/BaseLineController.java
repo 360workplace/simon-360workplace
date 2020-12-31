@@ -136,7 +136,7 @@ public class BaseLineController {
 
         this.getSourceService().save(baseLine);
 
-        return "redirect:/data/baseline/list";
+        return "redirect:/data/source/list";
     }
 
     @GetMapping("source/list")
@@ -173,6 +173,6 @@ public class BaseLineController {
         baseLine.setActive(false);
         this.getSourceService().save(baseLine);
 
-        return "redirect:/data/baseline/list";
+        return "redirect:/data/source/list";
     }
 }
