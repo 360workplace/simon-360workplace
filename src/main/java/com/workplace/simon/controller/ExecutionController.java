@@ -43,7 +43,7 @@ public class ExecutionController {
         return userRepository;
     }
 
-    public SourceService getBaseLineService() {
+    public SourceService getSourceService() {
         return sourceService;
     }
 
@@ -69,7 +69,7 @@ public class ExecutionController {
 
         // TODO - Get from source and the id the correct table and the values to the correct table.
         execution.setCodeFrom(sourceLabel);
-        BaseSource source = this.getBaseLineService().findById(sourceId)
+        BaseSource source = this.getSourceService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source is not defined in any table."));
         model.addAttribute("source", source);
         model.addAttribute("sourceId", sourceId);
@@ -107,7 +107,7 @@ public class ExecutionController {
             Model model
     ) {
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        BaseSource source = this.getBaseLineService().findById(sourceId)
+        BaseSource source = this.getSourceService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
 
@@ -120,10 +120,6 @@ public class ExecutionController {
 
         execution.setStatus(AssignationStatus.OPEN.getLabel());
         this.getExecutionService().save(execution);
-
-        // TODO - needs the change it is necessary to select correct database.
-        source.setActive(false);
-        this.getBaseLineService().save(source);
 
         return "redirect:/data/source/list";
     }
@@ -145,7 +141,7 @@ public class ExecutionController {
         policy.setUserSource(userSource.getId());
 
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        BaseSource source = this.getBaseLineService().findById(sourceId)
+        BaseSource source = this.getSourceService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
 
@@ -163,7 +159,7 @@ public class ExecutionController {
             Model model
     ) {
         // TODO - It is necessary select the correct source in order to select the correct database to save data.
-        BaseSource source = this.getBaseLineService().findById(sourceId)
+        BaseSource source = this.getSourceService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
         model.addAttribute("sourceId", sourceId);
@@ -173,10 +169,6 @@ public class ExecutionController {
         }
 
         this.getPolicyService().save(policy);
-
-        // TODO - needs the change it is necessary to select correct database.
-        source.setActive(false);
-        this.getBaseLineService().save(source);
 
         return "redirect:/data/source/list";
     }
