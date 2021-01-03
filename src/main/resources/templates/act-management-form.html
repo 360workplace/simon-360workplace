@@ -18,7 +18,7 @@
                         <form action="#" th:action="@{/actRegister/add}" th:object="${actRegister}" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <fieldset>
-                                    <caption>Asistencia</caption>
+                                    <caption class="from-group">Asistencia</caption>
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <label for="meetingDate" class="col-form-label">Fecha</label> <input type="date" th:field="*{meeting.meetingDate}" class="form-control" id="meetingDate" placeholder="Date"> <span th:if="${#fields.hasErrors('meeting.meetingDate')}" th:errors="*{meeting.meetingDate}" class="text-danger"></span>
                                     </div>
@@ -37,18 +37,20 @@
                             </div>
 
                             <div class="row">
-                                <caption>Convocados</caption>
-                                <div class="row">
-                                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <label for="assistants" class="col-form-label">Asistentes</label> <input type="text" th:field="*{participants.assistants}" class="form-control" id="assistants" placeholder="Assistant"> <span th:if="${#fields.hasErrors('participants.assistants')}" th:errors="*{participants.assistants}" class="text-danger"></span>
+                                <fieldset>
+                                    <caption class="form-group">Convocados</caption>
+                                    <div class="row">
+                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <label for="assistants" class="col-form-label">Asistentes</label> <input type="text" th:field="*{participants.assistants}" class="form-control" id="assistants" placeholder="Assistant"> <span th:if="${#fields.hasErrors('participants.assistants')}" th:errors="*{participants.assistants}" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <label for="missing" class="col-form-label">Ausentes</label> <input type="text" th:field="*{participants.missing}" class="form-control" id="missing" placeholder="Missing"> <span th:if="${#fields.hasErrors('participants.missing')}" th:errors="*{participants.missing}" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <label for="unpunctual" class="col-form-label">Impuntuales</label> <input type="text" th:field="*{participants.unpunctual}" class="form-control" id="unpunctual" placeholder="Unpunctual"> <span th:if="${#fields.hasErrors('participants.unpunctual')}" th:errors="*{participants.unpunctual}" class="text-danger"></span>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <label for="missing" class="col-form-label">Ausentes</label> <input type="text" th:field="*{participants.missing}" class="form-control" id="missing" placeholder="Missing"> <span th:if="${#fields.hasErrors('participants.missing')}" th:errors="*{participants.missing}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <label for="unpunctual" class="col-form-label">Impuntuales</label> <input type="text" th:field="*{participants.unpunctual}" class="form-control" id="unpunctual" placeholder="Unpunctual"> <span th:if="${#fields.hasErrors('participants.unpunctual')}" th:errors="*{participants.unpunctual}" class="text-danger"></span>
-                                    </div>
-                                </div>
+                                </fieldset>
                             </div>
 
                             <div class="row">
