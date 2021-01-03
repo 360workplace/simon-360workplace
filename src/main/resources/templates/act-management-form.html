@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <form action="#" th:action="@{/act/add}" th:object="${act}" method="post">
+                        <form action="#" th:action="@{/act/add}" th:object="${act}" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <fieldset>
                                     <caption>Asistencia</caption>
@@ -53,7 +53,7 @@
 
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="fileRecord" class="col-form-label">Registro Acta</label> <input type="file" th:field="*{act.fileRecord}" class="form-control" id="fileRecord" placeholder="Unpunctual"> <span th:if="${#fields.hasErrors('act.fileRecord')}" th:errors="*{act.fileRecord}" class="text-danger"></span>
+                                    <label for="fileRecord" class="col-form-label">Registro Acta</label> <input type="file" th:field="*{act.fileRecord}" class="form-control" id="fileRecord" placeholder="Unpunctual" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"> <span th:if="${#fields.hasErrors('act.fileRecord')}" th:errors="*{act.fileRecord}" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row">

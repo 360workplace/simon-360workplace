@@ -28,10 +28,10 @@ public class ActController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        Act source = new Act();
+        Act act = new Act();
         User user = this.getUserService().findByUsername(userDetails.getUsername());
 
-        model.addAttribute("act", source);
+        model.addAttribute("act", act);
         model.addAttribute("currentUser", user);
         model.addAttribute("userid", user.getId());
 
