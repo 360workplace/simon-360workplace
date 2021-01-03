@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "act_source")
-public class Act extends BaseSource {
+public class Act {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
