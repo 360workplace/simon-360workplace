@@ -20,17 +20,17 @@
                                 <fieldset>
                                     <caption>Asistencia</caption>
                                     <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <label for="meetingDate" class="col-form-label">Fecha</label> <input type="text" th:field="*{actRegister.meeting.meetingDate}" class="form-control" id="meetingDate" placeholder="Date"> <span th:if="${#fields.hasErrors('actRegister.meeting.meetingDate')}" th:errors="*{actRegister.meeting.meetingDate}" class="text-danger"></span>
+                                        <label for="meetingDate" class="col-form-label">Fecha</label> <input type="date" th:field="*{meeting.meetingDate}" class="form-control" id="meetingDate" placeholder="Date"> <span th:if="${#fields.hasErrors('meeting.meetingDate')}" th:errors="*{meeting.meetingDate}" class="text-danger"></span>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                            <label for="startMeeting" class="col-form-label">Hora Inicio</label> <input type="text" th:field="*{actRegister.meeting.startMeeting}" class="form-control" id="startMeeting" placeholder="Starting"> <span th:if="${#fields.hasErrors('actRegister.meeting.startMeeting')}" th:errors="*{actRegister.meeting.startMeeting}" class="text-danger"></span>
+                                            <label for="startMeeting" class="col-form-label">Hora Inicio</label> <input type="text" th:field="*{meeting.startMeeting}" class="form-control" id="startMeeting" placeholder="Starting"> <span th:if="${#fields.hasErrors('meeting.startMeeting')}" th:errors="*{meeting.startMeeting}" class="text-danger"></span>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                            <label for="endMeeting" class="col-form-label">Hora Fin</label> <input type="text" th:field="*{actRegister.meeting.endMeeting}" class="form-control" id="endMeeting" placeholder="Meeting over"> <span th:if="${#fields.hasErrors('actRegister.meeting.endMeeting')}" th:errors="*{actRegister.meeting.endMeeting}" class="text-danger"></span>
+                                            <label for="endMeeting" class="col-form-label">Hora Fin</label> <input type="text" th:field="*{meeting.endMeeting}" class="form-control" id="endMeeting" placeholder="Meeting over"> <span th:if="${#fields.hasErrors('meeting.endMeeting')}" th:errors="*{meeting.endMeeting}" class="text-danger"></span>
                                         </div>
                                         <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                            <label for="ternMeeting" class="col-form-label">Duración</label> <input type="text" th:field="*{actRegister.meeting.ternMeeting}" class="form-control" id="ternMeeting" placeholder="Tern"> <span th:if="${#fields.hasErrors('actRegister.meeting.ternMeeting')}" th:errors="*{actRegister.meeting.ternMeeting}" class="text-danger"></span>
+                                            <label for="ternMeeting" class="col-form-label">Duración</label> <input type="text" th:field="*{meeting.ternMeeting}" class="form-control" id="ternMeeting" placeholder="Tern"> <span th:if="${#fields.hasErrors('meeting.ternMeeting')}" th:errors="*{meeting.ternMeeting}" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -40,20 +40,20 @@
                                 <caption>Convocados</caption>
                                 <div class="row">
                                     <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <label for="assistants" class="col-form-label">Asistentes</label> <input type="text" th:field="*{actRegister.participants.assistants}" class="form-control" id="assistants" placeholder="Assistant"> <span th:if="${#fields.hasErrors('actRegister.participants.assistants')}" th:errors="*{actRegister.participants.assistants}" class="text-danger"></span>
+                                        <label for="assistants" class="col-form-label">Asistentes</label> <input type="text" th:field="*{participants.assistants}" class="form-control" id="assistants" placeholder="Assistant"> <span th:if="${#fields.hasErrors('participants.assistants')}" th:errors="*{participants.assistants}" class="text-danger"></span>
                                     </div>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <label for="missing" class="col-form-label">Ausentes</label> <input type="text" th:field="*{actRegister.participants.missing}" class="form-control" id="missing" placeholder="Missing"> <span th:if="${#fields.hasErrors('actRegister.participants.missing')}" th:errors="*{actRegister.participants.missing}" class="text-danger"></span>
+                                        <label for="missing" class="col-form-label">Ausentes</label> <input type="text" th:field="*{participants.missing}" class="form-control" id="missing" placeholder="Missing"> <span th:if="${#fields.hasErrors('participants.missing')}" th:errors="*{participants.missing}" class="text-danger"></span>
                                     </div>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                        <label for="unpunctual" class="col-form-label">Impuntuales</label> <input type="text" th:field="*{actRegister.participants.unpunctual}" class="form-control" id="unpunctual" placeholder="Unpunctual"> <span th:if="${#fields.hasErrors('actRegister.participants.unpunctual')}" th:errors="*{actRegister.participants.unpunctual}" class="text-danger"></span>
+                                        <label for="unpunctual" class="col-form-label">Impuntuales</label> <input type="text" th:field="*{participants.unpunctual}" class="form-control" id="unpunctual" placeholder="Unpunctual"> <span th:if="${#fields.hasErrors('participants.unpunctual')}" th:errors="*{participants.unpunctual}" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="fileRecord" class="col-form-label">Registro Acta</label> <input type="file" th:field="*{actRegister.fileRecord}" class="form-control" id="fileRecord" placeholder="Unpunctual" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"> <span th:if="${#fields.hasErrors('actRegister.fileRecord')}" th:errors="*{actRegister.fileRecord}" class="text-danger"></span>
+                                    <label for="fileRecord" class="col-form-label">Registro Acta</label> <input type="file" th:field="*{fileRecord}" class="form-control" id="fileRecord" placeholder="Unpunctual" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"> <span th:if="${#fields.hasErrors('fileRecord')}" th:errors="*{fileRecord}" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -83,31 +83,6 @@
             skin: 'bootstrap',
             menubar: false,
             height : "480"
-        });
-
-        // jQuery
-        function replaceItems (html) {
-            // Replace the <fieldset id="items"> with a new one returned by server.
-            $('#items').replaceWith($(html));
-        }
-
-        $('button[name="addItem"]').click(function (event) {
-            event.preventDefault();
-            var data = $('form').serialize();
-            // Add parameter "addItem" to POSTed form data. Button's name and value is
-            // POSTed only when clicked. Since "event.preventDefault();" prevents from
-            // actual clicking the button, following line will add parameter to form
-            // data.
-            data += 'addItem';
-            $.post('/data/add/[[${userId}]]', data, replaceItems);
-        });
-
-        $('button[name="removeItem"]').click(function (event) {
-            event.preventDefault();
-            var data = $('form').serialize();
-            // Add parameter and index of item that is going to be removed.
-            data += 'removeItem=' + $(this).val();
-            $.post('/data/add/[[${userId}]]', data, replaceItems);
         });
     </script>
 </th:block>
