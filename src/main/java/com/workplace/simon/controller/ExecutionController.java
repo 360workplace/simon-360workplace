@@ -67,7 +67,6 @@ public class ExecutionController {
         model.addAttribute("execution", execution);
         model.addAttribute("allUsers", this.getUserRepository().findAll());
 
-        // TODO - Get from source and the id the correct table and the values to the correct table.
         execution.setCodeFrom(sourceLabel);
         BaseSource source = this.getSourceService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source is not defined in any table."));
@@ -140,7 +139,6 @@ public class ExecutionController {
                 .orElseThrow(() -> new  IllegalArgumentException("The user id is not valid " + userId));
         policy.setUserSource(userSource.getId());
 
-        // TODO - It is necessary select the correct source in order to select the correct database to save data.
         BaseSource source = this.getSourceService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
@@ -158,7 +156,6 @@ public class ExecutionController {
             BindingResult bindingResult,
             Model model
     ) {
-        // TODO - It is necessary select the correct source in order to select the correct database to save data.
         BaseSource source = this.getSourceService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);

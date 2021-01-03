@@ -17,50 +17,52 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <form action="#" th:action="@{/act/add}" th:object="${act}" method="post">
                             <div class="row">
+                                <fieldset>
+                                    <caption>Asistencia</caption>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <label for="meetingDate" class="col-form-label">Fecha</label> <input type="text" th:field="*{act.meeting.meetingDate}" class="form-control" id="meetingDate" placeholder="Date"> <span th:if="${#fields.hasErrors('act.meeting.meetingDate')}" th:errors="*{act.meeting.meetingDate}" class="text-danger"></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <label for="startMeeting" class="col-form-label">Hora Inicio</label> <input type="text" th:field="*{act.meeting.startMeeting}" class="form-control" id="startMeeting" placeholder="Starting"> <span th:if="${#fields.hasErrors('act.meeting.startMeeting')}" th:errors="*{act.meeting.startMeeting}" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <label for="endMeeting" class="col-form-label">Hora Fin</label> <input type="text" th:field="*{act.meeting.endMeeting}" class="form-control" id="endMeeting" placeholder="Meeting over"> <span th:if="${#fields.hasErrors('act.meeting.endMeeting')}" th:errors="*{act.meeting.endMeeting}" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <label for="ternMeeting" class="col-form-label">Duración</label> <input type="text" th:field="*{act.meeting.ternMeeting}" class="form-control" id="ternMeeting" placeholder="Tern"> <span th:if="${#fields.hasErrors('act.meeting.ternMeeting')}" th:errors="*{act.meeting.ternMeeting}" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="row">
+                                <caption>Convocados</caption>
+                                <div class="row">
+                                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <label for="assistants" class="col-form-label">Asistentes</label> <input type="text" th:field="*{act.participants.assistants}" class="form-control" id="assistants" placeholder="Assistant"> <span th:if="${#fields.hasErrors('act.participants.assistants')}" th:errors="*{act.participants.assistants}" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <label for="missing" class="col-form-label">Ausentes</label> <input type="text" th:field="*{act.participants.missing}" class="form-control" id="missing" placeholder="Missing"> <span th:if="${#fields.hasErrors('act.participants.missing')}" th:errors="*{act.participants.missing}" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <label for="unpunctual" class="col-form-label">Impuntuales</label> <input type="text" th:field="*{act.participants.unpunctual}" class="form-control" id="unpunctual" placeholder="Unpunctual"> <span th:if="${#fields.hasErrors('act.participants.unpunctual')}" th:errors="*{act.participants.unpunctual}" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <span class="font-weight-light">Usuario: <span th:text="${currentUser.username}"></span></span>
-                                    <input type="hidden" th:field="*{userId}" th:value="${userId}">
-                                    <input type="hidden" th:field="*{type}">
+                                    <label for="fileRecord" class="col-form-label">Registro Acta</label> <input type="file" th:field="*{act.fileRecord}" class="form-control" id="fileRecord" placeholder="Unpunctual"> <span th:if="${#fields.hasErrors('act.fileRecord')}" th:errors="*{act.fileRecord}" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="title" class="col-form-label">Título</label> <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title"> <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="detail" class="col-form-label">Detalle</label> <textarea th:field="*{detail}" class="form-control textarea-editor" id="detail" placeholder="Detail" /> <span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="userSupervisor" class="col-form-label">Seleccione supervisor</label>
-                                    <select th:field="*{userSupervisor}" class="form-control" id="userSupervisor">
-                                        <option value="">-- Select --</option>
-                                        <option th:each="user : ${allUsers}"
-                                                th:value="${user.id}"
-                                                th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>
-                                    </select>
-                                    <span th:if="${#fields.hasErrors('userSupervisor')}" th:errors="*{userSupervisor}" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="startDate" class="col-form-label">Fecha de inicio</label> <input type="date" th:field="*{startDate}" class="form-control" id="startDate" placeholder="Start Date" data-provide="datepicker"> <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <fieldset id="items">
-                                        <caption>Recursos asignados</caption>
-                                        <div th:each="resource, stat : ${act.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <label th:for="|act.resources[${stat.index}].detail|">Detalle</label>
-                                            <!-- This construct will render field name like this: "items[0].name" -->
-                                            <input th:field="${act.resources[__${stat.index}__].detail}">
-
-                                            <button type="button" name="removeItem" th:value="${stat.index}" class="btn btn-danger">Remove item</button>
-                                        </div>
-                                    </fieldset>
-
-                                    <button type="button" name="addItem" class="btn btn-secondary">Add item</button>
+                                    <label for="content" class="col-form-label">Contenido</label> <textarea th:field="*{content}" class="form-control textarea-editor" id="content" placeholder="Content" /> <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                    <input type="hidden" th:field="*{type}">
                                     <input type="submit" class="btn btn-primary" name="save" value="Registrar">
                                 </div>
                             </div>
