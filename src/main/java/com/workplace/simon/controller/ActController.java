@@ -1,8 +1,6 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.Act;
-import com.workplace.simon.model.Resource;
-import com.workplace.simon.model.BaseSource;
+import com.workplace.simon.model.ActRegister;
 import com.workplace.simon.model.User;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +26,10 @@ public class ActController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        Act act = new Act();
+        ActRegister actRegister = new ActRegister();
         User user = this.getUserService().findByUsername(userDetails.getUsername());
 
-        model.addAttribute("act", act);
+        model.addAttribute("actRegister", actRegister);
         model.addAttribute("currentUser", user);
         model.addAttribute("userid", user.getId());
 
