@@ -30,7 +30,6 @@ public class ActController {
     ) {
         Act source = new Act();
         User user = this.getUserService().findByUsername(userDetails.getUsername());
-        source.setUserId(user.getId());
 
         model.addAttribute("act", source);
         model.addAttribute("currentUser", user);
