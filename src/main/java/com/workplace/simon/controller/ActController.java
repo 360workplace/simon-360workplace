@@ -1,5 +1,6 @@
 package com.workplace.simon.controller;
 
+import com.workplace.simon.model.Act;
 import com.workplace.simon.model.Resource;
 import com.workplace.simon.model.BaseSource;
 import com.workplace.simon.model.User;
@@ -27,14 +28,12 @@ public class ActController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        BaseSource source = new BaseSource();
-        source.getResources().add(new Resource());
+        Act source = new Act();
         User user = this.getUserService().findByUsername(userDetails.getUsername());
         source.setUserId(user.getId());
 
         model.addAttribute("act", source);
         model.addAttribute("currentUser", user);
-        model.addAttribute("allUsers", this.getUserService().findAll());
         model.addAttribute("userid", user.getId());
 
         return "act-management-form";
