@@ -54,10 +54,9 @@ public class ActController {
             Model model
     ) {
         ActRegister actRegister = new ActRegister();
-        User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
+        User currentUser = setCurrentUser(userDetails, model);
 
         model.addAttribute("actRegister", actRegister);
-        model.addAttribute("currentUser", currentUser);
         model.addAttribute("userid", currentUser.getId());
 
         return "act-management-form";
@@ -72,8 +71,7 @@ public class ActController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
-            model.addAttribute("currentUser", currentUser);
+            setCurrentUser(userDetails, model);
 
             return "act-management-form";
         }
@@ -94,9 +92,20 @@ public class ActController {
     }
 
     @GetMapping("source/list")
-    public String students(Model model) {
+    public String showActRegister(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model
+    ) {
+        setCurrentUser(userDetails, model);
         model.addAttribute("actRegister", this.getActRegisterService().findAll());
 
-        return "baseline-list";
+        return "act-register-list";
+    }
+
+    private User setCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
+        model.addAttribute("currentUser", currentUser);
+
+        return currentUser;
     }
 }

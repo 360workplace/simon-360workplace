@@ -140,7 +140,7 @@ public class BaseLineController {
     }
 
     @GetMapping("source/list")
-    public String students(Model model) {
+    public String showSourceList(Model model) {
         model.addAttribute("baseLine", this.getSourceService().findAll());
 
         return "baseline-list";

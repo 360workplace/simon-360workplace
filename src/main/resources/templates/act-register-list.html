@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>List of Acts</title>
+</head>
+<body>
+<div class="content" th:switch="${actRegister}" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="section">
+            <div class="card">
+                <div class="card-header ">
+                    <h4 class="card-title">Línea Base</h4>
+                    <p class="card-category">Registros recientes</p>
+                </div>
+                <div class="card-body table-full-width table-responsive">
+                    <div class="col-md-12">
+                        <h2 th:case="null">No registers yet!</h2>
+                        <div th:case="*">
+                            <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
+                                <thead>
+                                <tr>
+                                    <th>n°</th>
+                                    <th>Fecha</th>
+                                    <th>Contenido</th>
+                                    <th colspan="4"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="base : ${actRegister}">
+                                    <td></td>
+                                    <td th:text="${base.meeting.meetingDate}"></td>
+                                    <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.content,50)).text()}"></td>
+                                    <td>
+                                        <a th:href="@{/act/show/{baseLineId}(baseLineId=${base.id})}"
+                                           class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                           data-placement="top" title="Editar"><i
+                                                class="fa fa-edit"></i></a></td>
+                                    <td>
+                                        <a th:href="@{/register/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.type}, sourceId = ${base.id}, userId = ${base.userId})}"
+                                           class="btn btn-secondary btn-sm" data-toggle="tooltip"
+                                           data-placement="top"
+                                           title="Convertir a Asignación Gerencial"><i
+                                                class="fa fa-trophy"></i></a></td>
+                                    <td>
+                                        <a th:href="@{/register/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.type}, sourceId = ${base.id}, userId = ${base.userId})}"
+                                           class="btn btn-secondary btn-sm" data-toggle="tooltip"
+                                           data-placement="top"
+                                           title="Convertir a Norma y Politica"><i
+                                                class="fa fa fa-bullhorn"></i></a></td>
+                                    <td>
+                                        <a th:href="@{/act/trunk/{baseLineId}(baseLineId=${base.id})}"
+                                           class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                           data-placement="top"
+                                           title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+</th:block>
+</html>
