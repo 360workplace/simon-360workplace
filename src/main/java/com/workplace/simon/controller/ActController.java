@@ -83,13 +83,13 @@ public class ActController {
         return "redirect:/";
     }
 
-    private void preAction(MultipartFile file, ActRegister actRegister) {
-        try {
-            actRegister.setFileRecord(this.getFileStorageService().store(file));
-        } catch (Exception e) {
-            getLogger().error("FileStore fail", e);
-        }
-    }
+//    private void preAction(MultipartFile file, ActRegister actRegister) {
+//        try {
+//            actRegister.setFileRecord(this.getFileStorageService().store(file));
+//        } catch (Exception e) {
+//            getLogger().error("FileStore fail", e);
+//        }
+//    }
 
     @GetMapping("source/list")
     public String showActRegister(
