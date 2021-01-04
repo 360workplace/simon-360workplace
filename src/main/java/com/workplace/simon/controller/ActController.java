@@ -66,7 +66,7 @@ public class ActController {
     public String addActRegister(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid ActRegister actRegister,
-            @RequestParam("fileRecord") MultipartFile file,
+            @RequestParam("file") MultipartFile file,
             BindingResult bindingResult,
             Model model
     ) {
@@ -76,16 +76,16 @@ public class ActController {
             return "act-management-form";
         }
 
-        this.getActRegisterService().save(actRegister);
+        preAction(file, actRegister);
 
-        postAction(file);
+        this.getActRegisterService().save(actRegister);
 
         return "redirect:/";
     }
 
-    private void postAction(MultipartFile file) {
+    private void preAction(MultipartFile file, ActRegister actRegister) {
         try {
-            this.getFileStorageService().store(file);
+            actRegister.setFileRecord(this.getFileStorageService().store(file));
         } catch (Exception e) {
             getLogger().error("FileStore fail", e);
         }

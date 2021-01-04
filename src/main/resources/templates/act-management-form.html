@@ -55,7 +55,7 @@
 
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="fileRecord" class="col-form-label">Registro Acta</label> <input type="file" th:field="*{fileRecord}" class="form-control" id="fileRecord" placeholder="Unpunctual" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"> <span th:if="${#fields.hasErrors('fileRecord')}" th:errors="*{fileRecord}" class="text-danger"></span>
+                                    <label for="file" class="col-form-label">Registro Acta</label> <input type="file" name="file" class="form-control" id="file" placeholder="Unpunctual" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                                 </div>
                             </div>
                             <div class="row">
