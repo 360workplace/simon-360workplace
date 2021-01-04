@@ -13,8 +13,8 @@ public class ActRegister {
     @Column(columnDefinition = "smallint")
     private SourceType type;
 
-    @OneToOne
-    private FileDB fileRecord;
+//    @OneToOne
+//    private FileDB fileRecord;
 
     @Column(columnDefinition = "text")
     private String content;
@@ -41,13 +41,13 @@ public class ActRegister {
         this.type = type;
     }
 
-    public FileDB getFileRecord() {
-        return fileRecord;
-    }
-
-    public void setFileRecord(FileDB fileRecord) {
-        this.fileRecord = fileRecord;
-    }
+//    public FileDB getFileRecord() {
+//        return fileRecord;
+//    }
+//
+//    public void setFileRecord(FileDB fileRecord) {
+//        this.fileRecord = fileRecord;
+//    }
 
     public String getContent() {
         return content;

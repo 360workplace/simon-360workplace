@@ -76,7 +76,7 @@ public class ActController {
             return "act-management-form";
         }
 
-        preAction(file, actRegister);
+//        preAction(file, actRegister);
 
         this.getActRegisterService().save(actRegister);
 
