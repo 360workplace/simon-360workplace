@@ -1,11 +1,13 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.*;
-import com.workplace.simon.repository.UserRepository;
 import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.ExecutionService;
 import com.workplace.simon.service.PolicyService;
+import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +28,7 @@ public class ExecutionController {
     private PolicyService policyService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private SourceService sourceService;
@@ -39,8 +41,8 @@ public class ExecutionController {
         return policyService;
     }
 
-    public UserRepository getUserRepository() {
-        return userRepository;
+    public UserService getUserService() {
+        return userService;
     }
 
     public SourceService getSourceService() {
@@ -65,7 +67,7 @@ public class ExecutionController {
     ) {
         Execution execution = new Execution();
         model.addAttribute("execution", execution);
-        model.addAttribute("allUsers", this.getUserRepository().findAll());
+        model.addAttribute("allUsers", this.getUserService().findAll());
 
         execution.setCodeFrom(sourceLabel);
         BaseSource source = this.getSourceService().findById(sourceId)
@@ -73,7 +75,7 @@ public class ExecutionController {
         model.addAttribute("source", source);
         model.addAttribute("sourceId", sourceId);
 
-        User userSource = this.getUserRepository().findById(userId)
+        User userSource = this.getUserService().findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("The userId can't gets any register."));
 
         User userSupervisor = getUserSupervisor(source);
@@ -89,7 +91,7 @@ public class ExecutionController {
     private User getUserSupervisor(BaseSource source) {
         User userSupervisor;
         if (source.getUserSupervisor() != null) {
-            userSupervisor = this.getUserRepository().findById(source.getUserSupervisor())
+            userSupervisor = this.getUserService().findById(source.getUserSupervisor())
                     .orElse(new User());
         } else {
             userSupervisor = new User();
@@ -112,7 +114,7 @@ public class ExecutionController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("sourceId", sourceId);
-            model.addAttribute("allUsers", this.getUserRepository().findAll());
+            model.addAttribute("allUsers", this.getUserService().findAll());
 
             return "execution-creation-form";
         }
@@ -135,7 +137,7 @@ public class ExecutionController {
         model.addAttribute("policy", policy);
         model.addAttribute("sourceId", sourceId);
 
-        User userSource = this.getUserRepository().findById(userId)
+        User userSource = this.getUserService().findById(userId)
                 .orElseThrow(() -> new  IllegalArgumentException("The user id is not valid " + userId));
         policy.setUserSource(userSource.getId());
 
@@ -168,5 +170,23 @@ public class ExecutionController {
         this.getPolicyService().save(policy);
 
         return "redirect:/data/source/list";
+    }
+
+    @GetMapping("execution/list")
+    public String showExecution(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model
+    ) {
+        setCurrentUser(userDetails, model);
+        model.addAttribute("executions", this.getExecutionService().findAll());
+
+        return "execution-active-list";
+    }
+
+    private User setCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
+        model.addAttribute("currentUser", currentUser);
+
+        return currentUser;
     }
 }
