@@ -31,7 +31,7 @@
                                 <tbody>
                                 <tr th:each="base : ${executions}">
                                     <td th:text="${base.title}"></td>
-                                    <td th:text="${base.type}"></td>
+                                    <td th:text="${base.codeFrom}"></td>
                                     <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
                                     <td th:text="${base.userSupervisor}"></td>
                                     <td th:text="${base.startDate}"></td>
