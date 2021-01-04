@@ -18,7 +18,7 @@
                         <form action="#" th:action="@{/data/update/{id}(id=${baseLine.id})}" th:object="${baseLine}" method="post">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <span class="font-weight-light">Usuario: <span th:text="${currentUser.login}"></span></span>
+                                    <span class="font-weight-light">Usuario: <span th:text="${currentUser.username}"></span></span>
                                     <input type="hidden" th:field="*{userId}" th:value="${userId}">
                                 </div>
                             </div>
