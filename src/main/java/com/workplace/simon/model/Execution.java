@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
 @Entity
-@Table(name = "Ejecucion")
+@Table(name = "ejecucion")
 public class Execution {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +22,7 @@ public class Execution {
     @NotBlank(message = "title is mandatory")
     private String title;
 
-    @Lob
+    @Column(columnDefinition = "text")
     private String detail;
 
 //    @OneToOne(cascade = CascadeType.ALL)
@@ -36,7 +36,7 @@ public class Execution {
     @Column(name = "deadline")
     private Date deadline;
 
-    @Column(name = "status")
+    @Column(name = "status", length = 1)
     private String status;
 
     public Long getId() {
