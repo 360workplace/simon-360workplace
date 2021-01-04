@@ -62,7 +62,7 @@ public class ActController {
         return "act-management-form";
     }
 
-    @PostMapping(params = "save", path = "add")
+    @PostMapping("add")
     public String addActRegister(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid ActRegister actRegister,
