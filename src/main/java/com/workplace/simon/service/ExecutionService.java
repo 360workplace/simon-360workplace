@@ -32,4 +32,8 @@ public class ExecutionService {
     public void delete(Execution execution) {
         this.getExecutionRepository().delete(execution);
     }
+
+    public List<Execution> findBySourceAndStatus(Long userId, String status) {
+        return this.getExecutionRepository().findBySourceAndStatus(userId, status);
+    }
 }
