@@ -62,11 +62,11 @@ public class ActController {
         return "act-management-form";
     }
 
-    @PostMapping("add")
+    @PostMapping(params = "save", path = "add")
     public String addActRegister(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid ActRegister actRegister,
-            @RequestParam("file") MultipartFile file,
+            @RequestParam("fileRecord") MultipartFile file,
             BindingResult bindingResult,
             Model model
     ) {
