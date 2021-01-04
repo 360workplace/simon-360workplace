@@ -15,6 +15,9 @@ public class Participant {
 
     private Integer unpunctual;
 
+    @OneToOne(mappedBy = "participants")
+    private ActRegister act;
+
     public Long getId() {
         return id;
     }
@@ -45,5 +48,13 @@ public class Participant {
 
     public void setUnpunctual(Integer unpunctual) {
         this.unpunctual = unpunctual;
+    }
+
+    public ActRegister getAct() {
+        return act;
+    }
+
+    public void setAct(ActRegister act) {
+        this.act = act;
     }
 }

@@ -13,16 +13,19 @@ public class ActRegister {
     @Column(columnDefinition = "smallint")
     private SourceType type;
 
-//    @OneToOne
-//    private FileDB fileRecord;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "file_record_id", referencedColumnName = "id")
+    private FileDB fileRecord;
 
     @Column(columnDefinition = "text")
     private String content;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "meeting_id", referencedColumnName = "id")
     private Meeting meeting;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "participants_id", referencedColumnName = "id")
     private Participant participants;
 
     public Long getId() {
@@ -41,13 +44,13 @@ public class ActRegister {
         this.type = type;
     }
 
-//    public FileDB getFileRecord() {
-//        return fileRecord;
-//    }
-//
-//    public void setFileRecord(FileDB fileRecord) {
-//        this.fileRecord = fileRecord;
-//    }
+    public FileDB getFileRecord() {
+        return fileRecord;
+    }
+
+    public void setFileRecord(FileDB fileRecord) {
+        this.fileRecord = fileRecord;
+    }
 
     public String getContent() {
         return content;

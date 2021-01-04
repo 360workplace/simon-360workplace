@@ -10,13 +10,20 @@ public class Meeting {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "meeting_date")
     private Date meetingDate;
 
+    @Column(name = "start_meeting")
     private String startMeeting;
 
+    @Column(name = "end_meeting")
     private String endMeeting;
 
+    @Column(name = "tern_meeting")
     private Integer ternMeeting;
+
+    @OneToOne(mappedBy = "meeting")
+    private ActRegister act;
 
     public Long getId() {
         return id;
@@ -56,5 +63,13 @@ public class Meeting {
 
     public void setTernMeeting(Integer ternMeeting) {
         this.ternMeeting = ternMeeting;
+    }
+
+    public ActRegister getAct() {
+        return act;
+    }
+
+    public void setAct(ActRegister act) {
+        this.act = act;
     }
 }
