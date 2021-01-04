@@ -33,8 +33,8 @@
                                     <td th:text="${base.title}"></td>
                                     <td th:text="${base.codeFrom}"></td>
                                     <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
-                                    <td th:text="${base.userSupervisor}"></td>
-                                    <td th:text="${base.startDate}"></td>
+                                    <td th:text="${base.supervisor}"></td>
+                                    <td th:text="${base.deadline}"></td>
                                     <td>
                                         <a th:href="@{/data/baseline/show/{baseLineId}(baseLineId=${base.id})}"
                                            class="btn btn-primary btn-sm" data-toggle="tooltip"
