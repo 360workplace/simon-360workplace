@@ -41,19 +41,19 @@
                                            data-placement="top" title="Editar"><i
                                                 class="fa fa-edit"></i></a></td>
                                     <td>
-                                        <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.type}, sourceId = ${base.id}, userId = ${base.userId})}"
+                                        <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.codeFrom}, sourceId = ${base.id}, userId = ${base.source})}"
                                            class="btn btn-secondary btn-sm" data-toggle="tooltip"
                                            data-placement="top"
                                            title="Convertir a Asignación Gerencial"><i
                                                 class="fa fa-trophy"></i></a></td>
                                     <td>
-                                        <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.type}, sourceId = ${base.id}, userId = ${base.userId})}"
+                                        <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.codeFrom}, sourceId = ${base.id}, userId = ${base.source})}"
                                            class="btn btn-secondary btn-sm" data-toggle="tooltip"
                                            data-placement="top"
                                            title="Convertir a Norma y Politica"><i
                                                 class="fa fa fa-bullhorn"></i></a></td>
                                     <td>
-                                        <a th:href="@{/data/baseline/trunk/{baseLineId}(baseLineId=${base.id})}"
+                                        <a th:href="@{/data/baseline/trunk/{sourceId}(sourceId=${base.id})}"
                                            class="btn btn-danger btn-sm" data-toggle="tooltip"
                                            data-placement="top"
                                            title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
