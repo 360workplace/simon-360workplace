@@ -16,8 +16,8 @@ public class FileDB {
     @Lob
     private byte[] data;
 
-    @OneToOne(mappedBy = "fileRecord")
-    private ActRegister act;
+//    @OneToOne(mappedBy = "fileRecord")
+//    private ActRegister act;
 
     public FileDB() {
     }
