@@ -13,7 +13,9 @@ public class ActRegister {
     @Column(columnDefinition = "smallint")
     private SourceType type;
 
-    @OneToOne
+    @OneToOne(mappedBy = "act",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private FileDB fileRecord;
 
     @Column(columnDefinition = "text")
