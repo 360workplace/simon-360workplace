@@ -25,7 +25,7 @@
                                     <th>Detalle</th>
                                     <th>Responsable</th>
                                     <th>Fecha_Final</th>
-                                    <th colspan="4"></th>
+                                    <th colspan="3"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -36,24 +36,18 @@
                                     <td th:text="${base.supervisor}"></td>
                                     <td th:text="${base.deadline}"></td>
                                     <td>
-                                        <a th:href="@{/data/baseline/show/{baseLineId}(baseLineId=${base.id})}"
+                                        <a th:href="@{#}"
                                            class="btn btn-primary btn-sm" data-toggle="tooltip"
                                            data-placement="top" title="Editar"><i
                                                 class="fa fa-edit"></i></a></td>
                                     <td>
-                                        <a th:href="@{/process/execution/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.codeFrom}, sourceId = ${base.id}, userId = ${base.source})}"
+                                        <a th:href="@{#}"
                                            class="btn btn-secondary btn-sm" data-toggle="tooltip"
                                            data-placement="top"
-                                           title="Convertir a Asignación Gerencial"><i
-                                                class="fa fa-trophy"></i></a></td>
-                                    <td>
-                                        <a th:href="@{/process/policy/creation/{sourceLabel}/{sourceId}/{userId}(sourceLabel = ${base.codeFrom}, sourceId = ${base.id}, userId = ${base.source})}"
-                                           class="btn btn-secondary btn-sm" data-toggle="tooltip"
-                                           data-placement="top"
-                                           title="Convertir a Norma y Politica"><i
+                                           title="Cerrar Asignación"><i
                                                 class="fa fa fa-bullhorn"></i></a></td>
                                     <td>
-                                        <a th:href="@{/data/baseline/trunk/{sourceId}(sourceId=${base.id})}"
+                                        <a th:href="@{#}"
                                            class="btn btn-danger btn-sm" data-toggle="tooltip"
                                            data-placement="top"
                                            title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
