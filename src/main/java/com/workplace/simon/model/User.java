@@ -36,8 +36,12 @@ public class User {
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
-            joinColumns = @JoinColumn(name = "users_id"),
-            inverseJoinColumns = @JoinColumn(name = "roles_id")
+            joinColumns = {
+                    @JoinColumn(name = "users_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "roles_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)}
     )
     private Set<Role> roles = new HashSet<>();
 
