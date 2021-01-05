@@ -3,7 +3,7 @@ package com.workplace.simon.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "act_source")
+@Table(name = "act_register")
 public class ActRegister {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
