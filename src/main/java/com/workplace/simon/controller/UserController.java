@@ -88,8 +88,6 @@ public class UserController {
 
         this.getUserService().save(userForm);
 
-        //this.getSecurityService().autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-
         return "redirect:/dashboard";
     }
 

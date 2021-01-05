@@ -36,10 +36,10 @@ public class User {
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
-            joinColumns = @JoinColumn(name = "users_id"),
-            inverseJoinColumns = @JoinColumn(name = "roles_id")
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id")
     )
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
@@ -113,10 +113,6 @@ public class User {
     }
 
     public Set<Role> getRoles() {
-        if (this.roles == null) {
-            this.roles = new HashSet<>();
-        }
-
         return roles;
     }
 
