@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>SIMON - Assignation form add</title>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="section">
+            <div class="card">
+                <div class="card-header ">
+                    <h4 class="card-title">Asignación</h4>
+                    <p class="card-category">Asignar tarea</p>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-10">
+                        <form action="#" th:action="@{/process/execution/add/{id}(id = ${sourceId})}" th:object="${execution}" method="post">
+                            <div class="row">
+                                <div class="form-group col-md-8">
+                                    <label for="title" class="col-form-label">Título</label> <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title"> <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label for="detail" class="col-form-label">Detalle</label> <textarea th:field="*{detail}" class="form-control textarea-editor" id="detail" placeholder="Detail" /> <span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-md-8">
+                                    <label for="supervisor" class="col-form-label">Seleccione supervisor</label>
+                                    <select th:field="*{supervisor}" class="form-control" id="supervisor">
+                                        <option value="">-- Select --</option>
+                                        <option th:each="user : ${allUsers}"
+                                                th:value="${user.id}"
+                                                th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>
+                                    </select>
+                                    <span th:if="${#fields.hasErrors('supervisor')}" th:errors="*{supervisor}" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-md-8">
+                                    <label for="priority" class="col-form-label">Establecer Prioridad</label>
+                                    <select th:field="*{priority}" class="form-control" id="priority">
+                                        <option value="">-- Select --</option>
+                                        <option value="B">Baja</option>
+                                        <option value="N">Normal</option>
+                                        <option value="C">Crítica</option>
+                                    </select>
+                                    <span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-md-8">
+                                    <label for="deadline" class="col-form-label">Fecha de límite</label> <input type="date" th:field="*{deadline}" class="form-control" id="deadline" placeholder="deadline" data-provide="datepicker"> <span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="hidden" th:field="*{codeFrom}">
+                                    <input type="hidden" th:field="*{source}">
+                                    <input type="submit" class="btn btn-primary" value="Registrar">
+                                </div>
+
+                                <div class="form-group col-md-8"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<th:block layout:fragment="script">
+    <script src="https://cdn.tiny.cloud/1/l4m4tbiktmwhgn58iyprjv55noasmlwux4kfzyswdxrsn90t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea.textarea-editor',
+            skin: 'bootstrap',
+            menubar: false
+        });
+    </script>
+</th:block>
+</html>

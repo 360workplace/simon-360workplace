@@ -2,6 +2,7 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -112,6 +113,10 @@ public class User {
     }
 
     public Set<Role> getRoles() {
+        if (this.roles == null) {
+            this.roles = new HashSet<>();
+        }
+
         return roles;
     }
 
@@ -143,13 +148,13 @@ public class User {
 //        this.backSupervisor = backSupervisor;
 //    }
 
-//    public Area getArea() {
-//        return area;
-//    }
-//
-//    public void setArea(Area area) {
-//        this.area = area;
-//    }
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
 
 //    public Execution getExecution() {
 //        return execution;

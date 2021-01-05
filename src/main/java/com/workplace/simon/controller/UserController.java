@@ -2,6 +2,7 @@ package com.workplace.simon.controller;
 
 import com.workplace.simon.model.Role;
 import com.workplace.simon.model.User;
+import com.workplace.simon.service.AreaService;
 import com.workplace.simon.service.RoleService;
 import com.workplace.simon.service.SecurityService;
 import com.workplace.simon.service.UserService;
@@ -32,6 +33,9 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private AreaService areaService;
+
     public UserService getUserService() {
         return userService;
     }
@@ -48,12 +52,17 @@ public class UserController {
         return roleService;
     }
 
+    public AreaService getAreaService() {
+        return areaService;
+    }
+
     @GetMapping("/admin/registration")
     public String registration(Model model, @AuthenticationPrincipal UserDetails currentUser) {
         setCurrentUser(model, currentUser);
 
         model.addAttribute("userForm", new User());
         model.addAttribute("allRoles", this.getRoleService().findAll());
+        model.addAttribute("allAreas", this.getAreaService().findAll());
 
         return getSignUpForm(model);
     }
