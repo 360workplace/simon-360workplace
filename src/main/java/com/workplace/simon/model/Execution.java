@@ -37,6 +37,9 @@ public class Execution {
     @Column(name = "status", length = 1)
     private String status;
 
+    @Column(columnDefinition = "text")
+    private String resources;
+
     public Long getId() {
         return id;
     }
