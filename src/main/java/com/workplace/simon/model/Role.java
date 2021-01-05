@@ -2,7 +2,6 @@ package com.workplace.simon.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -14,9 +13,6 @@ public class Role {
     @Column(name = "name")
     @NotBlank(message = "Role name is mandatory")
     private String name;
-
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
 
     public Long getId() {
         return id;
@@ -34,11 +30,36 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getRoles() {
-        return users;
+    @Override
+    public String toString() {
+        return this.getName();
     }
 
-    public void setRoles(Set<User> users) {
-        this.users = users;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+
+        return prime * result + ((this.getId() == null) ? 0 : this.getId().hashCode());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Role other = (Role) obj;
+        if (this.getId() == null) {
+            return other.getId() == null;
+        } else {
+            return this.getId().equals(other.getId());
+        }
     }
 }

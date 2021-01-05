@@ -1,6 +1,7 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.ActRegister;
+import com.workplace.simon.model.FileDB;
 import com.workplace.simon.model.User;
 import com.workplace.simon.service.ActRegisterService;
 import com.workplace.simon.service.FileStorageService;
@@ -8,6 +9,8 @@ import com.workplace.simon.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -107,5 +110,15 @@ public class ActController {
         model.addAttribute("currentUser", currentUser);
 
         return currentUser;
+    }
+
+    @GetMapping("/files/{id}")
+    public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
+        FileDB fileDB = this.getFileStorageService().getFile(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + id));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
     }
 }

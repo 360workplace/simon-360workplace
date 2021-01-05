@@ -32,7 +32,12 @@ public class User {
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+    )
     private Set<Role> roles;
 
 //    @OneToOne(cascade = CascadeType.ALL)
@@ -43,9 +48,9 @@ public class User {
 //    @OneToOne(mappedBy = "supervisor")
 //    private User backSupervisor;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "area_id", referencedColumnName = "id")
-//    private Area area;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "area_id", referencedColumnName = "id")
+    private Area area;
 
 //    @OneToOne(mappedBy = "supervisor")
 //    private Execution execution;

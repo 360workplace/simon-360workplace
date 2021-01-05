@@ -37,6 +37,17 @@
                             </div>
 
                             <div class="form-group col-md-8">
+                                <label class="col-form-label">Roles:
+                                    <input type="checkbox" name="roles"
+                                           th:each="role : ${allRoles}"
+                                           th:text="${role.name}"
+                                           th:value="${role.id}"
+                                           th:field="*{roles}"
+                                    />
+                                </label>
+                            </div>
+
+                            <div class="form-group col-md-8">
                                 <label for="supervisor" class="col-form-label">Seleccione supervisor</label>
                                 <select th:field="*{supervisor}" class="form-control" id="supervisor">
                                     <option value="">-- Select --</option>

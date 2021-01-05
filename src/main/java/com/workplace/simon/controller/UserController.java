@@ -1,6 +1,8 @@
 package com.workplace.simon.controller;
 
+import com.workplace.simon.model.Role;
 import com.workplace.simon.model.User;
+import com.workplace.simon.service.RoleService;
 import com.workplace.simon.service.SecurityService;
 import com.workplace.simon.service.UserService;
 import com.workplace.simon.validators.UserValidator;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class UserController {
     @Autowired
@@ -24,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private RoleService roleService;
 
     public UserService getUserService() {
         return userService;
@@ -37,11 +44,16 @@ public class UserController {
         return userValidator;
     }
 
+    public RoleService getRoleService() {
+        return roleService;
+    }
+
     @GetMapping("/admin/registration")
     public String registration(Model model, @AuthenticationPrincipal UserDetails currentUser) {
         setCurrentUser(model, currentUser);
 
         model.addAttribute("userForm", new User());
+        model.addAttribute("allRoles", this.getRoleService().findAll());
 
         return getSignUpForm(model);
     }

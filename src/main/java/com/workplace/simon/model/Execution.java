@@ -25,8 +25,6 @@ public class Execution {
     @Column(columnDefinition = "text")
     private String detail;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "supervisor", referencedColumnName = "id")
     @Column(name = "supervisor")
     private Long supervisor;
 

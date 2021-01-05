@@ -16,8 +16,8 @@ public class Area {
     @Column(name = "depend")
     private Long depend;
 
-//    @OneToOne(mappedBy = "area")
-//    private User user;
+    @OneToOne(mappedBy = "area")
+    private User user;
 
 //    @ManyToMany(mappedBy = "areas", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 //    private Set<Policy> policies;
