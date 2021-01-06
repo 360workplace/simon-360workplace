@@ -4,6 +4,7 @@ import com.workplace.simon.model.ActRegister;
 import com.workplace.simon.model.FileDB;
 import com.workplace.simon.model.User;
 import com.workplace.simon.service.ActRegisterService;
+import com.workplace.simon.service.AreaService;
 import com.workplace.simon.service.FileStorageService;
 import com.workplace.simon.service.UserService;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/act/")
@@ -31,7 +33,10 @@ public class ActController {
     private ActRegisterService actRegisterService;
 
     @Autowired
-    public FileStorageService fileStorageService;
+    private FileStorageService fileStorageService;
+
+    @Autowired
+    private AreaService areaService;
 
     private static final Logger logger = LoggerFactory.getLogger(ActController.class);
 
@@ -45,6 +50,10 @@ public class ActController {
 
     public FileStorageService getFileStorageService() {
         return fileStorageService;
+    }
+
+    public AreaService getAreaService() {
+        return areaService;
     }
 
     public static Logger getLogger() {
@@ -97,10 +106,12 @@ public class ActController {
     @GetMapping("source/list")
     public String showActRegister(
             @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam Optional<Integer> area,
             Model model
     ) {
         setCurrentUser(userDetails, model);
         model.addAttribute("actRegister", this.getActRegisterService().findAll());
+        model.addAttribute("allAreas", this.getAreaService().findAll());
 
         return "act-register-list";
     }
