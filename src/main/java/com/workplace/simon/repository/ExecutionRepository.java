@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ExecutionRepository extends JpaRepository<Execution, Long> {
     List<Execution> findBySourceAndStatus(Long userId, String status);
+
+    List<Execution> findBySupervisorAndStatus(Long supervisorId, String status);
 }

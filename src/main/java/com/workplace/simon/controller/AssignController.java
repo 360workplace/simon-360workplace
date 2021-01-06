@@ -1,9 +1,6 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.Resource;
-import com.workplace.simon.model.Source;
-import com.workplace.simon.model.SourceType;
-import com.workplace.simon.model.User;
+import com.workplace.simon.model.*;
 import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +70,30 @@ public class AssignController {
         this.getSourceService().save(assign);
 
         return "redirect:/";
+    }
+
+    @GetMapping("execution/creation")
+    public String processManagerAssign(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model
+    ) {
+        User currentUser = setCurrentUser(userDetails, model);
+        Execution execution = new Execution();
+        model.addAttribute("execution", execution);
+        model.addAttribute("allUsers", this.getUserService().findAll());
+
+        execution.setCodeFrom(SourceType.MANAGER_ASSIGN);
+        model.addAttribute("sourceId", currentUser.getId());
+
+        execution.setSupervisor(currentUser.getId());
+
+        return "execution-assignation-creation-form";
+    }
+
+    private User setCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
+        model.addAttribute("currentUser", currentUser);
+
+        return currentUser;
     }
 }

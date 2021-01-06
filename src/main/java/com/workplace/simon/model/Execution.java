@@ -111,4 +111,12 @@ public class Execution {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getResources() {
+        return resources;
+    }
+
+    public void setResources(String resources) {
+        this.resources = resources;
+    }
 }
