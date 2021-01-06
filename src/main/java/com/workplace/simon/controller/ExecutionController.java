@@ -187,7 +187,7 @@ public class ExecutionController {
         if (areaId == 0) {
             model.addAttribute("executions", this.getExecutionService().findAll());
         } else {
-            model.addAttribute("executions", this.getExecutionService().findByArea(areaId));
+            model.addAttribute("executions", this.getExecutionService().findByArea(areaId, AssignationStatus.OPEN.getLabel()));
         }
 
         return "execution-active-list";

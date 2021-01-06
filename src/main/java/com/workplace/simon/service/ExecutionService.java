@@ -37,7 +37,7 @@ public class ExecutionService {
         return this.getExecutionRepository().findBySourceAndStatus(userId, status);
     }
 
-    public List<Execution> findByArea(Long areaId) {
-        return this.getExecutionRepository().findByArea(areaId);
+    public List<Execution> findByArea(Long areaId, String status) {
+        return this.getExecutionRepository().findByArea(areaId, status);
     }
 }
