@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ActRegisterRepository extends JpaRepository<ActRegister, Long> {
-    @Query("SELECT * FROM ejecucion e INNER JOIN users u ON (e.source = u.id) INNER JOIN area a ON (u.area_id = a.id) WHERE a.id = :areaId")
+    @Query(value = "SELECT * FROM ejecucion e INNER JOIN users u ON (e.source = u.id) INNER JOIN area a ON (u.area_id = a.id) WHERE a.id = :areaId")
     List<ActRegister> findByArea(@Param("areaId") Long id);
 }
