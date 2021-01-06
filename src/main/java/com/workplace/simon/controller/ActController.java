@@ -112,7 +112,7 @@ public class ActController {
         setCurrentUser(userDetails, model);
         Long id = area.orElse(0L);
 
-        if (id == 0) {
+        if (id == 0L) {
             model.addAttribute("actRegister", this.getActRegisterService().findAll());
         } else {
             model.addAttribute("actRegister", this.getActRegisterService().findByArea(id));
