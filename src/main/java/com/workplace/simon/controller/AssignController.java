@@ -1,6 +1,7 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.*;
+import com.workplace.simon.service.ExecutionService;
 import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,19 @@ public class AssignController {
     @Autowired
     private SourceService sourceService;
 
+    @Autowired
+    private ExecutionService executionService;
+
     public UserService getUserService() {
         return userService;
     }
 
     public SourceService getSourceService() {
         return sourceService;
+    }
+
+    public ExecutionService getExecutionService() {
+        return executionService;
     }
 
     @GetMapping("request")
@@ -95,5 +103,27 @@ public class AssignController {
         model.addAttribute("currentUser", currentUser);
 
         return currentUser;
+    }
+
+    @PostMapping("execution/add")
+    public String addExecution(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Valid Execution execution,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        User currentUser = setCurrentUser(userDetails, model);
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("sourceId", currentUser.getId());
+            model.addAttribute("allUsers", this.getUserService().findAll());
+
+            return "execution-assignation-creation-form";
+        }
+
+        execution.setStatus(AssignationStatus.OPEN.getLabel());
+        this.getExecutionService().save(execution);
+
+        return "redirect:/";
     }
 }
