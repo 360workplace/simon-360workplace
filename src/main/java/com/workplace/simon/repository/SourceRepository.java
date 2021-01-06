@@ -13,6 +13,6 @@ import java.util.List;
 public interface SourceRepository extends JpaRepository<Source, Long> {
     List<Source> findByActiveTrue();
 
-    @Query(value = "SELECT e FROM linea_base e INNER JOIN users u ON (e.fuente = u.id) INNER JOIN area a ON (u.area_id = a.id) WHERE a.id = (:areaId)", nativeQuery = true)
+    @Query(value = "SELECT e.id as id, e FROM linea_base e INNER JOIN users u ON (e.fuente = u.id) INNER JOIN area a ON (u.area_id = a.id) WHERE a.id = (:areaId)", nativeQuery = true)
     List<Source> findByArea(@Param("areaId") Long id);
 }
