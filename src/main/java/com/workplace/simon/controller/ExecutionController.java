@@ -189,4 +189,22 @@ public class ExecutionController {
 
         return currentUser;
     }
+
+    @GetMapping("execution/assign/creation")
+    public String processManagerAssign(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model
+    ) {
+        User currentUser = setCurrentUser(userDetails, model);
+        Execution execution = new Execution();
+        model.addAttribute("execution", execution);
+        model.addAttribute("allUsers", this.getUserService().findAll());
+
+        execution.setCodeFrom(SourceType.MANAGER_ASSIGN);
+        model.addAttribute("sourceId", currentUser.getId());
+
+        execution.setSupervisor(currentUser.getId());
+
+        return "execution-creation-form";
+    }
 }

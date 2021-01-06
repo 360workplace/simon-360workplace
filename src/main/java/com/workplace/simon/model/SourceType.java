@@ -5,7 +5,8 @@ import java.util.stream.Stream;
 public enum SourceType {
     BASE_LINE,
     ACT,
-    ASSIGN_REQUEST;
+    ASSIGN_REQUEST,
+    MANAGER_ASSIGN;
 
     public static SourceType of(int type) {
         return Stream.of(SourceType.values())
