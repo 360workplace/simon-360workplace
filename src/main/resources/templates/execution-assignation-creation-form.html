@@ -14,8 +14,8 @@
                     <p class="card-category">Asignar tarea</p>
                 </div>
                 <div class="card-body">
-                    <div class="col-md-10">
-                        <form action="#" th:action="@{/process/execution/add/{id}(id = ${sourceId})}" th:object="${execution}" method="post">
+                    <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                        <form action="#" th:action="@{/assign/execution/add}" th:object="${execution}" method="post">
                             <div class="row">
                                 <div class="form-group col-lg-6 col-lg-6 col-sm-6">
                                     <label for="source" class="col-form-label">Seleccione Persona encargada</label>
