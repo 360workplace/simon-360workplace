@@ -17,7 +17,7 @@
                     <div class="col-md-10">
                         <form action="#" th:action="@{/process/execution/add/{id}(id = ${sourceId})}" th:object="${execution}" method="post">
                             <div class="row">
-                                <div class="form-group col-lg-6">
+                                <div class="form-group col-lg-6 col-lg-6 col-sm-6">
                                     <label for="source" class="col-form-label">Seleccione Persona encargada</label>
                                     <select th:field="*{source}" class="form-control" id="source">
                                         <option value="">-- Select --</option>
@@ -27,25 +27,7 @@
                                     </select>
                                     <span th:if="${#fields.hasErrors('source')}" th:errors="*{source}" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-md-8">
-                                    <label for="title" class="col-form-label">Título</label> <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title"> <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <label for="detail" class="col-form-label">Detalle</label> <textarea th:field="*{detail}" class="form-control textarea-editor" id="detail" placeholder="Detail" /> <span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group col-md-8">
-                                    <label for="supervisor" class="col-form-label">Seleccione supervisor</label>
-                                    <select th:field="*{supervisor}" class="form-control" id="supervisor">
-                                        <option value="">-- Select --</option>
-                                        <option th:each="user : ${allUsers}"
-                                                th:value="${user.id}"
-                                                th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>
-                                    </select>
-                                    <span th:if="${#fields.hasErrors('supervisor')}" th:errors="*{supervisor}" class="text-danger"></span>
-                                </div>
-
-                                <div class="form-group col-md-8">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                     <label for="priority" class="col-form-label">Establecer Prioridad</label>
                                     <select th:field="*{priority}" class="form-control" id="priority">
                                         <option value="">-- Select --</option>
@@ -56,8 +38,30 @@
                                     <span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}" class="text-danger"></span>
                                 </div>
 
-                                <div class="form-group col-md-8">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-11">
                                     <label for="deadline" class="col-form-label">Fecha de límite</label> <input type="date" th:field="*{deadline}" class="form-control" id="deadline" placeholder="deadline" data-provide="datepicker"> <span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-11">
+                                    <label for="supervisor" class="col-form-label">Seleccione supervisor</label>
+                                    <select th:field="*{supervisor}" class="form-control" id="supervisor">
+                                        <option value="">-- Select --</option>
+                                        <option th:each="user : ${allUsers}"
+                                                th:value="${user.id}"
+                                                th:text="${user.firstname} + ' ' + ${user.lastname}">user</option>
+                                    </select>
+                                    <span th:if="${#fields.hasErrors('supervisor')}" th:errors="*{supervisor}" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-md-11">
+                                    <label for="title" class="col-form-label">Título</label> <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title"> <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-11">
+                                    <label for="detail" class="col-form-label">Detalle</label> <textarea th:field="*{detail}" class="form-control textarea-editor" id="detail" placeholder="Detail" /> <span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-md-11">
+                                    <label for="resources" class="col-form-label">Detalle Recursos asignados</label> <textarea th:field="*{resources}" class="form-control" id="resources" placeholder="Resources" /> <span th:if="${#fields.hasErrors('resources')}" th:errors="*{resources}" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-md-6">
