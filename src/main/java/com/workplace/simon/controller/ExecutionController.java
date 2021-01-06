@@ -1,22 +1,17 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.*;
-import com.workplace.simon.service.SourceService;
-import com.workplace.simon.service.ExecutionService;
-import com.workplace.simon.service.PolicyService;
-import com.workplace.simon.service.UserService;
+import com.workplace.simon.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("process")
@@ -33,6 +28,9 @@ public class ExecutionController {
     @Autowired
     private SourceService sourceService;
 
+    @Autowired
+    private AreaService areaService;
+
     public ExecutionService getExecutionService() {
         return executionService;
     }
@@ -47,6 +45,10 @@ public class ExecutionController {
 
     public SourceService getSourceService() {
         return sourceService;
+    }
+
+    public AreaService getAreaService() {
+        return areaService;
     }
 
     /**
@@ -175,10 +177,18 @@ public class ExecutionController {
     @GetMapping("execution/list")
     public String showExecution(
             @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam("areaFilter") Optional<Long> area,
             Model model
     ) {
         setCurrentUser(userDetails, model);
-        model.addAttribute("executions", this.getExecutionService().findAll());
+        Long areaId = area.orElse(0L);
+        model.addAttribute("allAreas", this.getAreaService().findAll());
+
+        if (areaId == 0) {
+            model.addAttribute("executions", this.getExecutionService().findAll());
+        } else {
+            model.addAttribute("executions", this.getExecutionService().findByArea(areaId));
+        }
 
         return "execution-active-list";
     }

@@ -32,8 +32,4 @@ public class ActRegisterService {
     public void delete(ActRegister actRegister) {
         this.getActRegisterRepository().delete(actRegister);
     }
-
-    public List<ActRegister> findByArea(Long id) {
-        return this.getActRegisterRepository().findByArea(id);
-    }
 }

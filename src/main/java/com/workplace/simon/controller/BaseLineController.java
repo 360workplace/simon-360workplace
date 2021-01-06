@@ -4,10 +4,13 @@ import com.workplace.simon.model.Source;
 import com.workplace.simon.model.Resource;
 import com.workplace.simon.model.SourceType;
 import com.workplace.simon.model.User;
+import com.workplace.simon.service.AreaService;
 import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.RegisterService;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/data/")
@@ -28,6 +32,9 @@ public class BaseLineController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AreaService areaService;
+
     public SourceService getSourceService() {
         return sourceService;
     }
@@ -39,6 +46,10 @@ public class BaseLineController {
 
     public UserService getUserService() {
         return userService;
+    }
+
+    public AreaService getAreaService() {
+        return areaService;
     }
 
     private static final String AJAX_HEADER_NAME = "X-Requested-With";
@@ -140,8 +151,20 @@ public class BaseLineController {
     }
 
     @GetMapping("source/list")
-    public String showSourceList(Model model) {
-        model.addAttribute("baseLine", this.getSourceService().findAll());
+    public String showSourceList(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam("areaFilter") Optional<Long> area,
+            Model model
+    ) {
+        setCurrentUser(userDetails, model);
+        Long areaId = area.orElse(0L);
+        model.addAttribute("allAreas", this.getAreaService().findAll());
+
+        if (areaId == 0L) {
+            model.addAttribute("baseLine", this.getSourceService().findAll());
+        } else {
+            model.addAttribute("baseLine", this.getSourceService().findByArea(areaId));
+        }
 
         return "baseline-list";
     }
@@ -174,5 +197,12 @@ public class BaseLineController {
         this.getSourceService().save(baseLine);
 
         return "redirect:/data/source/list";
+    }
+
+    private User setCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
+        model.addAttribute("currentUser", currentUser);
+
+        return currentUser;
     }
 }

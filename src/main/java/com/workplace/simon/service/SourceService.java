@@ -1,5 +1,6 @@
 package com.workplace.simon.service;
 
+import com.workplace.simon.model.ActRegister;
 import com.workplace.simon.model.Source;
 import com.workplace.simon.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,9 @@ public class SourceService {
 
     public void delete(Source source) {
         this.getBaseLineRepository().delete(source);
+    }
+
+    public List<Source> findByArea(Long id) {
+        return this.getBaseLineRepository().findByArea(id);
     }
 }

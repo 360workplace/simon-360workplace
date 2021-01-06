@@ -17,6 +17,26 @@
                     <div class="col-md-12">
                         <h2 th:case="null">No registers yet!</h2>
                         <div th:case="*">
+                            <div class="row">
+                                <form th:action="@{/act/source/list}" method="get">
+                                    <div class="offset-lg-6 offset-md-6 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="areaFilter" class="col-form-label">Seleccione Area</label>
+                                            <select name="areaFilter" class="form-control" id="areaFilter">
+                                                <option value="">-- Todas --</option>
+                                                <option th:each="area : ${allAreas}"
+                                                        th:value="${area.id}"
+                                                        th:text="${area.name}">user</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" name="filter" value="buscar">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
                                 <thead>
                                 <tr>

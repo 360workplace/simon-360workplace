@@ -105,19 +105,9 @@ public class ActController {
 
     @GetMapping("source/list")
     public String showActRegister(
-            @AuthenticationPrincipal UserDetails userDetails,
-            @RequestParam("areaFilter") Optional<Long> area,
             Model model
     ) {
-        setCurrentUser(userDetails, model);
-        Long id = area.orElse(0L);
-
-        if (id == 0L) {
-            model.addAttribute("actRegister", this.getActRegisterService().findAll());
-        } else {
-            model.addAttribute("actRegister", this.getActRegisterService().findByArea(id));
-        }
-
+        model.addAttribute("actRegister", this.getActRegisterService().findAll());
         model.addAttribute("allAreas", this.getAreaService().findAll());
 
         return "act-register-list";
