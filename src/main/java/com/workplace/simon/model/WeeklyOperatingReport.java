@@ -55,10 +55,10 @@ public class WeeklyOperatingReport {
     }
 
     public Set<WeekDetail> getActual() {
-        return actual;
+        return weekDetails;
     }
 
-    public void setActual(Set<WeekDetail> actual) {
-        this.actual = actual;
+    public void setActual(Set<WeekDetail> weekDetails) {
+        this.weekDetails = weekDetails;
     }
 }

@@ -3,7 +3,6 @@ package com.workplace.simon.model;
 import javax.persistence.*;
 import java.sql.Time;
 import java.time.Month;
-import java.time.Year;
 
 @Entity
 @Table(name = "periodo_semanal")
@@ -62,11 +61,11 @@ public class Period {
         this.month = month;
     }
 
-    public Year getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(Year year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 }
