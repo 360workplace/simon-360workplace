@@ -28,10 +28,4 @@ public enum Priority {
     public void setLabel(String label) {
         this.label = label;
     }
-
-
-    @Override
-    public String toString() {
-        return this.getLabel();
-    }
 }
