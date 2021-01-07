@@ -13,6 +13,7 @@ public class WeeklyOperatingReport {
     private String sequential;
 
     @ManyToOne
+    @JoinColumn(name = "ejecucion_id", referencedColumnName = "id")
     private Execution execution;
 
     @OneToOne
