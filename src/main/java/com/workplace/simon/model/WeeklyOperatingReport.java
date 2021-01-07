@@ -15,6 +15,7 @@ public class WeeklyOperatingReport {
     @ManyToOne
     private Execution execution;
 
+    @OneToOne
     private User maker;
 
     @OneToMany
