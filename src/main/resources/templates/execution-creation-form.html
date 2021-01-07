@@ -39,7 +39,7 @@
                                     <label for="priority" class="col-form-label">Establecer Prioridad</label>
                                     <select th:field="*{priority}" class="form-control" id="priority">
                                         <option value="">-- Select --</option>
-                                        <option th:each="priorityOpt : ${T(com.workplace.simon.model.Priority.values()}"
+                                        <option th:each="priorityOpt : ${T(com.workplace.simon.model.Priority).values()}"
                                                 th:value="${priorityOpt}" th:text="${priorityOpt}"></option>
                                     </select>
                                     <span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}" class="text-danger"></span>
