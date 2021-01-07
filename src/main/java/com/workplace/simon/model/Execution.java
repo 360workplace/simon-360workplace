@@ -28,8 +28,9 @@ public class Execution {
     @Column(name = "supervisor")
     private Long supervisor;
 
-    @Column(name = "priority")
-    private String priority;
+    @Enumerated
+    @Column(columnDefinition = "smallint")
+    private Priority priority;
 
     @Column(name = "deadline")
     private Date deadline;
@@ -88,11 +89,11 @@ public class Execution {
         this.supervisor = supervisor;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
