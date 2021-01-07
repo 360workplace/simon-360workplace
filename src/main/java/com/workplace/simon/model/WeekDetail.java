@@ -3,7 +3,7 @@ package com.workplace.simon.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "informe_detalle_semana")
+@Table(name = "detalle_semana")
 public class WeekDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

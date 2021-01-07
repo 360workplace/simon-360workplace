@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "informe_ejecucion_semanal")
+@Table(name = "ejecucion_semanal")
 public class WeeklyOperatingReport {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +16,8 @@ public class WeeklyOperatingReport {
     @JoinColumn(name = "ejecucion_id", referencedColumnName = "id")
     private Execution execution;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "maker_id", referencedColumnName = "id")
     private User maker;
 
     @OneToMany
