@@ -1,7 +1,6 @@
 package com.workplace.simon.model;
 
 import javax.persistence.*;
-import java.time.Period;
 
 @Entity
 @Table(name = "informe_detalle_semana")
@@ -10,6 +9,7 @@ public class WeekDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToOne
     private Period period;
 
     @Column(columnDefinition = "text")
