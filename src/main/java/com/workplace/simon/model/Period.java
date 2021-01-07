@@ -20,7 +20,7 @@ public class Period {
 
     private Month month;
 
-    private Year year;
+    private Integer year;
 
     public Long getId() {
         return id;

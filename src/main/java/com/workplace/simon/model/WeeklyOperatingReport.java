@@ -20,7 +20,7 @@ public class WeeklyOperatingReport {
     private User maker;
 
     @OneToMany
-    private Set<WeekDetail> actual;
+    private Set<WeekDetail> weekDetails;
 
     public Long getId() {
         return id;
