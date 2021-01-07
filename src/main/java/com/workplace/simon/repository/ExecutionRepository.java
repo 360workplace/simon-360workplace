@@ -12,6 +12,8 @@ import java.util.List;
 public interface ExecutionRepository extends JpaRepository<Execution, Long> {
     List<Execution> findBySourceAndStatus(Long userId, String status);
 
+    List<Execution> findBySourceAndStatusOrderByPriorityDesc(Long userId, String status);
+
     List<Execution> findBySupervisorAndStatus(Long supervisorId, String status);
 
     @Query(value = "SELECT execution0_.id as id, execution0_.code_from as code_from, execution0_.deadline as deadline, " +
@@ -23,5 +25,5 @@ public interface ExecutionRepository extends JpaRepository<Execution, Long> {
             "INNER JOIN area a ON (u.area_id = a.id) " +
             "WHERE a.id = (:areaId) " +
             "AND execution0_.status= (:status)", nativeQuery = true)
-    List<Execution> findByArea(@Param("areaId") Long id, @Param("status") String status);
+    List<Execution> findByAreaAndStatus(@Param("areaId") Long id, @Param("status") String status);
 }

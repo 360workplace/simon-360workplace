@@ -35,7 +35,7 @@ public class EmployeeReportController {
             Model model
     ) {
         User user = setCurrentUser(userDetails, model);
-        model.addAttribute("executions", this.getExecutionService().findBySourceAndStatus(
+        model.addAttribute("executions", this.getExecutionService().findBySourceAndStatusOrderByPriorityDesc(
                 user.getId(),
                 AssignationStatus.OPEN.getLabel()
         ));

@@ -37,7 +37,15 @@ public class ExecutionService {
         return this.getExecutionRepository().findBySourceAndStatus(userId, status);
     }
 
-    public List<Execution> findByArea(Long areaId, String status) {
-        return this.getExecutionRepository().findByArea(areaId, status);
+    public List<Execution> findBySourceAndStatusOrderByPriorityDesc(Long userId, String status) {
+        return this.getExecutionRepository().findBySourceAndStatusOrderByPriorityDesc(userId, status);
+    }
+
+    public List<Execution> findBySupervisorAndStatus(Long supervisorId, String status) {
+        return this.getExecutionRepository().findBySupervisorAndStatus(supervisorId, status);
+    }
+
+    public List<Execution> findByAreaAndStatus(Long areaId, String status) {
+        return this.getExecutionRepository().findByAreaAndStatus(areaId, status);
     }
 }

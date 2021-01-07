@@ -24,6 +24,7 @@
                                     <th>Detalle</th>
                                     <th>Responsable</th>
                                     <th>Fecha_Final</th>
+                                    <th>Prioridad</th>
                                     <th colspan="2"></th>
                                 </tr>
                                 </thead>
@@ -33,6 +34,7 @@
                                     <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
                                     <td th:text="${base.supervisor}"></td>
                                     <td th:text="${base.deadline}"></td>
+                                    <td th:text="${base.priority}"></td>
                                     <td>
                                         <a th:href="@{#}"
                                            class="btn btn-secondary btn-sm" data-toggle="tooltip"
