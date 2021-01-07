@@ -10,32 +10,37 @@
         <div class="section">
             <div class="card">
                 <div class="card-header ">
-                    <h4 class="card-title">**********++++</h4>
-                    <p class="card-category">Tarea Asignada</p>
+                    <h4 class="card-title">Tarea Asignada</h4>
+                    <p class="card-category">Detalles</p>
                 </div>
                 <div class="card-body">
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <div th:switch="${execution}">
                             <div class="row">
                                 <div class="form-group col-md-8">
-                                    <label for="title" class="col-form-label">Título</label> <span th:text="${title}" class="form-control" id="title"></span>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <label for="detail" class="col-form-label">Detalle</label> <span th:text="${detail}" class="form-control" id="detail"></span>
+                                    <label for="deadline" class="col-form-label">Fecha de límite</label> <span th:text="${execution.deadline}" class="form-control" id="deadline"> </span>
                                 </div>
 
                                 <div class="form-group col-md-8">
-                                    <label for="supervisor" class="col-form-label">Seleccione supervisor</label>
-                                    <span th:text="${supervisor}" class="form-control" id="supervisor"> </span>
+                                    <label for="title" class="col-form-label">Título</label> <span th:text="${execution.title}" class="form-control" id="title"></span>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label for="detail" class="col-form-label">Detalle</label> <span th:text="${execution.detail}" class="form-control" id="detail"></span>
                                 </div>
 
                                 <div class="form-group col-md-8">
-                                    <label for="priority" class="col-form-label">Establecer Prioridad</label>
-                                    <span th:text="${priority}" class="form-control" id="priority"> </span>
+                                    <label for="supervisor" class="col-form-label">Supervisor</label>
+                                    <span th:text="${execution.supervisor}" class="form-control" id="supervisor"> </span>
                                 </div>
 
                                 <div class="form-group col-md-8">
-                                    <label for="deadline" class="col-form-label">Fecha de límite</label> <span th:text="${deadline}" class="form-control" id="deadline"> </span>
+                                    <label for="priority" class="col-form-label">Prioridad</label>
+                                    <span th:text="${execution.priority}" class="form-control" id="priority"> </span>
+                                </div>
+
+                                <div class="form-group col-md-8">
+                                    <label for="resources" class="col-form-label">Recursos asignados</label>
+                                    <span th:text="${execution.resources}" class="form-control" id="resources"> </span>
                                 </div>
 
                                 <div class="col-md-6">
