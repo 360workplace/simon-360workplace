@@ -1,6 +1,7 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.AssignationStatus;
+import com.workplace.simon.model.Execution;
 import com.workplace.simon.model.User;
 import com.workplace.simon.service.ExecutionService;
 import com.workplace.simon.service.UserService;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -48,5 +50,20 @@ public class EmployeeReportController {
         model.addAttribute("currentUser", currentUser);
 
         return currentUser;
+    }
+
+    @GetMapping("week/show/{executionId}")
+    public String showAssignedActualExecution(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable Long executionId,
+            Model model
+    ) {
+        setCurrentUser(userDetails, model);
+        Execution execution = this.getExecutionService().findById(executionId)
+                .orElseThrow(() -> new IllegalArgumentException("The execution id is not valid " + executionId));
+
+        model.addAttribute("execution", execution);
+
+        return "assigned-execution-show";
     }
 }
