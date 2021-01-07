@@ -31,9 +31,9 @@
                                     <label for="priority" class="col-form-label">Establecer Prioridad</label>
                                     <select th:field="*{priority}" class="form-control" id="priority">
                                         <option value="">-- Select --</option>
-                                        <option value="B">Baja</option>
-                                        <option value="N">Normal</option>
-                                        <option value="C">Crítica</option>
+                                        <option value="0">Baja</option>
+                                        <option value="1">Normal</option>
+                                        <option value="2">Crítica</option>
                                     </select>
                                     <span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}" class="text-danger"></span>
                                 </div>
