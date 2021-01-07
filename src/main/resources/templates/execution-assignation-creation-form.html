@@ -32,7 +32,7 @@
                                     <select th:field="*{priority}" class="form-control" id="priority">
                                         <option value="">-- Select --</option>
                                         <option th:each="index, priorityOpt : ${T(com.workplace.simon.model.Priority).values()}"
-                                                th:value="${index}" th:text="${priorityOpt}"></option>
+                                                th:value="${priorityOpt.index}" th:text="${priorityOpt.current}"></option>
                                     </select>
                                     <span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}" class="text-danger"></span>
                                 </div>
