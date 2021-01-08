@@ -103,6 +103,7 @@ public class EmployeeReportController {
         weeklyOperatingReport.getWeekDetails().add(weekDetail);
 
         model.addAttribute("weeklyReport", weeklyOperatingReport);
+        model.addAttribute("executionId", executionId);
 
         return "weekly-operating-report-creation";
     }
