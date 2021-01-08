@@ -3,6 +3,7 @@ package com.workplace.simon.controller;
 import com.workplace.simon.model.AssignationStatus;
 import com.workplace.simon.model.Execution;
 import com.workplace.simon.model.User;
+import com.workplace.simon.model.WeeklyOperatingReport;
 import com.workplace.simon.service.ExecutionService;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,19 @@ public class EmployeeReportController {
         model.addAttribute("execution", execution);
 
         return "assigned-execution-show";
+    }
+
+    @GetMapping("week/report/{executionId}")
+    public String makeWeeklyReport(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable Long executionId,
+            Model model
+    ) {
+        setCurrentUser(userDetails, model);
+        WeeklyOperatingReport weeklyOperatingReport = new WeeklyOperatingReport();
+
+        model.addAttribute("weeklyReport", weeklyOperatingReport);
+
+        return "weekly-operating-report-creation";
     }
 }

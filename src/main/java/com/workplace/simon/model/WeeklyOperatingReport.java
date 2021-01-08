@@ -12,6 +12,9 @@ public class WeeklyOperatingReport {
 
     private String sequential;
 
+    @OneToOne
+    private Period period;
+
     @ManyToOne
     @JoinColumn(name = "ejecucion_id", referencedColumnName = "id")
     private Execution execution;
@@ -39,6 +42,14 @@ public class WeeklyOperatingReport {
         this.sequential = sequential;
     }
 
+    public Period getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
+    }
+
     public Execution getExecution() {
         return execution;
     }
@@ -55,11 +66,11 @@ public class WeeklyOperatingReport {
         this.maker = maker;
     }
 
-    public Set<WeekDetail> getActual() {
+    public Set<WeekDetail> getWeekDetails() {
         return weekDetails;
     }
 
-    public void setActual(Set<WeekDetail> weekDetails) {
+    public void setWeekDetails(Set<WeekDetail> weekDetails) {
         this.weekDetails = weekDetails;
     }
 }

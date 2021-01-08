@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "detalle_semana")
-public class WeekDetail {
+@Table(name = "novedades")
+public class WeeklyNews {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -13,7 +13,7 @@ public class WeekDetail {
     private Date date;
 
     @Column(columnDefinition = "text")
-    private String detail;
+    private String news;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class WeekDetail {
         this.date = date;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getNews() {
+        return news;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setNews(String news) {
+        this.news = news;
     }
 }

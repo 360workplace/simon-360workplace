@@ -32,7 +32,7 @@
                                     <td th:text="${base.title}"></td>
                                     <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
                                     <td th:text="${base.deadline}"></td>
-                                    <td th:text="${base.priority}"></td>
+                                    <td th:text="${base.priority.label}"></td>
                                     <td>
                                         <a th:href="@{/employee/week/show/{executionId}(executionId = ${base.id})}"
                                            class="btn btn-secondary btn-sm" data-toggle="tooltip"
