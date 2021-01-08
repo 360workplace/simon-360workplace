@@ -20,11 +20,7 @@ public class WeeklyOperatingReport {
     @JoinColumn(name = "ejecucion_id", referencedColumnName = "id")
     private Execution execution;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "maker_id", referencedColumnName = "id")
-    private User maker;
-
-    @OneToMany(mappedBy = "weeklyOperatingReport")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "weeklyOperatingReport")
     private List<WeekDetail> weekDetails;
 
     public Long getId() {
@@ -57,14 +53,6 @@ public class WeeklyOperatingReport {
 
     public void setExecution(Execution execution) {
         this.execution = execution;
-    }
-
-    public User getMaker() {
-        return maker;
-    }
-
-    public void setMaker(User maker) {
-        this.maker = maker;
     }
 
     public List<WeekDetail> getWeekDetails() {
