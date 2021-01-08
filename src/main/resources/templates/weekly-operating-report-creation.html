@@ -39,6 +39,7 @@
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" th:each="weekDetail, itemStat : *{weekDetails}" th:if="${itemStat.index == itemStat.size-1}">
                                     <input type="hidden" th:field="*{weekDetails[__${itemStat.index}__].date}">
+                                    <input type="hidden" th:field="*{weekDetails[__${itemStat.index}__].weeklyOperatingReport}">
                                     <label for="weekDetails" class="col-form-label">Actividad Semana Actual</label> <textarea th:field="*{weekDetails[__${itemStat.index}__].detail}" class="form-control textarea-editor" id="weekDetails" placeholder="Detail" /> <span th:if="${#fields.hasErrors('weekDetails[__${itemStat.index}__].detail')}" th:errors="*{weekDetails[__${itemStat.index}__].detail}" class="text-danger"></span>
                                 </div>
 
