@@ -1,8 +1,8 @@
 package com.workplace.simon.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ejecucion_semanal")
@@ -25,7 +25,7 @@ public class WeeklyOperatingReport {
     private User maker;
 
     @OneToMany
-    private Set<WeekDetail> weekDetails;
+    private List<WeekDetail> weekDetails;
 
     public Long getId() {
         return id;
@@ -67,15 +67,15 @@ public class WeeklyOperatingReport {
         this.maker = maker;
     }
 
-    public Set<WeekDetail> getWeekDetails() {
+    public List<WeekDetail> getWeekDetails() {
         if (weekDetails == null) {
-            weekDetails = new HashSet<>();
+            weekDetails = new ArrayList<>();
         }
 
         return weekDetails;
     }
 
-    public void setWeekDetails(Set<WeekDetail> weekDetails) {
+    public void setWeekDetails(List<WeekDetail> weekDetails) {
         this.weekDetails = weekDetails;
     }
 }
