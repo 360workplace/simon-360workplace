@@ -104,6 +104,7 @@ public class EmployeeReportController {
 
         model.addAttribute("weeklyReport", weeklyOperatingReport);
         model.addAttribute("execution", execution);
+        model.addAttribute("period", weeklyOperatingReport.getPeriod());
 
         return "weekly-operating-report-creation";
     }
