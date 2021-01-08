@@ -21,7 +21,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label class="col-form-label">Periodo</label> <span th:text="${#dates.format(period.startDate, 'dd-MMM-yyyy')}"> </span> to <span th:text="${#dates.format(period.endDate, 'dd-MMM-yyyy')}"> </span>
+                                    <label class="col-form-label">Periodo</label> <span th:text="${#dates.format(period.startDate, 'dd-MMM-yyyy')}"> </span> <span>a</span> <span th:text="${#dates.format(period.endDate, 'dd-MMM-yyyy')}"> </span>
                                     <input type="hidden" th:field="*{period.startDate}">
                                     <input type="hidden" th:field="*{period.endDate}">
                                 </div>

@@ -7,10 +7,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.sql.Date;
 import java.util.List;
 
@@ -127,5 +130,28 @@ public class EmployeeReportController {
         period.setEndDate(new Date(currentWeek.get(1).getTime()));
 
         return period;
+    }
+
+    @PostMapping("week/report/add/{executionId}")
+    public String addWeeklyReport(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable Long executionId,
+            @Valid WeeklyOperatingReport weeklyOperatingReport,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        User currentUser = setCurrentUser(userDetails, model);
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("weeklyReport", weeklyOperatingReport);
+            model.addAttribute("execution", weeklyOperatingReport.getExecution());
+            model.addAttribute("period", weeklyOperatingReport.getPeriod());
+
+            return "weekly-operating-report-creation";
+        }
+
+        this.getWeeklyOperatingReportService().save(weeklyOperatingReport);
+
+        return "redirect:/";
     }
 }
