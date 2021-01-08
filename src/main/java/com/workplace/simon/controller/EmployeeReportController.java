@@ -1,10 +1,7 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.*;
-import com.workplace.simon.service.ExecutionService;
-import com.workplace.simon.service.UserService;
-import com.workplace.simon.service.UtilDate;
-import com.workplace.simon.service.WeeklyOperatingReportService;
+import com.workplace.simon.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +27,7 @@ public class EmployeeReportController {
     private WeeklyOperatingReportService weeklyOperatingReportService;
 
     @Autowired
-    private UtilDate utilDate;
+    private UtilDateService utilDate;
 
     public ExecutionService getExecutionService() {
         return executionService;
