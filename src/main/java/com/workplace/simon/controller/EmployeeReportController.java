@@ -90,7 +90,7 @@ public class EmployeeReportController {
         User currentUser = setCurrentUser(userDetails, model);
 
         Execution execution = this.getExecutionService().findById(executionId)
-                .orElseThrow(() -> new IllegalArgumentException("The execution id is not valid " + executionId));
+                .orElseThrow(() -> new IllegalArgumentException("The [Execution] id is not valid " + executionId));
         WeeklyOperatingReport weeklyOperatingReport = this.getWeeklyOperatingReportService().findByExecution(execution)
                 .orElse(null);
 
