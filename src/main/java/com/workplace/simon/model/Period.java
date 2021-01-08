@@ -1,7 +1,7 @@
 package com.workplace.simon.model;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Date;
 import java.time.Month;
 
 @Entity
@@ -11,9 +11,9 @@ public class Period {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Time startDate;
+    private Date startDate;
 
-    private Time endDate;
+    private Date endDate;
 
     private Integer weekNo;
 
@@ -29,19 +29,19 @@ public class Period {
         this.id = id;
     }
 
-    public Time getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Time startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Time getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Time endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

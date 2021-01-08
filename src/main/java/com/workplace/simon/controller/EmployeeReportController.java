@@ -1,11 +1,10 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.AssignationStatus;
-import com.workplace.simon.model.Execution;
-import com.workplace.simon.model.User;
-import com.workplace.simon.model.WeeklyOperatingReport;
+import com.workplace.simon.model.*;
 import com.workplace.simon.service.ExecutionService;
 import com.workplace.simon.service.UserService;
+import com.workplace.simon.service.UtilDate;
+import com.workplace.simon.service.WeeklyOperatingReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.sql.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("employee")
@@ -24,12 +26,26 @@ public class EmployeeReportController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private WeeklyOperatingReportService weeklyOperatingReportService;
+
+    @Autowired
+    private UtilDate utilDate;
+
     public ExecutionService getExecutionService() {
         return executionService;
     }
 
     public UserService getUserService() {
         return userService;
+    }
+
+    public WeeklyOperatingReportService getWeeklyOperatingReportService() {
+        return weeklyOperatingReportService;
+    }
+
+    public UtilDate getUtilDate() {
+        return utilDate;
     }
 
     @GetMapping("week/report")
@@ -74,11 +90,43 @@ public class EmployeeReportController {
             @PathVariable Long executionId,
             Model model
     ) {
-        setCurrentUser(userDetails, model);
-        WeeklyOperatingReport weeklyOperatingReport = new WeeklyOperatingReport();
+        User currentUser = setCurrentUser(userDetails, model);
+
+        Execution execution = this.getExecutionService().findById(executionId)
+                .orElseThrow(() -> new IllegalArgumentException("The execution id is not valid " + executionId));
+        WeeklyOperatingReport weeklyOperatingReport = this.getWeeklyOperatingReportService().findByExecution(execution)
+                .orElse(null);
+
+        if (weeklyOperatingReport == null) {
+            weeklyOperatingReport = addDefaultValues(currentUser, execution);
+        }
+
+        WeekDetail weekDetail = new WeekDetail();
+        weekDetail.setDate(new Date(System.currentTimeMillis()));
+        weeklyOperatingReport.getWeekDetails().add(weekDetail);
 
         model.addAttribute("weeklyReport", weeklyOperatingReport);
 
         return "weekly-operating-report-creation";
+    }
+
+    private WeeklyOperatingReport addDefaultValues(User user, Execution execution) {
+        WeeklyOperatingReport weeklyOperatingReport = new WeeklyOperatingReport();
+        weeklyOperatingReport.setMaker(user);
+        weeklyOperatingReport.setPeriod(getPeriod());
+        weeklyOperatingReport.setExecution(execution);
+
+        return weeklyOperatingReport;
+    }
+
+    private Period getPeriod() {
+        Period period = new Period();
+
+        List<java.util.Date> currentWeek = this.getUtilDate().getStartAndEndDate();
+
+        period.setStartDate(java.sql.Date.valueOf(String.valueOf(currentWeek.get(0))));
+        period.setEndDate(java.sql.Date.valueOf(String.valueOf(currentWeek.get(1))));
+
+        return period;
     }
 }

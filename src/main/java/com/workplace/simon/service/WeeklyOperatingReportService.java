@@ -1,5 +1,6 @@
 package com.workplace.simon.service;
 
+import com.workplace.simon.model.Execution;
 import com.workplace.simon.model.WeeklyOperatingReport;
 import com.workplace.simon.repository.WeeklyOperatingReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,9 @@ public class WeeklyOperatingReportService {
 
     public void delete(WeeklyOperatingReport weeklyOperatingReport) {
         this.getWeeklyOperatingReportRepository().delete(weeklyOperatingReport);
+    }
+
+    public Optional<WeeklyOperatingReport> findByExecution(Execution execution) {
+        return this.getWeeklyOperatingReportRepository().findByExecution(execution);
     }
 }
