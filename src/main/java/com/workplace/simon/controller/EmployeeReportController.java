@@ -108,8 +108,14 @@ public class EmployeeReportController {
         model.addAttribute("weeklyReport", weeklyOperatingReport);
         model.addAttribute("execution", execution);
         model.addAttribute("period", weeklyOperatingReport.getPeriod());
+        model.addAttribute("supervisor", getSupervisor(execution));
 
         return "weekly-operating-report-creation";
+    }
+
+    private User getSupervisor(Execution execution) {
+        return this.getUserService().findById(execution.getSupervisor())
+                .orElseThrow(() -> new IllegalArgumentException("The supervisor defined has not any registered user"));
     }
 
     private WeeklyOperatingReport addDefaultValues(User user, Execution execution) {
@@ -146,6 +152,7 @@ public class EmployeeReportController {
             model.addAttribute("weeklyReport", weeklyOperatingReport);
             model.addAttribute("execution", weeklyOperatingReport.getExecution());
             model.addAttribute("period", weeklyOperatingReport.getPeriod());
+            model.addAttribute("supervisor", getSupervisor(weeklyOperatingReport.getExecution()));
 
             return "weekly-operating-report-creation";
         }
