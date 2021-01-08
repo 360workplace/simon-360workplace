@@ -27,7 +27,7 @@ public class EmployeeReportController {
     private WeeklyOperatingReportService weeklyOperatingReportService;
 
     @Autowired
-    private UtilDateService utilDate;
+    private UtilDate utilDate;
 
     public ExecutionService getExecutionService() {
         return executionService;
@@ -121,8 +121,8 @@ public class EmployeeReportController {
 
         List<java.util.Date> currentWeek = this.getUtilDate().getStartAndEndDate();
 
-        period.setStartDate(java.sql.Date.valueOf(String.valueOf(currentWeek.get(0))));
-        period.setEndDate(java.sql.Date.valueOf(String.valueOf(currentWeek.get(1))));
+        period.setStartDate(Date.valueOf(String.valueOf(currentWeek.get(0).getTime())));
+        period.setEndDate(Date.valueOf(String.valueOf(currentWeek.get(1).getTime())));
 
         return period;
     }
