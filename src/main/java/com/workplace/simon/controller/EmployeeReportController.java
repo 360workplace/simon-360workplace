@@ -107,7 +107,6 @@ public class EmployeeReportController {
         model.addAttribute("execution", execution);
         model.addAttribute("period", weeklyOperatingReport.getPeriod());
         model.addAttribute("supervisor", getSupervisor(execution));
-        model.addAttribute("weekDetail", weekDetail);
 
         return "weekly-operating-report-creation";
     }
@@ -164,7 +163,6 @@ public class EmployeeReportController {
             model.addAttribute("execution", weeklyOperatingReport.getExecution());
             model.addAttribute("period", weeklyOperatingReport.getPeriod());
             model.addAttribute("supervisor", getSupervisor(weeklyOperatingReport.getExecution()));
-            model.addAttribute("weekDetail", weeklyOperatingReport.getWeekDetails());
 
             return "weekly-operating-report-creation";
         }
