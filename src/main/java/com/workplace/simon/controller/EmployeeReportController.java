@@ -101,17 +101,18 @@ public class EmployeeReportController {
             weeklyOperatingReport = addDefaultValues(currentUser, execution);
         }
 
-        appendWeeklyDetail(weeklyOperatingReport);
+        WeekDetail weekDetail = appendWeeklyDetail(weeklyOperatingReport);
 
         model.addAttribute("weeklyReport", weeklyOperatingReport);
         model.addAttribute("execution", execution);
         model.addAttribute("period", weeklyOperatingReport.getPeriod());
         model.addAttribute("supervisor", getSupervisor(execution));
+        model.addAttribute("weekDetail", weekDetail);
 
         return "weekly-operating-report-creation";
     }
 
-    private void appendWeeklyDetail(WeeklyOperatingReport weeklyOperatingReport) {
+    private WeekDetail appendWeeklyDetail(WeeklyOperatingReport weeklyOperatingReport) {
         WeekDetail weekDetail = new WeekDetail();
         weekDetail.setDate(new Date(System.currentTimeMillis()));
 
@@ -119,6 +120,8 @@ public class EmployeeReportController {
                 weeklyOperatingReport.getWeekDetails().size(),
                 weekDetail
         );
+
+        return weekDetail;
     }
 
     private User getSupervisor(Execution execution) {
@@ -161,6 +164,7 @@ public class EmployeeReportController {
             model.addAttribute("execution", weeklyOperatingReport.getExecution());
             model.addAttribute("period", weeklyOperatingReport.getPeriod());
             model.addAttribute("supervisor", getSupervisor(weeklyOperatingReport.getExecution()));
+            model.addAttribute("weekDetail", weeklyOperatingReport.getWeekDetails());
 
             return "weekly-operating-report-creation";
         }
