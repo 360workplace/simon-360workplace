@@ -101,6 +101,8 @@ public class EmployeeReportController {
             weeklyOperatingReport = addDefaultValues(currentUser, execution);
         }
 
+        WeekDetail weekDetail = appendWeeklyDetail(weeklyOperatingReport);
+
         model.addAttribute("weeklyReport", weeklyOperatingReport);
         model.addAttribute("execution", execution);
         model.addAttribute("period", weeklyOperatingReport.getPeriod());
