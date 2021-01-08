@@ -15,8 +15,8 @@ public class WeekDetail {
     @Column(columnDefinition = "text")
     private String detail;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "weekly_operating_report_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "weekly_operating_report_id", nullable = false, updatable = true, insertable = true)
     private WeeklyOperatingReport weeklyOperatingReport;
 
     public Long getId() {

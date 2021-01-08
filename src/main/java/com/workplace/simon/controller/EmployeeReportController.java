@@ -169,6 +169,6 @@ public class EmployeeReportController {
 
         this.getWeeklyOperatingReportService().save(weeklyOperatingReport);
 
-        return "redirect:/";
+        return "redirect:/employee/week/report";
     }
 }

@@ -20,7 +20,7 @@ public class WeeklyOperatingReport {
     @JoinColumn(name = "ejecucion_id", referencedColumnName = "id")
     private Execution execution;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "weeklyOperatingReport")
+    @OneToMany(mappedBy = "weeklyOperatingReport", cascade = CascadeType.ALL)
     private List<WeekDetail> weekDetails;
 
     public Long getId() {
