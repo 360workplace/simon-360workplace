@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <form action="#" th:action="@{/employee/week/report/add/{executionId}(executionId = ${executionId})}" th:object="${weeklyReport}" method="post">
+                        <form action="#" th:action="@{/employee/week/report/add/{executionId}(executionId = ${execution.id})}" th:object="${weeklyReport}" method="post">
                             <div class="row">
                                 <h3 th:utext="${execution.title}"></h3>
                             </div>
