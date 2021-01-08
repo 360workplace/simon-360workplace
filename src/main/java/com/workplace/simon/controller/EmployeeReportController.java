@@ -114,11 +114,9 @@ public class EmployeeReportController {
     private void appendWeeklyDetail(WeeklyOperatingReport weeklyOperatingReport) {
         WeekDetail weekDetail = new WeekDetail();
         weekDetail.setDate(new Date(System.currentTimeMillis()));
-        int size = weeklyOperatingReport.getWeekDetails().size();
 
-        int index = (size == 0) ? 0 : weeklyOperatingReport.getWeekDetails().size() - 1;
         weeklyOperatingReport.getWeekDetails().add(
-                index,
+                weeklyOperatingReport.getWeekDetails().size(),
                 weekDetail
         );
     }

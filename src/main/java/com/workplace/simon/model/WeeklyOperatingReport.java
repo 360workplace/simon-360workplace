@@ -13,10 +13,10 @@ public class WeeklyOperatingReport {
 
     private String sequential;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Period period;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ejecucion_id", referencedColumnName = "id")
     private Execution execution;
 
@@ -24,7 +24,7 @@ public class WeeklyOperatingReport {
     @JoinColumn(name = "maker_id", referencedColumnName = "id")
     private User maker;
 
-    @OneToMany
+    @OneToMany(mappedBy = "weeklyOperatingReport")
     private List<WeekDetail> weekDetails;
 
     public Long getId() {

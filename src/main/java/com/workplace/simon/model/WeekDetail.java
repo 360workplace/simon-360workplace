@@ -15,6 +15,10 @@ public class WeekDetail {
     @Column(columnDefinition = "text")
     private String detail;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "weekly_operating_report_id", referencedColumnName = "id")
+    private WeeklyOperatingReport weeklyOperatingReport;
+
     public Long getId() {
         return id;
     }
@@ -37,5 +41,13 @@ public class WeekDetail {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public WeeklyOperatingReport getWeeklyOperatingReport() {
+        return weeklyOperatingReport;
+    }
+
+    public void setWeeklyOperatingReport(WeeklyOperatingReport weeklyOperatingReport) {
+        this.weeklyOperatingReport = weeklyOperatingReport;
     }
 }
