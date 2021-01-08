@@ -121,8 +121,8 @@ public class EmployeeReportController {
 
         List<java.util.Date> currentWeek = this.getUtilDate().getStartAndEndDate();
 
-        period.setStartDate(Date.valueOf(String.valueOf(currentWeek.get(0).getTime())));
-        period.setEndDate(Date.valueOf(String.valueOf(currentWeek.get(1).getTime())));
+        period.setStartDate(new Date(currentWeek.get(0).getTime()));
+        period.setEndDate(new Date(currentWeek.get(1).getTime()));
 
         return period;
     }
