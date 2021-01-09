@@ -167,7 +167,7 @@ public class EmployeeReportController {
             return "weekly-operating-report-creation";
         }
 
-        this.getWeeklyOperatingReportService().save(weeklyOperatingReport);
+        this.getWeeklyOperatingReportService().persist(weeklyOperatingReport);
 
         return "redirect:/employee/week/report";
     }

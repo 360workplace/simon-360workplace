@@ -1,7 +1,9 @@
 package com.workplace.simon.service;
 
 import com.workplace.simon.model.Execution;
+import com.workplace.simon.model.WeekDetail;
 import com.workplace.simon.model.WeeklyOperatingReport;
+import com.workplace.simon.repository.WeekDetailRepository;
 import com.workplace.simon.repository.WeeklyOperatingReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,15 @@ public class WeeklyOperatingReportService {
     @Autowired
     private WeeklyOperatingReportRepository weeklyOperatingReportRepository;
 
+    @Autowired
+    private WeekDetailRepository weekDetailRepository;
+
     public WeeklyOperatingReportRepository getWeeklyOperatingReportRepository() {
         return weeklyOperatingReportRepository;
+    }
+
+    public WeekDetailRepository getWeekDetailRepository() {
+        return weekDetailRepository;
     }
 
     public WeeklyOperatingReport save(WeeklyOperatingReport weeklyOperatingReport) {
@@ -36,5 +45,18 @@ public class WeeklyOperatingReportService {
 
     public Optional<WeeklyOperatingReport> findByExecution(Execution execution) {
         return this.getWeeklyOperatingReportRepository().findByExecution(execution);
+    }
+
+    public WeeklyOperatingReport persist(WeeklyOperatingReport weeklyOperatingReport) {
+        List<WeekDetail> details = weeklyOperatingReport.getWeekDetails();
+
+        WeeklyOperatingReport saved = this.save(weeklyOperatingReport);
+
+        for (WeekDetail detail : details) {
+            detail.setWeeklyOperatingReport(saved);
+            this.getWeekDetailRepository().save(detail);
+        }
+
+        return saved;
     }
 }
