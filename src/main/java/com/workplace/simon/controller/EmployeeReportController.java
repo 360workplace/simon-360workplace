@@ -101,7 +101,7 @@ public class EmployeeReportController {
             weeklyOperatingReport = addDefaultValues(currentUser, execution);
         }
 
-        WeekDetail weekDetail = appendWeeklyDetail(weeklyOperatingReport);
+        appendWeeklyDetail(weeklyOperatingReport);
 
         model.addAttribute("weeklyReport", weeklyOperatingReport);
         model.addAttribute("execution", execution);
@@ -114,12 +114,12 @@ public class EmployeeReportController {
     private WeekDetail appendWeeklyDetail(WeeklyOperatingReport weeklyOperatingReport) {
         WeekDetail weekDetail = new WeekDetail();
         weekDetail.setDate(new Date(System.currentTimeMillis()));
-        weekDetail.setWeeklyOperatingReport(weeklyOperatingReport);
 
         weeklyOperatingReport.getWeekDetails().add(
                 weeklyOperatingReport.getWeekDetails().size(),
                 weekDetail
         );
+        weekDetail.setWeeklyOperatingReport(weeklyOperatingReport);
 
         return weekDetail;
     }
@@ -156,7 +156,7 @@ public class EmployeeReportController {
             BindingResult bindingResult,
             Model model
     ) {
-        User currentUser = setCurrentUser(userDetails, model);
+        setCurrentUser(userDetails, model);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("weeklyReport", weeklyOperatingReport);
