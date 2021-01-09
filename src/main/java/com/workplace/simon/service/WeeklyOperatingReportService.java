@@ -49,14 +49,21 @@ public class WeeklyOperatingReportService {
 
     public WeeklyOperatingReport persist(WeeklyOperatingReport weeklyOperatingReport) {
         List<WeekDetail> details = weeklyOperatingReport.getWeekDetails();
+        Long id = weeklyOperatingReport.getId();
 
-        WeeklyOperatingReport saved = this.save(weeklyOperatingReport);
-
-        for (WeekDetail detail : details) {
-            detail.setWeeklyOperatingReport(saved);
-            this.getWeekDetailRepository().save(detail);
+        if (id == null) {
+            WeeklyOperatingReport saved = this.save(weeklyOperatingReport);
+            weeklyOperatingReport.setId(saved.getId());
         }
 
-        return saved;
+        for (WeekDetail detail : details) {
+            detail.setWeeklyOperatingReport(weeklyOperatingReport);
+            Long id = detail.getId()
+            if (id == null) {
+                this.getWeekDetailRepository().save(detail);
+            }
+        }
+
+        return weeklyOperatingReport;
     }
 }
