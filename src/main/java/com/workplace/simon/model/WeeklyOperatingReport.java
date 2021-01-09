@@ -21,7 +21,7 @@ public class WeeklyOperatingReport {
     private Execution execution;
 
     @OneToMany(mappedBy = "weeklyOperatingReport", cascade = CascadeType.ALL)
-    private List<WeekDetail> weekDetails;
+    private List<WeekDetail> weekDetails = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -56,10 +56,6 @@ public class WeeklyOperatingReport {
     }
 
     public List<WeekDetail> getWeekDetails() {
-        if (weekDetails == null) {
-            weekDetails = new ArrayList<>();
-        }
-
         return weekDetails;
     }
 

@@ -16,7 +16,7 @@ public class WeekDetail {
     private String detail;
 
     @ManyToOne
-    @JoinColumn(name = "weekly_operating_report_id", nullable = false)
+    @JoinColumn(name = "weekly_operating_report_id", referencedColumnName = "id", nullable = false)
     private WeeklyOperatingReport weeklyOperatingReport;
 
     public Long getId() {
