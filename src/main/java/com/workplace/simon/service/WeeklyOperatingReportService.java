@@ -58,8 +58,9 @@ public class WeeklyOperatingReportService {
 
         for (WeekDetail detail : details) {
             detail.setWeeklyOperatingReport(weeklyOperatingReport);
-            Long id = detail.getId()
-            if (id == null) {
+            Long detailId = detail.getId();
+
+            if (detailId == null) {
                 this.getWeekDetailRepository().save(detail);
             }
         }
