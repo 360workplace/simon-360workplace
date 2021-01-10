@@ -100,7 +100,7 @@ public class EmployeeReportController {
         if (weeklyOperatingReport == null) {
             weeklyOperatingReport = addDefaultValues(currentUser, execution);
         } else {
-            return "redirect:week/report/update/" + weeklyOperatingReport.getId();
+            return "redirect:/employee/week/report/update/" + weeklyOperatingReport.getId();
         }
 
         appendWeeklyDetail(weeklyOperatingReport);
