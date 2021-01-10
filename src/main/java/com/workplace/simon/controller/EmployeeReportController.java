@@ -182,7 +182,9 @@ public class EmployeeReportController {
     ) {
         setCurrentUser(userDetails, model);
         WeeklyOperatingReport weeklyOperatingReport = this.getWeeklyOperatingReportService().findById(weeklyReportId)
-                .orElseThrow(() -> new IllegalArgumentException(""));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid id provided " + weeklyReportId));
+        appendWeeklyDetail(weeklyOperatingReport);
+
         model.addAttribute("weeklyReport", weeklyOperatingReport);
         model.addAttribute("execution", weeklyOperatingReport.getExecution());
         model.addAttribute("period", weeklyOperatingReport.getPeriod());
