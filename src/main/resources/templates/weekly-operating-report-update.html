@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Weekly operating Report</title>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="section">
+            <div class="card">
+                <div class="card-header ">
+                    <h4 class="card-title">Informe Semanal de Ejecución</h4>
+                    <p class="card-category">Agregar nuevo registro/novedad</p>
+                </div>
+                <div class="card-body">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <form action="#" th:action="@{/employee/week/report/update/{weeklyReportId}(weeklyReportId = ${weeklyReport.id})}" th:object="${weeklyReport}" method="post">
+                            <div class="row">
+                                <h3 th:text="${execution.title}"></h3>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label class="col-form-label">Periodo</label> <span th:text="${#dates.format(period.startDate, 'dd-MMM-yyyy')}"> </span> <span>a</span> <span th:text="${#dates.format(period.endDate, 'dd-MMM-yyyy')}"> </span>
+                                    <input type="hidden" th:field="*{period.startDate}">
+                                    <input type="hidden" th:field="*{period.endDate}">
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label class="col-form-label">Responsable</label> <span th:text="${currentUser.firstname}"> </span> <span th:text="${currentUser.lastname}"> </span>
+                                </div>
+
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label class="col-form-label">Asignado Por</label> <span th:text="${supervisor.firstname}"> </span> <span th:text="${supervisor.lastname}"> </span>
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label for="sequential" class="col-form-label">Código</label> <input type="text" th:field="*{sequential}" class="form-control" id="sequential" placeholder="Sequential"> <span th:if="${#fields.hasErrors('sequential')}" th:errors="*{sequential}" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" th:each="weekDetail, itemStat : *{weekDetails}" th:if="${itemStat.index == itemStat.size-1}">
+                                    <input type="hidden" th:field="*{weekDetails[__${itemStat.index}__].date}">
+                                    <input type="hidden" th:field="*{weekDetails[__${itemStat.index}__].weeklyOperatingReport}">
+                                    <label for="weekDetails" class="col-form-label">Actividad Semana Actual</label> <textarea th:field="*{weekDetails[__${itemStat.index}__].detail}" class="form-control textarea-editor" id="weekDetails" placeholder="Detail" /> <span th:if="${#fields.hasErrors('weekDetails[__${itemStat.index}__].detail')}" th:errors="*{weekDetails[__${itemStat.index}__].detail}" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                    <input type="hidden" th:field="*{execution}">
+                                    <input type="submit" class="btn btn-primary" name="save" value="Registrar">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<th:block layout:fragment="script">
+    <script src="https://cdn.tiny.cloud/1/l4m4tbiktmwhgn58iyprjv55noasmlwux4kfzyswdxrsn90t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea.textarea-editor',
+            skin: 'bootstrap',
+            menubar: false
+        });
+    </script>
+</th:block>
+</html>

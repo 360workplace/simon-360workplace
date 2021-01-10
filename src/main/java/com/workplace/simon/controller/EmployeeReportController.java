@@ -99,6 +99,8 @@ public class EmployeeReportController {
 
         if (weeklyOperatingReport == null) {
             weeklyOperatingReport = addDefaultValues(currentUser, execution);
+        } else {
+            return "redirect:week/report/update/{" + weeklyOperatingReport.getId() + "}";
         }
 
         appendWeeklyDetail(weeklyOperatingReport);
@@ -168,6 +170,48 @@ public class EmployeeReportController {
         }
 
         this.getWeeklyOperatingReportService().persist(weeklyOperatingReport);
+
+        return "redirect:/employee/week/report";
+    }
+
+    @GetMapping("week/report/update/{weeklyReportId}")
+    public String updateWeeklyReport(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable Long weeklyReportId,
+            Model model
+    ) {
+        setCurrentUser(userDetails, model);
+        WeeklyOperatingReport weeklyOperatingReport = this.getWeeklyOperatingReportService().findById(weeklyReportId)
+                .orElseThrow(() -> new IllegalArgumentException(""));
+        model.addAttribute("weeklyReport", weeklyOperatingReport);
+        model.addAttribute("execution", weeklyOperatingReport.getExecution());
+        model.addAttribute("period", weeklyOperatingReport.getPeriod());
+        model.addAttribute("supervisor", getSupervisor(weeklyOperatingReport.getExecution()));
+
+        return "weekly-operating-report-update";
+    }
+
+    @PostMapping("week/report/update/{weeklyReportId}")
+    public String updateWeeklyReport(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable Long weeklyReportId,
+            @Valid WeeklyOperatingReport weeklyOperatingReport,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        setCurrentUser(userDetails, model);
+        weeklyOperatingReport.setId(weeklyReportId);
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("weeklyReport", weeklyOperatingReport);
+            model.addAttribute("execution", weeklyOperatingReport.getExecution());
+            model.addAttribute("period", weeklyOperatingReport.getPeriod());
+            model.addAttribute("supervisor", getSupervisor(weeklyOperatingReport.getExecution()));
+
+            return "weekly-operating-report-update";
+        }
+
+        this.getWeeklyOperatingReportService().saveWeeklyDetail(weeklyOperatingReport);
 
         return "redirect:/employee/week/report";
     }

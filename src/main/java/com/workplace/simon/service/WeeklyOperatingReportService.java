@@ -67,4 +67,17 @@ public class WeeklyOperatingReportService {
 
         return weeklyOperatingReport;
     }
+
+    public WeeklyOperatingReport update(WeeklyOperatingReport weeklyOperatingReport) {
+        return this.saveWeeklyDetail(weeklyOperatingReport);
+    }
+
+    public WeeklyOperatingReport saveWeeklyDetail(WeeklyOperatingReport weeklyOperatingReport) {
+        List<WeekDetail> details = weeklyOperatingReport.getWeekDetails();
+        WeekDetail weekDetail = details.get(details.size() -1);
+        weekDetail.setWeeklyOperatingReport(weeklyOperatingReport);
+        this.getWeekDetailRepository().save(weekDetail);
+
+        return weeklyOperatingReport;
+    }
 }
