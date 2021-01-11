@@ -220,6 +220,7 @@ public class EmployeeReportController {
     ) {
         setCurrentUser(userDetails, model);
         WeeklyNews weeklyNews = new WeeklyNews();
+        weeklyNews.setDate(new Date(System.currentTimeMillis()));
 
         model.addAttribute("weeklyNews", weeklyNews);
         model.addAttribute("period", this.getUtilDate().getPeriod());
