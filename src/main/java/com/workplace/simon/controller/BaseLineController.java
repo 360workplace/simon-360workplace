@@ -32,6 +32,7 @@ public class BaseLineController {
     @Autowired
     private AreaService areaService;
 
+    @Autowired
     private KeepSessionService keepSessionService;
 
     public SourceService getSourceService() {
