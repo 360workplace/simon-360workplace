@@ -31,7 +31,7 @@ public class UserController {
     private AreaService areaService;
 
     @Autowired
-    private KeepSession keepSession;
+    private KeepSessionService keepSessionService;
 
     public UserService getUserService() {
         return userService;
@@ -53,13 +53,13 @@ public class UserController {
         return areaService;
     }
 
-    public KeepSession getKeepSession() {
-        return keepSession;
+    public KeepSessionService getKeepSessionService() {
+        return keepSessionService;
     }
 
     @GetMapping("/admin/registration")
     public String registration(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        this.getKeepSession().setCurrentUser(currentUser, model);
+        this.getKeepSessionService().setCurrentUser(currentUser, model);
 
         model.addAttribute("userForm", new User());
         model.addAttribute("allRoles", this.getRoleService().findAll());
@@ -75,7 +75,7 @@ public class UserController {
             Model model,
             @AuthenticationPrincipal UserDetails currentUser
     ) {
-        this.getKeepSession().setCurrentUser(currentUser, model);
+        this.getKeepSessionService().setCurrentUser(currentUser, model);
         this.getUserValidator().validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -113,7 +113,7 @@ public class UserController {
 
     @GetMapping({"/", "/dashboard", "/admin"})
     public String dashboard(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        this.getKeepSession().setCurrentUser(currentUser, model);
+        this.getKeepSessionService().setCurrentUser(currentUser, model);
 
         return "dashboard";
     }

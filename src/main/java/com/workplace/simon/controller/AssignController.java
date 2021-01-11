@@ -2,7 +2,7 @@ package com.workplace.simon.controller;
 
 import com.workplace.simon.model.*;
 import com.workplace.simon.service.ExecutionService;
-import com.workplace.simon.service.KeepSession;
+import com.workplace.simon.service.KeepSessionService;
 import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class AssignController {
     private ExecutionService executionService;
 
     @Autowired
-    private KeepSession keepSession;
+    private KeepSessionService keepSessionService;
 
     public UserService getUserService() {
         return userService;
@@ -44,8 +44,8 @@ public class AssignController {
         return executionService;
     }
 
-    public KeepSession getKeepSession() {
-        return keepSession;
+    public KeepSessionService getKeepSessionService() {
+        return keepSessionService;
     }
 
     @GetMapping("request")
@@ -93,7 +93,7 @@ public class AssignController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        User currentUser = this.getKeepSession().setCurrentUser(userDetails, model);
+        User currentUser = this.getKeepSessionService().setCurrentUser(userDetails, model);
         Execution execution = new Execution();
         model.addAttribute("execution", execution);
         model.addAttribute("allUsers", this.getUserService().findAll());
@@ -113,7 +113,7 @@ public class AssignController {
             BindingResult bindingResult,
             Model model
     ) {
-        User currentUser = this.getKeepSession().setCurrentUser(userDetails, model);
+        User currentUser = this.getKeepSessionService().setCurrentUser(userDetails, model);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("sourceId", currentUser.getId());

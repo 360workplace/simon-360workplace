@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 @Service
-public class KeepSession implements KeepSessionInterface {
+public class KeepSessionService implements KeepSessionInterface {
     @Autowired
     private UserService userService;
 

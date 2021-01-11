@@ -32,7 +32,7 @@ public class ExecutionController {
     private AreaService areaService;
 
     @Autowired
-    private KeepSession keepSession;
+    private KeepSessionService keepSessionService;
 
     public ExecutionService getExecutionService() {
         return executionService;
@@ -54,8 +54,8 @@ public class ExecutionController {
         return areaService;
     }
 
-    public KeepSession getKeepSession() {
-        return keepSession;
+    public KeepSessionService getKeepSessionService() {
+        return keepSessionService;
     }
 
     /**
@@ -187,7 +187,7 @@ public class ExecutionController {
             @RequestParam("areaFilter") Optional<Long> area,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
         Long areaId = area.orElse(0L);
         model.addAttribute("allAreas", this.getAreaService().findAll());
 

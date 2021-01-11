@@ -1,9 +1,9 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.WeekDetail;
-import com.workplace.simon.model.WeeklyNews;
-import com.workplace.simon.model.WeeklyOperatingReport;
-import com.workplace.simon.service.KeepSession;
+import com.workplace.simon.service.KeepSessionService;
+import com.workplace.simon.service.WeeklyNewsService;
+import com.workplace.simon.service.WeeklyOperatingReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,38 +15,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/manager/")
 public class ManagerReportController {
     @Autowired
-    private WeeklyOperatingReport weeklyOperatingReport;
+    private WeeklyOperatingReportService weeklyOperatingReportService;
 
     @Autowired
     private WeekDetail weekDetail;
 
     @Autowired
-    private WeeklyNews weeklyNews;
+    private WeeklyNewsService weeklyNewsService;
 
     @Autowired
-    private KeepSession keepSession;
+    private KeepSessionService keepSessionService;
 
-    public WeeklyOperatingReport getWeeklyOperatingReport() {
-        return weeklyOperatingReport;
+    public WeeklyOperatingReportService getWeeklyOperatingReportService() {
+        return weeklyOperatingReportService;
     }
 
     public WeekDetail getWeekDetail() {
         return weekDetail;
     }
 
-    public WeeklyNews getWeeklyNews() {
-        return weeklyNews;
+    public WeeklyNewsService getWeeklyNewsService() {
+        return weeklyNewsService;
     }
 
-    public KeepSession getKeepSession() {
-        return keepSession;
+    public KeepSessionService getKeepSessionService() {
+        return keepSessionService;
     }
 
     public String printWeeklyReport(
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
 
         return "manager-weekly-report";
     }

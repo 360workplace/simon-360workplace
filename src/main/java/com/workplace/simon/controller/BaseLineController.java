@@ -32,7 +32,7 @@ public class BaseLineController {
     @Autowired
     private AreaService areaService;
 
-    private KeepSession keepSession;
+    private KeepSessionService keepSessionService;
 
     public SourceService getSourceService() {
         return sourceService;
@@ -51,8 +51,8 @@ public class BaseLineController {
         return areaService;
     }
 
-    public KeepSession getKeepSession() {
-        return keepSession;
+    public KeepSessionService getKeepSessionService() {
+        return keepSessionService;
     }
 
     private static final String AJAX_HEADER_NAME = "X-Requested-With";
@@ -160,7 +160,7 @@ public class BaseLineController {
             @RequestParam("areaFilter") Optional<Long> area,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
         Long areaId = area.orElse(0L);
         model.addAttribute("allAreas", this.getAreaService().findAll());
 

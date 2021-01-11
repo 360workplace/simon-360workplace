@@ -35,7 +35,7 @@ public class EmployeeReportController {
     private WeeklyNewsService weeklyNewsService;
 
     @Autowired
-    private KeepSession keepSession;
+    private KeepSessionService keepSessionService;
 
     public ExecutionService getExecutionService() {
         return executionService;
@@ -57,8 +57,8 @@ public class EmployeeReportController {
         return weeklyNewsService;
     }
 
-    public KeepSession getKeepSession() {
-        return keepSession;
+    public KeepSessionService getKeepSessionService() {
+        return keepSessionService;
     }
 
     @GetMapping("week/report")
@@ -66,7 +66,7 @@ public class EmployeeReportController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        User user = this.getKeepSession().setCurrentUser(userDetails, model);
+        User user = this.getKeepSessionService().setCurrentUser(userDetails, model);
         model.addAttribute("executions", this.getExecutionService().findBySourceAndStatusOrderByPriorityDesc(
                 user.getId(),
                 AssignationStatus.OPEN.getLabel()
@@ -81,7 +81,7 @@ public class EmployeeReportController {
             @PathVariable Long executionId,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
         Execution execution = this.getExecutionService().findById(executionId)
                 .orElseThrow(() -> new IllegalArgumentException("The execution id is not valid " + executionId));
 
@@ -96,7 +96,7 @@ public class EmployeeReportController {
             @PathVariable Long executionId,
             Model model
     ) {
-        User currentUser = this.getKeepSession().setCurrentUser(userDetails, model);
+        User currentUser = this.getKeepSessionService().setCurrentUser(userDetails, model);
 
         Execution execution = this.getExecutionService().findById(executionId)
                 .orElseThrow(() -> new IllegalArgumentException("The [Execution] id is not valid " + executionId));
@@ -153,7 +153,7 @@ public class EmployeeReportController {
             BindingResult bindingResult,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("weeklyReport", weeklyOperatingReport);
@@ -175,7 +175,7 @@ public class EmployeeReportController {
             @PathVariable Long weeklyReportId,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
         WeeklyOperatingReport weeklyOperatingReport = this.getWeeklyOperatingReportService().findById(weeklyReportId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid id provided " + weeklyReportId));
         appendWeeklyDetail(weeklyOperatingReport);
@@ -196,7 +196,7 @@ public class EmployeeReportController {
             BindingResult bindingResult,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
         weeklyOperatingReport.setId(weeklyReportId);
 
         if (bindingResult.hasErrors()) {
@@ -218,7 +218,7 @@ public class EmployeeReportController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
         WeeklyNews weeklyNews = new WeeklyNews();
         weeklyNews.setDate(new Date(System.currentTimeMillis()));
 
@@ -235,7 +235,7 @@ public class EmployeeReportController {
             BindingResult bindingResult,
             Model model
     ) {
-        this.getKeepSession().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("weeklyNews", weeklyNews);
