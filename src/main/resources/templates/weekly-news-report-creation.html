@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <form action="#" th:action="@{/employee/week/news/add" th:object="${weeklyNews}" method="post">
+                        <form action="#" th:action="@{/employee/week/news/add}" th:object="${weeklyNews}" method="post">
                             <div class="row">
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label class="col-form-label">Periodo</label> <span th:text="${#dates.format(period.startDate, 'dd-MMM-yyyy')}"> </span> <span>a</span> <span th:text="${#dates.format(period.endDate, 'dd-MMM-yyyy')}"> </span>
