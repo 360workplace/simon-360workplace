@@ -1,6 +1,5 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.WeekDetail;
 import com.workplace.simon.service.KeepSessionService;
 import com.workplace.simon.service.WeeklyNewsService;
 import com.workplace.simon.service.WeeklyOperatingReportService;
@@ -18,9 +17,6 @@ public class ManagerReportController {
     private WeeklyOperatingReportService weeklyOperatingReportService;
 
     @Autowired
-    private WeekDetail weekDetail;
-
-    @Autowired
     private WeeklyNewsService weeklyNewsService;
 
     @Autowired
@@ -28,10 +24,6 @@ public class ManagerReportController {
 
     public WeeklyOperatingReportService getWeeklyOperatingReportService() {
         return weeklyOperatingReportService;
-    }
-
-    public WeekDetail getWeekDetail() {
-        return weekDetail;
     }
 
     public WeeklyNewsService getWeeklyNewsService() {
