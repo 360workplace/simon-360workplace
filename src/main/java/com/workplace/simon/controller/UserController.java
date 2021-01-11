@@ -1,11 +1,7 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.Role;
 import com.workplace.simon.model.User;
-import com.workplace.simon.service.AreaService;
-import com.workplace.simon.service.RoleService;
-import com.workplace.simon.service.SecurityService;
-import com.workplace.simon.service.UserService;
+import com.workplace.simon.service.*;
 import com.workplace.simon.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,8 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -35,6 +29,9 @@ public class UserController {
 
     @Autowired
     private AreaService areaService;
+
+    @Autowired
+    private KeepSession keepSession;
 
     public UserService getUserService() {
         return userService;
@@ -56,20 +53,19 @@ public class UserController {
         return areaService;
     }
 
+    public KeepSession getKeepSession() {
+        return keepSession;
+    }
+
     @GetMapping("/admin/registration")
     public String registration(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        setCurrentUser(model, currentUser);
+        this.getKeepSession().setCurrentUser(currentUser, model);
 
         model.addAttribute("userForm", new User());
         model.addAttribute("allRoles", this.getRoleService().findAll());
         model.addAttribute("allAreas", this.getAreaService().findAll());
 
         return getSignUpForm(model);
-    }
-
-    private void setCurrentUser(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        User user = this.getUserService().findByUsername(currentUser.getUsername());
-        model.addAttribute("currentUser", user);
     }
 
     @PostMapping("/admin/registration")
@@ -79,7 +75,7 @@ public class UserController {
             Model model,
             @AuthenticationPrincipal UserDetails currentUser
     ) {
-        setCurrentUser(model, currentUser);
+        this.getKeepSession().setCurrentUser(currentUser, model);
         this.getUserValidator().validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -117,7 +113,7 @@ public class UserController {
 
     @GetMapping({"/", "/dashboard", "/admin"})
     public String dashboard(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        setCurrentUser(model, currentUser);
+        this.getKeepSession().setCurrentUser(currentUser, model);
 
         return "dashboard";
     }

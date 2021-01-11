@@ -31,6 +31,9 @@ public class ExecutionController {
     @Autowired
     private AreaService areaService;
 
+    @Autowired
+    private KeepSession keepSession;
+
     public ExecutionService getExecutionService() {
         return executionService;
     }
@@ -49,6 +52,10 @@ public class ExecutionController {
 
     public AreaService getAreaService() {
         return areaService;
+    }
+
+    public KeepSession getKeepSession() {
+        return keepSession;
     }
 
     /**
@@ -180,7 +187,7 @@ public class ExecutionController {
             @RequestParam("areaFilter") Optional<Long> area,
             Model model
     ) {
-        setCurrentUser(userDetails, model);
+        this.getKeepSession().setCurrentUser(userDetails, model);
         Long areaId = area.orElse(0L);
         model.addAttribute("allAreas", this.getAreaService().findAll());
 
@@ -194,12 +201,5 @@ public class ExecutionController {
         }
 
         return "execution-active-list";
-    }
-
-    private User setCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
-        model.addAttribute("currentUser", currentUser);
-
-        return currentUser;
     }
 }

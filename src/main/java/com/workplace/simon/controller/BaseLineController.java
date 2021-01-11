@@ -4,10 +4,7 @@ import com.workplace.simon.model.Source;
 import com.workplace.simon.model.Resource;
 import com.workplace.simon.model.SourceType;
 import com.workplace.simon.model.User;
-import com.workplace.simon.service.AreaService;
-import com.workplace.simon.service.SourceService;
-import com.workplace.simon.service.RegisterService;
-import com.workplace.simon.service.UserService;
+import com.workplace.simon.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +32,8 @@ public class BaseLineController {
     @Autowired
     private AreaService areaService;
 
+    private KeepSession keepSession;
+
     public SourceService getSourceService() {
         return sourceService;
     }
@@ -50,6 +49,10 @@ public class BaseLineController {
 
     public AreaService getAreaService() {
         return areaService;
+    }
+
+    public KeepSession getKeepSession() {
+        return keepSession;
     }
 
     private static final String AJAX_HEADER_NAME = "X-Requested-With";
@@ -157,7 +160,7 @@ public class BaseLineController {
             @RequestParam("areaFilter") Optional<Long> area,
             Model model
     ) {
-        setCurrentUser(userDetails, model);
+        this.getKeepSession().setCurrentUser(userDetails, model);
         Long areaId = area.orElse(0L);
         model.addAttribute("allAreas", this.getAreaService().findAll());
 
@@ -200,12 +203,5 @@ public class BaseLineController {
         this.getSourceService().save(baseLine);
 
         return "redirect:/data/source/list/" + baseLine.getType();
-    }
-
-    private User setCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
-        model.addAttribute("currentUser", currentUser);
-
-        return currentUser;
     }
 }

@@ -2,6 +2,7 @@ package com.workplace.simon.controller;
 
 import com.workplace.simon.model.*;
 import com.workplace.simon.service.ExecutionService;
+import com.workplace.simon.service.KeepSession;
 import com.workplace.simon.service.SourceService;
 import com.workplace.simon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class AssignController {
     @Autowired
     private ExecutionService executionService;
 
+    @Autowired
+    private KeepSession keepSession;
+
     public UserService getUserService() {
         return userService;
     }
@@ -38,6 +42,10 @@ public class AssignController {
 
     public ExecutionService getExecutionService() {
         return executionService;
+    }
+
+    public KeepSession getKeepSession() {
+        return keepSession;
     }
 
     @GetMapping("request")
@@ -85,7 +93,7 @@ public class AssignController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        User currentUser = setCurrentUser(userDetails, model);
+        User currentUser = this.getKeepSession().setCurrentUser(userDetails, model);
         Execution execution = new Execution();
         model.addAttribute("execution", execution);
         model.addAttribute("allUsers", this.getUserService().findAll());
@@ -98,13 +106,6 @@ public class AssignController {
         return "execution-assignation-creation-form";
     }
 
-    private User setCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
-        User currentUser = this.getUserService().findByUsername(userDetails.getUsername());
-        model.addAttribute("currentUser", currentUser);
-
-        return currentUser;
-    }
-
     @PostMapping("execution/add")
     public String addExecution(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -112,7 +113,7 @@ public class AssignController {
             BindingResult bindingResult,
             Model model
     ) {
-        User currentUser = setCurrentUser(userDetails, model);
+        User currentUser = this.getKeepSession().setCurrentUser(userDetails, model);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("sourceId", currentUser.getId());
