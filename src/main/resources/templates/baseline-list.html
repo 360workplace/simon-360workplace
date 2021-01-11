@@ -9,9 +9,9 @@
     <div class="container-fluid">
         <div class="section">
             <div class="card">
-                <div class="card-header ">
-                    <h4 class="card-title" th:if="${baseLine.type == SourceType.BASE_LINE}">Linea Base</h4>
-                    <h4 class="card-title" th:if="${baseLine.type == SourceType.ASSIGN_REQUEST}">Solicitudes de Asignación</h4>
+                <div class="card-header">
+                    <h4 class="card-title" th:if="${baseLine.type == com.workplace.simon.model.SourceType.BASE_LINE}">Linea Base</h4>
+                    <h4 class="card-title" th:if="${baseLine.type == com.workplace.simon.model.SourceType.ASSIGN_REQUEST}">Solicitudes de Asignación</h4>
                     <p class="card-category">Registros recientes</p>
                 </div>
                 <div class="card-body table-full-width table-responsive">
