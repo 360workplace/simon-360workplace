@@ -234,6 +234,8 @@ public class EmployeeReportController {
             BindingResult bindingResult,
             Model model
     ) {
+        setCurrentUser(userDetails, model);
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("weeklyNews", weeklyNews);
             model.addAttribute("period", this.getUtilDate().getPeriod());
