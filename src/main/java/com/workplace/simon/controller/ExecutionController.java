@@ -124,7 +124,7 @@ public class ExecutionController {
         execution.setStatus(AssignationStatus.OPEN.getLabel());
         this.getExecutionService().save(execution);
 
-        return "redirect:/data/source/list";
+        return "redirect:/data/source/list/" + source.getType();
     }
 
     @GetMapping("policy/creation/{sourceLabel}/{sourceId}/{userId}")
@@ -171,7 +171,7 @@ public class ExecutionController {
 
         this.getPolicyService().save(policy);
 
-        return "redirect:/data/source/list";
+        return "redirect:/data/source/list/" + source.getType();
     }
 
     @GetMapping("execution/list")

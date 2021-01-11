@@ -40,13 +40,13 @@
 
         <ul class="nav" sec:authorize="hasAuthority('MANAGER')">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/data/source/list}">
+                <a class="nav-link" th:href="@{/data/source/list/BASE_LINE}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Todos Línea Base</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/data/source/list}">
+                <a class="nav-link" th:href="@{/data/source/list/ASSIGN_REQUEST}">
                     <i class="nc-icon nc-notes"></i>
                     <p>Listado de Solicitudes</p>
                 </a>

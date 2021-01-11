@@ -147,12 +147,13 @@ public class BaseLineController {
 
         this.getSourceService().save(baseLine);
 
-        return "redirect:/data/source/list";
+        return "redirect:/data/source/list/" + baseLine.getType();
     }
 
-    @GetMapping("source/list")
+    @GetMapping("source/list/{type}")
     public String showSourceList(
             @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable("type") SourceType type,
             @RequestParam("areaFilter") Optional<Long> area,
             Model model
     ) {
@@ -161,9 +162,9 @@ public class BaseLineController {
         model.addAttribute("allAreas", this.getAreaService().findAll());
 
         if (areaId == 0L) {
-            model.addAttribute("baseLine", this.getSourceService().findAll());
+            model.addAttribute("baseLine", this.getSourceService().findByType(type));
         } else {
-            model.addAttribute("baseLine", this.getSourceService().findByArea(areaId));
+            model.addAttribute("baseLine", this.getSourceService().findByTypeAndArea(type, areaId));
         }
 
         return "baseline-list";
@@ -196,7 +197,7 @@ public class BaseLineController {
         baseLine.setActive(false);
         this.getSourceService().save(baseLine);
 
-        return "redirect:/data/source/list";
+        return "redirect:/data/source/list/" + baseLine.getType();
     }
 
     private User setCurrentUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {

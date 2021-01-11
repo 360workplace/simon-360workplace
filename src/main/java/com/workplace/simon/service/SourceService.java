@@ -1,7 +1,7 @@
 package com.workplace.simon.service;
 
-import com.workplace.simon.model.ActRegister;
 import com.workplace.simon.model.Source;
+import com.workplace.simon.model.SourceType;
 import com.workplace.simon.repository.SourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,29 +12,37 @@ import java.util.Optional;
 @Service
 public class SourceService {
     @Autowired
-    private SourceRepository baseLineRepository;
+    private SourceRepository sourceRepository;
 
-    public SourceRepository getBaseLineRepository() {
-        return baseLineRepository;
+    public SourceRepository getSourceRepository() {
+        return sourceRepository;
     }
 
     public Source save(Source source) {
-        return this.getBaseLineRepository().save(source);
+        return this.getSourceRepository().save(source);
     }
 
     public List<Source> findAll() {
-        return this.getBaseLineRepository().findByActiveTrue();
+        return this.getSourceRepository().findByActiveTrue();
     }
 
     public Optional<Source> findById(Long id) {
-        return this.getBaseLineRepository().findById(id);
+        return this.getSourceRepository().findById(id);
     }
 
     public void delete(Source source) {
-        this.getBaseLineRepository().delete(source);
+        this.getSourceRepository().delete(source);
     }
 
     public List<Source> findByArea(Long id) {
-        return this.getBaseLineRepository().findByArea(id);
+        return this.getSourceRepository().findByArea(id);
+    }
+
+    public List<Source> findByTypeAndArea(SourceType type, Long area) {
+        return this.getSourceRepository().findByTypeAndArea(type, area);
+    }
+
+    public List<Source> findByType(SourceType type) {
+        return this.getSourceRepository().findByType(type);
     }
 }
