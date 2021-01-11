@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.sql.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping("employee")
@@ -32,6 +31,9 @@ public class EmployeeReportController {
     @Autowired
     private UtilDate utilDate;
 
+    @Autowired
+    private WeeklyNewsService weeklyNewsService;
+
     public ExecutionService getExecutionService() {
         return executionService;
     }
@@ -46,6 +48,10 @@ public class EmployeeReportController {
 
     public UtilDate getUtilDate() {
         return utilDate;
+    }
+
+    public WeeklyNewsService getWeeklyNewsService() {
+        return weeklyNewsService;
     }
 
     @GetMapping("week/report")
@@ -133,21 +139,10 @@ public class EmployeeReportController {
 
     private WeeklyOperatingReport addDefaultValues(User user, Execution execution) {
         WeeklyOperatingReport weeklyOperatingReport = new WeeklyOperatingReport();
-        weeklyOperatingReport.setPeriod(getPeriod());
+        weeklyOperatingReport.setPeriod(this.getUtilDate().getPeriod());
         weeklyOperatingReport.setExecution(execution);
 
         return weeklyOperatingReport;
-    }
-
-    private Period getPeriod() {
-        Period period = new Period();
-
-        List<java.util.Date> currentWeek = this.getUtilDate().getStartAndEndDate();
-
-        period.setStartDate(new Date(currentWeek.get(0).getTime()));
-        period.setEndDate(new Date(currentWeek.get(1).getTime()));
-
-        return period;
     }
 
     @PostMapping("week/report/add/{executionId}")
@@ -216,5 +211,38 @@ public class EmployeeReportController {
         this.getWeeklyOperatingReportService().saveWeeklyDetail(weeklyOperatingReport);
 
         return "redirect:/employee/week/report";
+    }
+
+    @GetMapping("week/news")
+    public String showWeeklyNews(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model
+    ) {
+        setCurrentUser(userDetails, model);
+        WeeklyNews weeklyNews = new WeeklyNews();
+
+        model.addAttribute("weeklyNews", weeklyNews);
+        model.addAttribute("period", this.getUtilDate().getPeriod());
+
+        return "weekly-news-report-creation";
+    }
+
+    @PostMapping("week/news/add")
+    public String saveWeeklyNews(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Valid WeeklyNews weeklyNews,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("weeklyNews", weeklyNews);
+            model.addAttribute("period", this.getUtilDate().getPeriod());
+
+            return "weekly-news-report-creation";
+        }
+
+        this.getWeeklyNewsService().save(weeklyNews);
+
+        return "redirect:/";
     }
 }

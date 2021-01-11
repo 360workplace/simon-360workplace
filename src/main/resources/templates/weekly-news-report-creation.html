@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Weekly news Report</title>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="section">
+            <div class="card">
+                <div class="card-header ">
+                    <h4 class="card-title">Novedad</h4>
+                    <p class="card-category">Agregar nuevo registro</p>
+                </div>
+                <div class="card-body">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <form action="#" th:action="@{/employee/week/news/add" th:object="${weeklyNews}" method="post">
+                            <div class="row">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label class="col-form-label">Periodo</label> <span th:text="${#dates.format(period.startDate, 'dd-MMM-yyyy')}"> </span> <span>a</span> <span th:text="${#dates.format(period.endDate, 'dd-MMM-yyyy')}"> </span>
+                                    <input type="hidden" th:field="*{date}">
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label class="col-form-label">Responsable</label> <span th:text="${currentUser.firstname}"> </span> <span th:text="${currentUser.lastname}"> </span>
+                                </div>
+
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label for="news" class="col-form-label">Descripción de la novedad</label> <textarea th:field="*{news}" class="form-control textarea-editor" id="news" placeholder="Detail" /> <span th:if="${#fields.hasErrors('news')}" th:errors="*{news}" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                    <input type="submit" class="btn btn-primary" name="save" value="Registrar">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<th:block layout:fragment="script">
+    <script src="https://cdn.tiny.cloud/1/l4m4tbiktmwhgn58iyprjv55noasmlwux4kfzyswdxrsn90t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea.textarea-editor',
+            skin: 'bootstrap',
+            menubar: false
+        });
+    </script>
+</th:block>
+</html>

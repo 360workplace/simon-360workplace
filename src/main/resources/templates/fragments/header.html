@@ -30,6 +30,12 @@
                     <p>Informe Semanal</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/employee/week/news}">
+                    <i class="nc-icon nc-notes"></i>
+                    <p>Definir novedad</p>
+                </a>
+            </li>
         </ul>
 
         <ul class="nav" sec:authorize="hasAuthority('MANAGER')">
