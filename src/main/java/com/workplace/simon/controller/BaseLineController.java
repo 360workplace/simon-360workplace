@@ -167,6 +167,8 @@ public class BaseLineController {
             model.addAttribute("baseLine", this.getSourceService().findByTypeAndArea(type, areaId));
         }
 
+        model.addAttribute("type", type);
+
         return "baseline-list";
     }
 
