@@ -29,7 +29,7 @@ public interface SourceRepository extends JpaRepository<Source, Long> {
             "WHERE a.id = (:areaId) " +
             "AND source0_.type = (:type) " +
             "AND source0_.active=true", nativeQuery = true)
-    List<Source> findByTypeAndArea(@Param("type") SourceType type, @Param("areaId") Long area);
+    List<Source> findByTypeAndArea(@Param("type") int type, @Param("areaId") Long area);
 
     List<Source> findByType(SourceType type);
 }

@@ -39,7 +39,7 @@ public class SourceService {
     }
 
     public List<Source> findByTypeAndArea(SourceType type, Long area) {
-        return this.getSourceRepository().findByTypeAndArea(type, area);
+        return this.getSourceRepository().findByTypeAndArea(type.ordinal(), area);
     }
 
     public List<Source> findByType(SourceType type) {
