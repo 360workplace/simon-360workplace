@@ -17,8 +17,8 @@ public class ActRegister {
     @JoinColumn(name = "file_record_id", referencedColumnName = "id")
     private FileDB fileRecord;
 
-    @Column(columnDefinition = "text")
-    private String content;
+    @Column(name = "title")
+    private String title;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "meeting_id", referencedColumnName = "id")
@@ -52,12 +52,12 @@ public class ActRegister {
         this.fileRecord = fileRecord;
     }
 
-    public String getContent() {
-        return content;
+    public String getTitle() {
+        return title;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Meeting getMeeting() {
