@@ -54,15 +54,14 @@
                             </div>
 
                             <div class="row">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label for="title" class="col-form-label">Título/Descripción del Acta</label> <input type="text" th:field="*{content}" class="form-control textarea-editor" id="title" placeholder="Title" /> <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
+                                </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="file" class="col-form-label">Registro Acta</label> <input type="file" name="file" class="form-control" id="file" placeholder="Unpunctual" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="content" class="col-form-label">Contenido</label> <textarea th:field="*{content}" class="form-control textarea-editor" id="content" placeholder="Content" /> <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="text-danger"></span>
-                                </div>
-
                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                     <input type="hidden" th:field="*{type}">
                                     <input type="submit" class="btn btn-primary" name="save" value="Registrar">
