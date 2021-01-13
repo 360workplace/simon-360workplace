@@ -20,6 +20,7 @@ public class WeeklyOperatingReport {
     @OneToMany(mappedBy = "weeklyOperatingReport")
     private List<WeekDetail> weekDetails = new ArrayList<>();
 
+    @Column(name = "closed")
     private Boolean requestClose;
 
     public Long getId() {
