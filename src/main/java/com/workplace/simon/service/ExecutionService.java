@@ -61,7 +61,7 @@ public class ExecutionService {
         return this.getExecutionRepository().save(execution);
     }
 
-    public List<Execution>  findByAreaAndStatusNot(Long areaId, String label) {
-        return this.getExecutionRepository().findByAreaAndStatusNot(areaId, label);
+    public List<Execution>  findByAreaAndStatusNot(Long areaId, AssignationStatus label) {
+        return this.getExecutionRepository().findByAreaAndStatusNot(areaId, label.getLabel());
     }
 }

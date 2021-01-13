@@ -196,7 +196,7 @@ public class ExecutionController {
         } else {
             model.addAttribute("executions", this.getExecutionService().findByAreaAndStatusNot(
                     areaId,
-                    AssignationStatus.CLOSED.getLabel()
+                    AssignationStatus.CLOSED
             ));
         }
 

@@ -36,7 +36,7 @@ public interface ExecutionRepository extends JpaRepository<Execution, Long> {
             "FROM ejecucion execution0_ " +
             "INNER JOIN users u ON (execution0_.source = u.id) " +
             "INNER JOIN area a ON (u.area_id = a.id) " +
-            "WHERE a.id == (:areaId) " +
+            "WHERE a.id = (:areaId) " +
             "AND execution0_.status <> (:status)", nativeQuery = true)
     List<Execution>  findByAreaAndStatusNot(@Param("areaId") Long areaId, @Param("status") String status);
 }
