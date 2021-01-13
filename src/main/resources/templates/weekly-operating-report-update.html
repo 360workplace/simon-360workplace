@@ -44,10 +44,7 @@
                                 </div>
 
                                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-check">
-                                        <label for="requestClose" class="form-check-label">Solicitar Cierre</label>
-                                        <input type="checkbox" th:field="*{requestClose}" class="form-check-input" id="requestClose"> <span th:if="${#fields.hasErrors('requestClose')}" th:errors="*{requestClose}" class="text-danger"></span>
-                                    </div>
+                                    <label for="requestClose" class="col-form-label">Solicitar Cierre</label> <input type="checkbox" th:field="*{requestClose}" class="form-control" id="requestClose">
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
