@@ -67,9 +67,9 @@ public class EmployeeReportController {
             Model model
     ) {
         User user = this.getKeepSessionService().setCurrentUser(userDetails, model);
-        model.addAttribute("executions", this.getExecutionService().findBySourceAndStatusOrderByPriorityDesc(
+        model.addAttribute("executions", this.getExecutionService().findBySourceAndStatusNotOrderByPriorityDesc(
                 user.getId(),
-                AssignationStatus.OPEN.getLabel()
+                AssignationStatus.CLOSED
         ));
 
         return "employee-report-list";

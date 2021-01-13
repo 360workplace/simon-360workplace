@@ -42,8 +42,8 @@ public class ExecutionService {
         return this.getExecutionRepository().findBySourceAndStatus(userId, status);
     }
 
-    public List<Execution> findBySourceAndStatusOrderByPriorityDesc(Long userId, String status) {
-        return this.getExecutionRepository().findBySourceAndStatusOrderByPriorityDesc(userId, status);
+    public List<Execution> findBySourceAndStatusNotOrderByPriorityDesc(Long userId, AssignationStatus status) {
+        return this.getExecutionRepository().findBySourceAndStatusNotOrderByPriorityDesc(userId, status.getLabel());
     }
 
     public List<Execution> findBySupervisorAndStatus(Long supervisorId, String status) {

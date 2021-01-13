@@ -12,7 +12,7 @@ import java.util.List;
 public interface ExecutionRepository extends JpaRepository<Execution, Long> {
     List<Execution> findBySourceAndStatus(Long userId, String status);
 
-    List<Execution> findBySourceAndStatusOrderByPriorityDesc(Long userId, String status);
+    List<Execution> findBySourceAndStatusNotOrderByPriorityDesc(Long userId, String status);
 
     List<Execution> findBySupervisorAndStatus(Long supervisorId, String status);
 
