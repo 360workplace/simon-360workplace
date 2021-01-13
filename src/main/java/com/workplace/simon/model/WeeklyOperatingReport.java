@@ -13,15 +13,14 @@ public class WeeklyOperatingReport {
 
     private String sequential;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Period period;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ejecucion_id", referencedColumnName = "id")
     private Execution execution;
 
     @OneToMany(mappedBy = "weeklyOperatingReport")
     private List<WeekDetail> weekDetails = new ArrayList<>();
+
+    private Boolean requestClose;
 
     public Long getId() {
         return id;
@@ -39,14 +38,6 @@ public class WeeklyOperatingReport {
         this.sequential = sequential;
     }
 
-    public Period getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(Period period) {
-        this.period = period;
-    }
-
     public Execution getExecution() {
         return execution;
     }
@@ -61,5 +52,13 @@ public class WeeklyOperatingReport {
 
     public void setWeekDetails(List<WeekDetail> weekDetails) {
         this.weekDetails = weekDetails;
+    }
+
+    public Boolean getRequestClose() {
+        return requestClose;
+    }
+
+    public void setRequestClose(Boolean requestClose) {
+        this.requestClose = requestClose;
     }
 }

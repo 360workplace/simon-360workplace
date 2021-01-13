@@ -69,6 +69,8 @@ public class WeeklyOperatingReportService {
     }
 
     public WeeklyOperatingReport update(WeeklyOperatingReport weeklyOperatingReport) {
+        this.save(weeklyOperatingReport);
+
         return this.saveWeeklyDetail(weeklyOperatingReport);
     }
 

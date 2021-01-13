@@ -96,7 +96,7 @@ public class EmployeeReportController {
             @PathVariable Long executionId,
             Model model
     ) {
-        User currentUser = this.getKeepSessionService().setCurrentUser(userDetails, model);
+        this.getKeepSessionService().setCurrentUser(userDetails, model);
 
         Execution execution = this.getExecutionService().findById(executionId)
                 .orElseThrow(() -> new IllegalArgumentException("The [Execution] id is not valid " + executionId));
@@ -104,16 +104,16 @@ public class EmployeeReportController {
                 .orElse(null);
 
         if (weeklyOperatingReport == null) {
-            weeklyOperatingReport = addDefaultValues(currentUser, execution);
+            weeklyOperatingReport = addDefaultValues(execution);
         } else {
             return "redirect:/employee/week/report/update/" + weeklyOperatingReport.getId();
         }
 
-        appendWeeklyDetail(weeklyOperatingReport);
+        WeekDetail weekDetail = appendWeeklyDetail(weeklyOperatingReport);
 
         model.addAttribute("weeklyReport", weeklyOperatingReport);
         model.addAttribute("execution", execution);
-        model.addAttribute("period", weeklyOperatingReport.getPeriod());
+        model.addAttribute("period", weekDetail.getPeriod());
         model.addAttribute("supervisor", getSupervisor(execution));
 
         return "weekly-operating-report-creation";
@@ -122,6 +122,7 @@ public class EmployeeReportController {
     private WeekDetail appendWeeklyDetail(WeeklyOperatingReport weeklyOperatingReport) {
         WeekDetail weekDetail = new WeekDetail();
         weekDetail.setDate(new Date(System.currentTimeMillis()));
+        weekDetail.setPeriod(this.getUtilDate().getPeriod());
 
         weeklyOperatingReport.getWeekDetails().add(
                 weeklyOperatingReport.getWeekDetails().size(),
@@ -137,9 +138,8 @@ public class EmployeeReportController {
                 .orElseThrow(() -> new IllegalArgumentException("The supervisor defined has not any registered user"));
     }
 
-    private WeeklyOperatingReport addDefaultValues(User user, Execution execution) {
+    private WeeklyOperatingReport addDefaultValues(Execution execution) {
         WeeklyOperatingReport weeklyOperatingReport = new WeeklyOperatingReport();
-        weeklyOperatingReport.setPeriod(this.getUtilDate().getPeriod());
         weeklyOperatingReport.setExecution(execution);
 
         return weeklyOperatingReport;
@@ -158,12 +158,17 @@ public class EmployeeReportController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("weeklyReport", weeklyOperatingReport);
             model.addAttribute("execution", weeklyOperatingReport.getExecution());
-            model.addAttribute("period", weeklyOperatingReport.getPeriod());
+            model.addAttribute("period", this.getUtilDate().getPeriod());
             model.addAttribute("supervisor", getSupervisor(weeklyOperatingReport.getExecution()));
 
             return "weekly-operating-report-creation";
         }
 
+        this.getExecutionService().updateExecutionStatus(
+                executionId,
+                weeklyOperatingReport.getExecution(),
+                AssignationStatus.IN_PROCESS
+        );
         this.getWeeklyOperatingReportService().persist(weeklyOperatingReport);
 
         return "redirect:/employee/week/report";
@@ -178,11 +183,11 @@ public class EmployeeReportController {
         this.getKeepSessionService().setCurrentUser(userDetails, model);
         WeeklyOperatingReport weeklyOperatingReport = this.getWeeklyOperatingReportService().findById(weeklyReportId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid id provided " + weeklyReportId));
-        appendWeeklyDetail(weeklyOperatingReport);
+        WeekDetail weekDetail = appendWeeklyDetail(weeklyOperatingReport);
 
         model.addAttribute("weeklyReport", weeklyOperatingReport);
         model.addAttribute("execution", weeklyOperatingReport.getExecution());
-        model.addAttribute("period", weeklyOperatingReport.getPeriod());
+        model.addAttribute("period", weekDetail.getPeriod());
         model.addAttribute("supervisor", getSupervisor(weeklyOperatingReport.getExecution()));
 
         return "weekly-operating-report-update";
@@ -202,7 +207,7 @@ public class EmployeeReportController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("weeklyReport", weeklyOperatingReport);
             model.addAttribute("execution", weeklyOperatingReport.getExecution());
-            model.addAttribute("period", weeklyOperatingReport.getPeriod());
+            model.addAttribute("period", this.getUtilDate().getPeriod());
             model.addAttribute("supervisor", getSupervisor(weeklyOperatingReport.getExecution()));
 
             return "weekly-operating-report-update";

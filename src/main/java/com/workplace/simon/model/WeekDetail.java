@@ -12,6 +12,9 @@ public class WeekDetail {
 
     private Date date;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Period period;
+
     @Column(columnDefinition = "text")
     private String detail;
 
@@ -33,6 +36,14 @@ public class WeekDetail {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Period getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
     }
 
     public String getDetail() {

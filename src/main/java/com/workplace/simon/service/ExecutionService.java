@@ -1,5 +1,6 @@
 package com.workplace.simon.service;
 
+import com.workplace.simon.model.AssignationStatus;
 import com.workplace.simon.model.Execution;
 import com.workplace.simon.repository.ExecutionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,12 @@ public class ExecutionService {
 
     public List<Execution> findByAreaAndStatus(Long areaId, String status) {
         return this.getExecutionRepository().findByAreaAndStatus(areaId, status);
+    }
+
+    public Execution updateExecutionStatus(Long executionId, Execution execution, AssignationStatus status) {
+        execution.setStatus(status.getLabel());
+        execution.setId(executionId);
+
+        return this.getExecutionRepository().save(execution);
     }
 }
