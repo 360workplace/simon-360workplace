@@ -16,6 +16,8 @@ public interface ExecutionRepository extends JpaRepository<Execution, Long> {
 
     List<Execution> findBySupervisorAndStatus(Long supervisorId, String status);
 
+    List<Execution> findByStatusNot(String status);
+
     @Query(value = "SELECT execution0_.id as id, execution0_.code_from as code_from, execution0_.deadline as deadline, " +
             "execution0_.detail as detail, execution0_.priority as priority, execution0_.resources as resource, " +
             "execution0_.source as source, execution0_.status as status, execution0_.supervisor as supervisor, " +
@@ -24,6 +26,17 @@ public interface ExecutionRepository extends JpaRepository<Execution, Long> {
             "INNER JOIN users u ON (execution0_.source = u.id) " +
             "INNER JOIN area a ON (u.area_id = a.id) " +
             "WHERE a.id = (:areaId) " +
-            "AND execution0_.status= (:status)", nativeQuery = true)
+            "AND execution0_.status = (:status)", nativeQuery = true)
     List<Execution> findByAreaAndStatus(@Param("areaId") Long id, @Param("status") String status);
+
+    @Query(value = "SELECT execution0_.id as id, execution0_.code_from as code_from, execution0_.deadline as deadline, " +
+            "execution0_.detail as detail, execution0_.priority as priority, execution0_.resources as resource, " +
+            "execution0_.source as source, execution0_.status as status, execution0_.supervisor as supervisor, " +
+            "execution0_.title as title, execution0_.resources as resources " +
+            "FROM ejecucion execution0_ " +
+            "INNER JOIN users u ON (execution0_.source = u.id) " +
+            "INNER JOIN area a ON (u.area_id = a.id) " +
+            "WHERE a.id == (:areaId) " +
+            "AND execution0_.status <> (:status)", nativeQuery = true)
+    List<Execution>  findByAreaAndStatusNot(Long areaId, String label);
 }

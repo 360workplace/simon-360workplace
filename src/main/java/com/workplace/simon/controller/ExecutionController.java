@@ -192,11 +192,11 @@ public class ExecutionController {
         model.addAttribute("allAreas", this.getAreaService().findAll());
 
         if (areaId == 0) {
-            model.addAttribute("executions", this.getExecutionService().findAll());
+            model.addAttribute("executions", this.getExecutionService().findByStatusNot(AssignationStatus.CLOSED));
         } else {
-            model.addAttribute("executions", this.getExecutionService().findByAreaAndStatus(
+            model.addAttribute("executions", this.getExecutionService().findByAreaAndStatusNot(
                     areaId,
-                    AssignationStatus.OPEN.getLabel()
+                    AssignationStatus.CLOSED.getLabel()
             ));
         }
 

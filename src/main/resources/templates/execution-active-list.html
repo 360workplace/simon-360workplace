@@ -41,9 +41,8 @@
                                 <thead>
                                 <tr>
                                     <th>Título</th>
-                                    <th>Fuente</th>
                                     <th>Detalle</th>
-                                    <th>Responsable</th>
+                                    <th>Status</th>
                                     <th>Fecha_Final</th>
                                     <th colspan="3"></th>
                                 </tr>
@@ -51,9 +50,8 @@
                                 <tbody>
                                 <tr th:each="base : ${executions}">
                                     <td th:text="${base.title}"></td>
-                                    <td th:text="${base.codeFrom}"></td>
                                     <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
-                                    <td th:text="${base.supervisor}"></td>
+                                    <td th:text="${base.status}"></td>
                                     <td th:text="${base.deadline}"></td>
                                     <td>
                                         <a th:href="@{#}"

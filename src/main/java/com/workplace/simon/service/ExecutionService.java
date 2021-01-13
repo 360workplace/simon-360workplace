@@ -26,6 +26,10 @@ public class ExecutionService {
         return this.getExecutionRepository().findAll();
     }
 
+    public List<Execution> findByStatusNot(AssignationStatus status) {
+        return this.getExecutionRepository().findByStatusNot(status.getLabel());
+    }
+
     public Optional<Execution> findById(Long id) {
         return this.getExecutionRepository().findById(id);
     }
@@ -55,5 +59,9 @@ public class ExecutionService {
         execution.setId(executionId);
 
         return this.getExecutionRepository().save(execution);
+    }
+
+    public List<Execution>  findByAreaAndStatusNot(Long areaId, String label) {
+        return this.getExecutionRepository().findByAreaAndStatusNot(areaId, label);
     }
 }
