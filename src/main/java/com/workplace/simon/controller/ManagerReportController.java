@@ -1,6 +1,7 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.service.KeepSessionService;
+import com.workplace.simon.service.UtilDate;
 import com.workplace.simon.service.WeeklyNewsService;
 import com.workplace.simon.service.WeeklyOperatingReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class ManagerReportController {
     @Autowired
     private KeepSessionService keepSessionService;
 
+    @Autowired
+    private UtilDate utilDate;
+
     public WeeklyOperatingReportService getWeeklyOperatingReportService() {
         return weeklyOperatingReportService;
     }
@@ -35,12 +39,19 @@ public class ManagerReportController {
         return keepSessionService;
     }
 
+    public UtilDate getUtilDate() {
+        return utilDate;
+    }
+
     @GetMapping("week/report")
     public String printWeeklyReport(
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
         this.getKeepSessionService().setCurrentUser(userDetails, model);
+
+        model.addAttribute("weeklyReport", this.getWeeklyOperatingReportService().getWeeklyReport());
+        model.addAttribute("currentPeriod", this.getUtilDate().getPeriod());
 
         return "manager-weekly-report";
     }

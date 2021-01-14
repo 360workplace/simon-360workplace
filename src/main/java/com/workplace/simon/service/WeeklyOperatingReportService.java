@@ -3,6 +3,7 @@ package com.workplace.simon.service;
 import com.workplace.simon.model.Execution;
 import com.workplace.simon.model.WeekDetail;
 import com.workplace.simon.model.WeeklyOperatingReport;
+import com.workplace.simon.model.dto.WeeklyView;
 import com.workplace.simon.repository.WeekDetailRepository;
 import com.workplace.simon.repository.WeeklyOperatingReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,5 +82,9 @@ public class WeeklyOperatingReportService {
         this.getWeekDetailRepository().save(weekDetail);
 
         return weeklyOperatingReport;
+    }
+
+    public List<WeeklyView> getWeeklyReport() {
+        return this.getWeeklyOperatingReportRepository().getWeeklyReport();
     }
 }
