@@ -16,7 +16,7 @@ public interface WeeklyOperatingReportRepository extends JpaRepository<WeeklyOpe
 
     @Query(value = "SELECT e.id as id, e.sequential as sequential, p.start_date as start_date, " +
             "p.end_date as end_date, d.date as detail_date, d.detail as detail, x.title as title, " +
-            "x.detail as execution_detail, x.priority as priority, x.deadline ad deadline, x.status as status " +
+            "x.detail as execution_detail, x.priority as priority, x.deadline as deadline, x.status as status " +
             "FROM ejecucion_semanal e " +
             "INNER JOIN ejecucion x ON e.ejecucion_id = x.id " +
             "INNER JOIN detalle_semana d ON d.weekly_operating_report_id = e.id " +
