@@ -21,17 +21,20 @@
                                 <thead>
                                 <tr>
                                     <th>Tema</th>
+                                    <th>Prioridad</th>
                                     <th>/Fecha</th>
                                     <th>/Acción</th>
-                                    <th>Semana Actual</th>
-                                    <th>Acumulado</th>
+                                    <th>/Acumulado</th>
+                                    <th>Fecha entrega</th>
                                     <th>Solicitud cierre</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="week : ${weeklyReport}">
                                     <td th:text="${week[6]}"></td>
-                                    <td th:text="${week[9]}"></td>
+                                    <td th:if="${week[9]} == 0" th:text="Baja"></td>
+                                    <td th:if="${week[9]} == 1" th:text="Normal"></td>
+                                    <td th:if="${week[9]} == 2" th:text="Critica"></td>
                                     <td th:text="${week[10]}"></td>
                                     <td th:text="${week[8]}"></td>
                                     <td th:utext="${week[5]}"></td>
