@@ -2,7 +2,6 @@ package com.workplace.simon.repository;
 
 import com.workplace.simon.model.Execution;
 import com.workplace.simon.model.WeeklyOperatingReport;
-import com.workplace.simon.model.dto.WeeklyView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
