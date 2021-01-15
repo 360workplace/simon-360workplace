@@ -5,6 +5,7 @@ import com.workplace.simon.repository.WeeklyNewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,5 +32,9 @@ public class WeeklyNewsService {
 
     public void delete(WeeklyNews weeklyNews) {
         this.getWeeklyNewsRepository().delete(weeklyNews);
+    }
+
+    public List<WeeklyNews> findByDateBetween(Date startDate, Date endDate) {
+        return this.getWeeklyNewsRepository().findByDateBetween(startDate, endDate);
     }
 }

@@ -25,6 +25,7 @@
                                     <th>/Acción</th>
                                     <th>Semana Actual</th>
                                     <th>Acumulado</th>
+                                    <th>Solicitud cierre</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -33,8 +34,25 @@
                                     <td th:text="${week[9]}"></td>
                                     <td th:text="${week[10]}"></td>
                                     <td th:text="${week[8]}"></td>
-                                    <td th:text="${week[5]}"></td>
+                                    <td th:utext="${week[5]}"></td>
                                     <td th:text="${week[6]}"></td>
+                                    <td th:text="${week[2]}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
+                                <caption>NOVEDADES</caption>
+                                <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Accion</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="news : ${newsReport}">
+                                    <td th:text="${news.date"></td>
+                                    <td th:utext="${news.detail"></td>
                                 </tr>
                                 </tbody>
                             </table>

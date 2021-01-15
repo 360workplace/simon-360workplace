@@ -1,5 +1,6 @@
 package com.workplace.simon.controller;
 
+import com.workplace.simon.model.Period;
 import com.workplace.simon.service.KeepSessionService;
 import com.workplace.simon.service.UtilDate;
 import com.workplace.simon.service.WeeklyNewsService;
@@ -55,9 +56,14 @@ public class ManagerReportController {
         this.getKeepSessionService().setCurrentUser(userDetails, model);
 
 //        Set report = makeReport(this.getWeeklyOperatingReportService().getWeeklyReport());
+        Period period = this.getUtilDate().getPeriod();
 
         model.addAttribute("weeklyReport", this.getWeeklyOperatingReportService().getWeeklyReport());
-        model.addAttribute("currentPeriod", this.getUtilDate().getPeriod());
+        model.addAttribute("currentPeriod", period);
+        model.addAttribute("newsReport", this.getWeeklyNewsService().findByDateBetween(
+                period.getStartDate(),
+                period.getEndDate()
+        ));
 
         return "manager-weekly-report";
     }
