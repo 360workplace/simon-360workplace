@@ -1,6 +1,5 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.dto.WeeklyView;
 import com.workplace.simon.service.KeepSessionService;
 import com.workplace.simon.service.UtilDate;
 import com.workplace.simon.service.WeeklyNewsService;
@@ -62,7 +61,7 @@ public class ManagerReportController {
         return "manager-weekly-report";
     }
 
-    private Set makeReport(List<WeeklyView> weeklyReport) {
+    private Set makeReport(List<Object[]> weeklyReport) {
         return null;
     }
 }

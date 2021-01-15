@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header ">
                     <h4 class="card-title">Reporte de Ejecución Semanal</h4>
-                    <p class="card-category">del <span th:text="currentPeriod.startDate"></span> al <span th:text="${currentPeriod.endDate}"></span> </p>
+                    <p class="card-category">del <span th:text="${#dates.format(currentPeriod.startDate, 'dd-MMM-yyyy')}"></span> al <span th:text="${#dates.format(currentPeriod.endDate, 'dd-MMM-yyyy')}"></span> </p>
                 </div>
                 <div class="card-body table-full-width table-responsive">
                     <div class="col-md-12">

@@ -23,5 +23,5 @@ public interface WeeklyOperatingReportRepository extends JpaRepository<WeeklyOpe
             "INNER JOIN periodo_semanal p ON d.period_id = p.id " +
             "WHERE x.status <> 'C' " +
             "ORDER BY e.ejecucion_id ASC, x.priority DESC", nativeQuery = true)
-    List<WeeklyView> getWeeklyReport();
+    List<Object[]> getWeeklyReport();
 }
