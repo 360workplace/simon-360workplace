@@ -28,13 +28,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="week, stat : ${weekReport}">
-                                    <td th:text="${weekReport[6]}"></td>
-                                    <td th:text="${weekReport[9]}"></td>
-                                    <td th:text="${weekReport[10]}"></td>
-                                    <td th:text="${weekReport[8]}"></td>
-                                    <td th:text="${weekReport[5]}"></td>
-                                    <td th:text="${weekReport[6]}"></td>
+                                <tr th:each="week : ${weekReport}">
+                                    <td th:text="${week[6]}"></td>
+                                    <td th:text="${week[9]}"></td>
+                                    <td th:text="${week[10]}"></td>
+                                    <td th:text="${week[8]}"></td>
+                                    <td th:text="${week[5]}"></td>
+                                    <td th:text="${week[6]}"></td>
                                 </tr>
                                 </tbody>
                             </table>
