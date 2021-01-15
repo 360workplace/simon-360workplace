@@ -62,6 +62,10 @@ public class ManagerReportController {
     }
 
     private Set makeReport(List<Object[]> weeklyReport) {
+        for (Object item : weeklyReport) {
+            System.out.println(item);
+        }
+
         return null;
     }
 }
