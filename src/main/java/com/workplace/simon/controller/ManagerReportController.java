@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -53,20 +54,34 @@ public class ManagerReportController {
     ) {
         this.getKeepSessionService().setCurrentUser(userDetails, model);
 
-        Set report = makeReport(this.getWeeklyOperatingReportService().getWeeklyReport());
+//        Set report = makeReport(this.getWeeklyOperatingReportService().getWeeklyReport());
 
-        model.addAttribute("weeklyReport", report);
+        model.addAttribute("weeklyReport", this.getWeeklyOperatingReportService().getWeeklyReport());
         model.addAttribute("currentPeriod", this.getUtilDate().getPeriod());
 
         return "manager-weekly-report";
     }
 
     private Set makeReport(List<Object[]> weeklyReport) {
+        HashMap<Long, Set<Object[]>> result = new HashMap<Long, Set<Object[]>>();
+        Long id = 0L;
+
+        HashMap<String, Object[]> elements = new HashMap<>();
         for (Object[] item : weeklyReport) {
-            System.out.println(item[0]);
-            System.out.println(item[1]);
-            System.out.println(item[2]);
-            System.out.println(item[3]);
+            if (!id.equals(Long.valueOf((String) item[0]))) {
+                elements = new HashMap<>();
+                id = Long.valueOf((String) item[0]);
+                result.put(id, (Set<Object[]>) elements);
+
+                elements.put("value", new Object[]{
+                        item[1], item[2], item[3]
+                });
+            }
+
+
+//            if (item[4] > item[2] && item[4].toString() <= item[3].toString()) {
+//
+//            }
         }
 
         return null;

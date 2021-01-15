@@ -20,25 +20,22 @@
                             <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
                                 <thead>
                                 <tr>
-                                    <th>Fecha/Tema/Acción</th>
-                                    <th>Asignado</th>
+                                    <th>Tema</th>
+                                    <th>/Fecha</th>
+                                    <th>/Acción</th>
                                     <th>Semana Actual</th>
                                     <th>Acumulado</th>
                                 </tr>
                                 </thead>
-                                <tr th:each="week : ${weeklyReport}">
-                                    <td><strong th:text="${week.deadline}"></strong> - <strong th:text="${week.title}"></strong> <br/>
-                                        <p th:text="${week.executionDetail}"></p>
-                                    </td>
-                                    <td></td>
-                                    <td th:if="$(week.detailDate} >= ${week.startDate} and ${week.detailDate <= ${week.endDate}" th:text="${week.detail}">
-                                    </td>
-                                    <td>
-                                        <strong th:if="${week.dateDetail} < ${week.startDate}" th:text="${week.detailDate}"></strong><br/>
-                                        <p th:if="${week.dateDetail} < ${week.startDate}" th:text="${week.detail}"></p>
-                                    </td>
-                                </tr>
                                 <tbody>
+                                <tr th:each="week, stat : ${weekReport}">
+                                    <td th:text="${weekReport[6]}"></td>
+                                    <td th:text="${weekReport[9]}"></td>
+                                    <td th:text="${weekReport[10]}"></td>
+                                    <td th:text="${weekReport[8]}"></td>
+                                    <td th:text="${weekReport[5]}"></td>
+                                    <td th:text="${weekReport[6]}"></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
