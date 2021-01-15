@@ -31,7 +31,7 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="week : ${weeklyReport}">
-                                    <td th:utext="${week[6]}"></td>
+                                    <td th:utext="${week[7]}"></td>
                                     <td th:if="${week[9]} == 0" th:text="Baja"></td>
                                     <td th:if="${week[9]} == 1" th:text="Normal"></td>
                                     <td th:if="${week[9]} == 2" th:text="Critica"></td>
