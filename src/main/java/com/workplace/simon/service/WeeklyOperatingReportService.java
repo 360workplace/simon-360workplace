@@ -84,7 +84,7 @@ public class WeeklyOperatingReportService {
         return weeklyOperatingReport;
     }
 
-    public List<Object[]> getWeeklyReport() {
+    public List<WeeklyView> getWeeklyReport() {
         return this.getWeeklyOperatingReportRepository().getWeeklyReport();
     }
 }
