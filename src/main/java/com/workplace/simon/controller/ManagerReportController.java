@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+import java.util.Set;
+
 @Controller
 @RequestMapping("/manager/")
 public class ManagerReportController {
@@ -50,9 +53,15 @@ public class ManagerReportController {
     ) {
         this.getKeepSessionService().setCurrentUser(userDetails, model);
 
-        model.addAttribute("weeklyReport", this.getWeeklyOperatingReportService().getWeeklyReport());
+        Set report = makeReport(this.getWeeklyOperatingReportService().getWeeklyReport());
+
+        model.addAttribute("weeklyReport", report);
         model.addAttribute("currentPeriod", this.getUtilDate().getPeriod());
 
         return "manager-weekly-report";
+    }
+
+    private Set makeReport(List<Object[]> weeklyReport) {
+        return null;
     }
 }
