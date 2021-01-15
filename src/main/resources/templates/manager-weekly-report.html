@@ -24,8 +24,8 @@
                                     <th>Prioridad</th>
                                     <th>/Fecha</th>
                                     <th>/Acción</th>
-                                    <th>/Acumulado</th>
                                     <th>Fecha entrega</th>
+                                    <th>Acumulado</th>
                                     <th>Solicitud cierre</th>
                                 </tr>
                                 </thead>
@@ -39,7 +39,8 @@
                                     <td th:text="${week[8]}"></td>
                                     <td th:utext="${week[5]}"></td>
                                     <td th:text="${week[6]}"></td>
-                                    <td th:text="${week[2]}"></td>
+                                    <td th:if="${week[2]}" th:text="Petición Cierre"></td>
+                                    <td th:unless="${week[2]}"></td>
                                 </tr>
                                 </tbody>
                             </table>
