@@ -47,7 +47,7 @@ public class UserService implements UserServiceInterface, FindUserService {
     @Override
     public void save(User user) {
         user.setPassword(this.getPasswordEncoder().encode(user.getPassword()));
-        user.setRoles(new HashSet<>(this.getRoleRepository().findAll()));
+        user.setRoles(new HashSet<>(user.getRoles()));
         this.getUserRepository().save(user);
     }
 
