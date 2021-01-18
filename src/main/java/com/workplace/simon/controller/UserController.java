@@ -88,7 +88,7 @@ public class UserController {
             System.out.println(role.getName());
         }
 
-        //this.getUserService().save(userForm);
+        this.getUserService().save(userForm);
 
         return "redirect:/dashboard";
     }
