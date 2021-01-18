@@ -1,5 +1,6 @@
 package com.workplace.simon.controller;
 
+import com.workplace.simon.model.Role;
 import com.workplace.simon.model.User;
 import com.workplace.simon.service.*;
 import com.workplace.simon.validators.UserValidator;
@@ -83,7 +84,11 @@ public class UserController {
             return getSignUpForm(model);
         }
 
-        this.getUserService().save(userForm);
+        for (Role role : userForm.getRoles()) {
+            System.out.println(role.getName());
+        }
+
+        //this.getUserService().save(userForm);
 
         return "redirect:/dashboard";
     }
