@@ -117,4 +117,16 @@ public class UserController {
 
         return "dashboard";
     }
+
+    @GetMapping("/admin/users/list")
+    public String showUsers(
+            @AuthenticationPrincipal UserDetails currentUser,
+            Model model
+    ) {
+        this.getKeepSessionService().setCurrentUser(currentUser, model);
+
+        model.addAttribute("users", this.getUserService().findAll());
+
+        return "users-list";
+    }
 }

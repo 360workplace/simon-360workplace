@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>User's list</title>
+</head>
+<body>
+<div class="content" th:switch="${users}" layout:fragment="content">
+    <div class="container-fluid">
+        <div class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Usuarios</h4>
+                    <p class="card-category">Registros recientes</p>
+                </div>
+                <div class="card-body table-full-width table-responsive">
+                    <div class="col-md-12">
+                        <h2 th:case="null">No registers yet!</h2>
+                        <div th:case="*">
+                            <div class="row">
+                            <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
+                                <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Login</th>
+                                    <th>Email</th>
+                                    <th colspan="2"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="user : ${users}">
+                                    <td th:text="${user.firstname}"></td>
+                                    <td th:text="${user.lastname}"></td>
+                                    <td th:text="${user.username}"></td>
+                                    <td th:text="${user.email}"></td>
+                                    <td>
+                                        <a th:href="@{/admin/user/update/{userId}(userId=${user.id})}"
+                                           class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                           data-placement="top" title="Editar"><i
+                                                class="fa fa-edit"></i></a></td>
+                                    <td>
+                                        <a th:href="@{/admin/user/trunk/{userId}(userId=${user.id})}"
+                                           class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                           data-placement="top"
+                                           title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+</th:block>
+</html>
