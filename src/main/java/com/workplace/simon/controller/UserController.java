@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -128,5 +129,22 @@ public class UserController {
         model.addAttribute("users", this.getUserService().findAll());
 
         return "users-list";
+    }
+
+    @GetMapping("/admin/user/update/{userId}")
+    public String updateUser(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable("userId") Long userId,
+            Model model
+    ) {
+        this.getKeepSessionService().setCurrentUser(currentUser, model);
+        User user = this.getUserService().findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User id is not valid " + userId));
+
+        model.addAttribute("userForm", user);
+        model.addAttribute("allRoles", this.getRoleService().findAll());
+        model.addAttribute("allAreas", this.getAreaService().findAll());
+
+        return "registration";
     }
 }
