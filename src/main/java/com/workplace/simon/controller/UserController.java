@@ -90,7 +90,6 @@ public class UserController {
 
     private String getSignUpForm(Model model) {
         model.addAttribute("allUsers", this.getUserService().findAll());
-        model.addAttribute("simpleUser", 2);
 
         return "registration";
     }

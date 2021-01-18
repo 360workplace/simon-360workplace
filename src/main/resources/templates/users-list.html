@@ -25,7 +25,7 @@
                                     <th>Apellido</th>
                                     <th>Login</th>
                                     <th>Email</th>
-                                    <th colspan="2"></th>
+<!--                                    <th colspan="2"></th>-->
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -34,16 +34,16 @@
                                     <td th:text="${user.lastname}"></td>
                                     <td th:text="${user.username}"></td>
                                     <td th:text="${user.email}"></td>
-                                    <td>
-                                        <a th:href="@{/admin/user/update/{userId}(userId=${user.id})}"
-                                           class="btn btn-primary btn-sm" data-toggle="tooltip"
-                                           data-placement="top" title="Editar"><i
-                                                class="fa fa-edit"></i></a></td>
-                                    <td>
-                                        <a th:href="@{/admin/user/trunk/{userId}(userId=${user.id})}"
-                                           class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                           data-placement="top"
-                                           title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
+<!--                                    <td>-->
+<!--                                        <a th:href="@{/admin/user/update/{userId}(userId=${user.id})}"-->
+<!--                                           class="btn btn-primary btn-sm" data-toggle="tooltip"-->
+<!--                                           data-placement="top" title="Editar"><i-->
+<!--                                                class="fa fa-edit"></i></a></td>-->
+<!--                                    <td>-->
+<!--                                        <a th:href="@{/admin/user/trunk/{userId}(userId=${user.id})}"-->
+<!--                                           class="btn btn-danger btn-sm" data-toggle="tooltip"-->
+<!--                                           data-placement="top"-->
+<!--                                           title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>-->
                                 </tr>
                                 </tbody>
                             </table>

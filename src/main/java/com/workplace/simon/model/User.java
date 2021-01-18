@@ -33,7 +33,7 @@ public class User {
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = {
@@ -45,20 +45,12 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
     @Column(name = "supervisor_id")
     private Long supervisor;
-
-//    @OneToOne(mappedBy = "supervisor")
-//    private User backSupervisor;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "area_id", referencedColumnName = "id")
     private Area area;
-
-//    @OneToOne(mappedBy = "supervisor")
-//    private Execution execution;
 
     public Long getId() {
         return id;
@@ -124,14 +116,6 @@ public class User {
         this.roles = roles;
     }
 
-    //    public Long getRoleId() {
-//        return roleId;
-//    }
-//
-//    public void setRoleId(Long roleId) {
-//        this.roleId = roleId;
-//    }
-
     public Long getSupervisor() {
         return supervisor;
     }
@@ -140,14 +124,6 @@ public class User {
         this.supervisor = supervisor;
     }
 
-//    public User getBackSupervisor() {
-//        return backSupervisor;
-//    }
-//
-//    public void setBackSupervisor(User backSupervisor) {
-//        this.backSupervisor = backSupervisor;
-//    }
-
     public Area getArea() {
         return area;
     }
@@ -155,12 +131,4 @@ public class User {
     public void setArea(Area area) {
         this.area = area;
     }
-
-//    public Execution getExecution() {
-//        return execution;
-//    }
-//
-//    public void setExecution(Execution execution) {
-//        this.execution = execution;
-//    }
 }
