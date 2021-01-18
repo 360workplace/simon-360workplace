@@ -1,6 +1,5 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.model.Role;
 import com.workplace.simon.model.User;
 import com.workplace.simon.service.*;
 import com.workplace.simon.validators.UserValidator;
@@ -90,10 +89,6 @@ public class UserController {
             model.addAttribute("allAreas", this.getAreaService().findAll());
 
             return "registration";
-        }
-
-        for (Role role : userForm.getRoles()) {
-            System.out.println(role.getName());
         }
 
         this.getUserService().save(userForm);
