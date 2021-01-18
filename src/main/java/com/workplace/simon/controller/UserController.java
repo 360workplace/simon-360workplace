@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 public class UserController {
     @Autowired
@@ -135,8 +137,8 @@ public class UserController {
         return "users-list";
     }
 
-    @GetMapping("/admin/user/update/{userId}")
-    public String updateUser(
+    @GetMapping("/admin/user/show/{userId}")
+    public String showUpdateUser(
             @AuthenticationPrincipal UserDetails currentUser,
             @PathVariable("userId") Long userId,
             Model model
@@ -149,6 +151,31 @@ public class UserController {
         model.addAttribute("allRoles", this.getRoleService().findAll());
         model.addAttribute("allAreas", this.getAreaService().findAll());
 
-        return "registration";
+        return "user-update-form";
+    }
+
+    @PostMapping("/admin/user/update/{userId}")
+    public String updateCurrentUser(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @PathVariable("userId") Long userId,
+            @Valid User userForm,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        this.getKeepSessionService().setCurrentUser(currentUser, model);
+        userForm.setId(userId);
+        //this.getUserValidator().validate(userForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return getSignUpForm(model);
+        }
+
+        for (Role role : userForm.getRoles()) {
+            System.out.println(role.getName());
+        }
+
+        this.getUserService().save(userForm);
+
+        return "redirect:/admin/users/list";
     }
 }
