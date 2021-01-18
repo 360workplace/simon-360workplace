@@ -164,14 +164,9 @@ public class UserController {
     ) {
         this.getKeepSessionService().setCurrentUser(currentUser, model);
         userForm.setId(userId);
-        //this.getUserValidator().validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return getSignUpForm(model);
-        }
-
-        for (Role role : userForm.getRoles()) {
-            System.out.println(role.getName());
         }
 
         this.getUserService().save(userForm);
