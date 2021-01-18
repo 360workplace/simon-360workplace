@@ -66,10 +66,12 @@ public class UserController {
         this.getKeepSessionService().setCurrentUser(currentUser, model);
 
         model.addAttribute("userForm", new User());
+
+        model.addAttribute("allUsers", this.getUserService().findAll());
         model.addAttribute("allRoles", this.getRoleService().findAll());
         model.addAttribute("allAreas", this.getAreaService().findAll());
 
-        return getSignUpForm(model);
+        return "registration";
     }
 
     @PostMapping("/admin/registration")
@@ -83,7 +85,11 @@ public class UserController {
         this.getUserValidator().validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return getSignUpForm(model);
+            model.addAttribute("allUsers", this.getUserService().findAll());
+            model.addAttribute("allRoles", this.getRoleService().findAll());
+            model.addAttribute("allAreas", this.getAreaService().findAll());
+
+            return "registration";
         }
 
         for (Role role : userForm.getRoles()) {
@@ -93,12 +99,6 @@ public class UserController {
         this.getUserService().save(userForm);
 
         return "redirect:/dashboard";
-    }
-
-    private String getSignUpForm(Model model) {
-        model.addAttribute("allUsers", this.getUserService().findAll());
-
-        return "registration";
     }
 
     @GetMapping("/login")
@@ -166,7 +166,11 @@ public class UserController {
         userForm.setId(userId);
 
         if (bindingResult.hasErrors()) {
-            return getSignUpForm(model);
+            model.addAttribute("allUsers", this.getUserService().findAll());
+            model.addAttribute("allRoles", this.getRoleService().findAll());
+            model.addAttribute("allAreas", this.getAreaService().findAll());
+
+            return "user-update-form";
         }
 
         this.getUserService().save(userForm);
