@@ -1,6 +1,6 @@
 package com.workplace.simon.controller;
 
-import com.workplace.simon.decorator.WeeklyReportService;
+import com.workplace.simon.decorator.WeeklyReportAllStatusFormatter;
 import com.workplace.simon.model.Period;
 import com.workplace.simon.service.KeepSessionService;
 import com.workplace.simon.service.UtilDate;
@@ -30,7 +30,7 @@ public class ManagerReportController {
     private UtilDate utilDate;
 
     @Autowired
-    private WeeklyReportService weeklyReportService;
+    private WeeklyReportAllStatusFormatter weeklyReportFormatter;
 
     public WeeklyOperatingReportService getWeeklyOperatingReportService() {
         return weeklyOperatingReportService;
@@ -48,8 +48,8 @@ public class ManagerReportController {
         return utilDate;
     }
 
-    public WeeklyReportService getWeeklyReportService() {
-        return weeklyReportService;
+    public WeeklyReportAllStatusFormatter getWeeklyReportFormatter() {
+        return weeklyReportFormatter;
     }
 
     @GetMapping("week/report")
@@ -61,8 +61,8 @@ public class ManagerReportController {
 
         Period period = this.getUtilDate().getPeriod();
 
-        model.addAttribute("weeklyReport", this.getWeeklyReportService().makeReport(
-                this.getWeeklyOperatingReportService().getWeeklyReport()
+        model.addAttribute("weeklyReport", this.getWeeklyReportFormatter().format(
+                this.getWeeklyOperatingReportService().getWeeklyReportAllStatus()
         ));
         model.addAttribute("currentPeriod", period);
         model.addAttribute("newsReport", this.getWeeklyNewsService().findByDateBetween(

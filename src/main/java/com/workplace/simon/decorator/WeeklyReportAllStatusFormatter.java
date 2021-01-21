@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class WeeklyReportService {
-    public Map makeReport(List<Object[]> weeklyReport) {
+public class WeeklyReportAllStatusFormatter implements Formatter {
+    @Override
+    public Map format(List<Object[]> weeklyReport) {
         HashMap<String, HashMap<String, List<Object[]>>> result = new HashMap<>();
         String id = "";
 
@@ -31,6 +32,8 @@ public class WeeklyReportService {
                 elements.put("current", curremt);
                 elements.put("history", history);
             }
+
+            if (item[5] == null || item[3] == null || item[4] == null) continue;
 
             if (item[5].toString().compareTo(item[3].toString()) >= 0 &&
                     item[5].toString().compareTo(item[4].toString()) <= 0

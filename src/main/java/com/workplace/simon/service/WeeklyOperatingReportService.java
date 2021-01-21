@@ -86,4 +86,8 @@ public class WeeklyOperatingReportService {
     public List<Object[]> getWeeklyReport() {
         return this.getWeeklyOperatingReportRepository().getWeeklyReport();
     }
+
+    public List<Object[]> getWeeklyReportAllStatus() {
+        return this.getWeeklyOperatingReportRepository().getWeeklyReportAllStatus();
+    }
 }
