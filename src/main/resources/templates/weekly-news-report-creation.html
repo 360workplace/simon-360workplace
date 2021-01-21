@@ -26,10 +26,15 @@
                                 </div>
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label for="title" class="col-form-label">Tema/Título</label> <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title"> <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="news" class="col-form-label">Descripción de la novedad</label> <textarea th:field="*{news}" class="form-control textarea-editor" id="news" placeholder="Detail" /> <span th:if="${#fields.hasErrors('news')}" th:errors="*{news}" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                    <input type="hidden" th:field="*{source}">
                                     <input type="submit" class="btn btn-primary" name="save" value="Registrar">
                                 </div>
                             </div>

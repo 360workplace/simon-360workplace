@@ -223,9 +223,10 @@ public class EmployeeReportController {
             @AuthenticationPrincipal UserDetails userDetails,
             Model model
     ) {
-        this.getKeepSessionService().setCurrentUser(userDetails, model);
+        User currentUser = this.getKeepSessionService().setCurrentUser(userDetails, model);
         WeeklyNews weeklyNews = new WeeklyNews();
         weeklyNews.setDate(new Date(System.currentTimeMillis()));
+        weeklyNews.setSource(currentUser);
 
         model.addAttribute("weeklyNews", weeklyNews);
         model.addAttribute("period", this.getUtilDate().getPeriod());

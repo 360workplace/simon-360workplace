@@ -30,7 +30,7 @@
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label for="detail" class="col-form-label">Detalle</label> <textarea th:field="*{detail}" class="form-control textarea-editor" id="detail" placeholder="Detail" /> <span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" class="text-danger"></span>
                                 </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <label for="userSupervisor" class="col-form-label">Seleccione supervisor</label>
                                     <select th:field="*{userSupervisor}" class="form-control" id="userSupervisor">
                                         <option value="">-- Select --</option>
@@ -41,17 +41,17 @@
                                     <span th:if="${#fields.hasErrors('userSupervisor')}" th:errors="*{userSupervisor}" class="text-danger"></span>
                                 </div>
 
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <label for="startDate" class="col-form-label">Fecha de inicio</label> <input type="date" th:field="*{startDate}" class="form-control" id="startDate" placeholder="Start Date" data-provide="datepicker"> <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <fieldset id="items">
                                         <caption>Recursos asignados</caption>
-                                        <div th:each="resource, stat : ${baseLine.resources}" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <label th:for="|baseLine.resources[${stat.index}].detail|">Detalle</label>
+                                        <div th:each="resource, stat : ${resources}">
+                                            <label th:for="|resources[${stat.index}].detail|">Detalle</label>
                                             <!-- This construct will render field name like this: "items[0].name" -->
-                                            <input th:field="${baseLine.resources[__${stat.index}__].detail}">
+                                            <input th:field="*{resources[__${stat.index}__].detail}">
                                         </div>
                                     </fieldset>
 

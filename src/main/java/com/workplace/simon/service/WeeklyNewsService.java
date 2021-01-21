@@ -1,5 +1,6 @@
 package com.workplace.simon.service;
 
+import com.workplace.simon.model.User;
 import com.workplace.simon.model.WeeklyNews;
 import com.workplace.simon.repository.WeeklyNewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,9 @@ public class WeeklyNewsService {
 
     public List<WeeklyNews> findByDateBetween(Date startDate, Date endDate) {
         return this.getWeeklyNewsRepository().findByDateBetween(startDate, endDate);
+    }
+
+    public List<WeeklyNews> findByDateBetweenAndSource(Date startDate, Date endDate, User source) {
+        return this.getWeeklyNewsRepository().findByDateBetweenAndSource(startDate, endDate, source);
     }
 }

@@ -1,5 +1,6 @@
 package com.workplace.simon.controller;
 
+import com.workplace.simon.decorator.WeeklyReportService;
 import com.workplace.simon.model.Period;
 import com.workplace.simon.service.KeepSessionService;
 import com.workplace.simon.service.UtilDate;
@@ -12,10 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/manager/")
@@ -31,6 +28,9 @@ public class ManagerReportController {
 
     @Autowired
     private UtilDate utilDate;
+
+    @Autowired
+    private WeeklyReportService weeklyReportService;
 
     public WeeklyOperatingReportService getWeeklyOperatingReportService() {
         return weeklyOperatingReportService;
@@ -48,6 +48,10 @@ public class ManagerReportController {
         return utilDate;
     }
 
+    public WeeklyReportService getWeeklyReportService() {
+        return weeklyReportService;
+    }
+
     @GetMapping("week/report")
     public String printWeeklyReport(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -55,10 +59,11 @@ public class ManagerReportController {
     ) {
         this.getKeepSessionService().setCurrentUser(userDetails, model);
 
-//        Set report = makeReport(this.getWeeklyOperatingReportService().getWeeklyReport());
         Period period = this.getUtilDate().getPeriod();
 
-        model.addAttribute("weeklyReport", this.getWeeklyOperatingReportService().getWeeklyReport());
+        model.addAttribute("weeklyReport", this.getWeeklyReportService().makeReport(
+                this.getWeeklyOperatingReportService().getWeeklyReport()
+        ));
         model.addAttribute("currentPeriod", period);
         model.addAttribute("newsReport", this.getWeeklyNewsService().findByDateBetween(
                 period.getStartDate(),
@@ -66,30 +71,5 @@ public class ManagerReportController {
         ));
 
         return "manager-weekly-report";
-    }
-
-    private Set makeReport(List<Object[]> weeklyReport) {
-        HashMap<Long, Set<Object[]>> result = new HashMap<Long, Set<Object[]>>();
-        Long id = 0L;
-
-        HashMap<String, Object[]> elements = new HashMap<>();
-        for (Object[] item : weeklyReport) {
-            if (!id.equals(Long.valueOf((String) item[0]))) {
-                elements = new HashMap<>();
-                id = Long.valueOf((String) item[0]);
-                result.put(id, (Set<Object[]>) elements);
-
-                elements.put("value", new Object[]{
-                        item[1], item[2], item[3]
-                });
-            }
-
-
-//            if (item[4] > item[2] && item[4].toString() <= item[3].toString()) {
-//
-//            }
-        }
-
-        return null;
     }
 }

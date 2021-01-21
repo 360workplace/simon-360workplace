@@ -20,42 +20,60 @@
                             <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
                                 <thead>
                                 <tr>
-                                    <th>Tema</th>
-                                    <th>Prioridad</th>
-                                    <th>/Fecha</th>
-                                    <th>/Acción</th>
-                                    <th>Fecha entrega</th>
+                                    <th>Fecha-Tema/Acción</th>
+                                    <th>Semana Actual: Comentarios </th>
                                     <th>Acumulado</th>
-                                    <th>Solicitud cierre</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="week : ${weeklyReport}">
-                                    <td th:utext="${week[7]}"></td>
-                                    <td th:if="${week[9]} == 0" th:text="Baja"></td>
-                                    <td th:if="${week[9]} == 1" th:text="Normal"></td>
-                                    <td th:if="${week[9]} == 2" th:text="Critica"></td>
-                                    <td th:text="${week[10]}"></td>
-                                    <td th:utext="${week[8]}"></td>
-                                    <td th:text="${week[5]}"></td>
-                                    <td th:utext="${week[6]}"></td>
-                                    <td th:text="${week[2]}"></td>
+                                    <td>
+                                        <div th:each="values : ${week.value.values}">
+                                            <h5><strong><span th:text="${#dates.format(values[5], 'dd-MMM-yyyy')}"></span> <span th:text="${values[2]}"></span></strong></h5>
+                                            <article th:utext="${values[3]}"></article>
+                                            <p th:if="${values[1]} == true" class="alert alert-success">Solicitud de cierre</p>
+                                            <p>
+                                                <small th:if="${values[4]} == 0" th:text="Baja"></small>
+                                                <small th:if="${values[4]} == 1" th:text="Normal"></small>
+                                                <small th:if="${values[4]} == 2" th:text="Crítica"></small>
+                                                |
+                                                <small>ESTADO</small>:
+                                                <small th:text="${values[6]}"></small>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div th:each="current : ${week.value.current}">
+                                            <h5><strong th:text="${current[0]}"></strong></h5>
+                                            <article th:utext="${current[1]}"></article>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div th:each="history : ${week.value.history}">
+                                            <h5><strong th:text="${history[0]}"></strong></h5>
+                                            <article th:utext="${history[1]}"></article>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
 
+                            <h4>Novedades</h4>
                             <table class="table table-hover table-striped table-responsive table-responsive-md table-responsive-sm">
-                                <caption>NOVEDADES</caption>
                                 <thead>
                                 <tr>
+                                    <th>Responsable</th>
                                     <th>Fecha</th>
+                                    <th>Tema</th>
                                     <th>Accion</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="news : ${newsReport}">
-                                    <td th:text="${news.date"></td>
-                                    <td th:utext="${news.detail"></td>
+                                    <td th:text="${news.source.firstname} + ' ' + ${news.source.lastname}"></td>
+                                    <td th:text="${news.date}"></td>
+                                    <td th:text="${news.title}"></td>
+                                    <td th:utext="${news.news}"></td>
                                 </tr>
                                 </tbody>
                             </table>
