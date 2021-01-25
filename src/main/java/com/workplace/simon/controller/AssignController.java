@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/assign/")
 public class AssignController {
     @Autowired
