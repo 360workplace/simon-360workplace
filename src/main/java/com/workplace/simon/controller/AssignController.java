@@ -1,23 +1,20 @@
 package com.workplace.simon.controller;
 
 import com.workplace.simon.model.*;
-import com.workplace.simon.service.ExecutionService;
-import com.workplace.simon.service.KeepSessionService;
-import com.workplace.simon.service.SourceService;
-import com.workplace.simon.service.UserService;
+import com.workplace.simon.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:8080")
 @RequestMapping("/assign/")
 public class AssignController {
     @Autowired
@@ -106,7 +103,7 @@ public class AssignController {
         return "execution-assignation-creation-form";
     }
 
-    @PostMapping("execution/add")
+    @PostMapping(params = "save", path = "execution/add")
     public String addExecution(
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid Execution execution,
@@ -126,5 +123,44 @@ public class AssignController {
         this.getExecutionService().save(execution);
 
         return "redirect:/";
+    }
+
+    @PostMapping(params = "addItem", path = {"execution/add", "execution/add/{id}"})
+    public String addResource(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Execution execution,
+            HttpServletRequest request,
+            Model model
+    ) {
+        User currentUser = this.getKeepSessionService().setCurrentUser(userDetails, model);
+        execution.getResourceExecutions().add(new ResourceExecution());
+        model.addAttribute("sourceId", currentUser.getId());
+        model.addAttribute("allUsers", this.getUserService().findAll());
+
+        if (AjaxRequest.AJAX_HEADER_VALUE.equals(request.getHeader(AjaxRequest.AJAX_HEADER_NAME))) {
+            return "execution-assignation-creation-form::#resources";
+        } else {
+            return "execution-assignation-creation-form";
+        }
+    }
+
+    @PostMapping(params = "removeItem", path = {"execution/add", "execution/add/{id}"})
+    public String removeResource(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Execution execution,
+            @RequestParam("removeItem") int index,
+            HttpServletRequest request,
+            Model model
+    ) {
+        User currentUser = this.getKeepSessionService().setCurrentUser(userDetails, model);
+        execution.getResourceExecutions().remove(index);
+        model.addAttribute("sourceId", currentUser.getId());
+        model.addAttribute("allUsers", this.getUserService().findAll());
+
+        if (AjaxRequest.AJAX_HEADER_VALUE.equals(request.getHeader(AjaxRequest.AJAX_HEADER_NAME))) {
+            return "execution-assignation-creation-form::#resources";
+        } else {
+            return "execution-assignation-creation-form";
+        }
     }
 }

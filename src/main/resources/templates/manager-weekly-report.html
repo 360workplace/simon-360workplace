@@ -23,12 +23,13 @@
                                     <th>Fecha-Tema/Acción</th>
                                     <th>Semana Actual: Comentarios </th>
                                     <th>Acumulado</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="week : ${weeklyReport}">
                                     <td>
-                                        <div th:each="values : ${week.value.values}">
+                                        <div th:each="values : ${week.values}">
                                             <h5><strong><span th:text="${#dates.format(values[5], 'dd-MMM-yyyy')}"></span> <span th:text="${values[2]}"></span></strong></h5>
                                             <article th:utext="${values[3]}"></article>
                                             <p th:if="${values[1]} == true" class="alert alert-success">Solicitud de cierre</p>
@@ -43,17 +44,18 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div th:each="current : ${week.value.current}">
+                                        <div th:each="current : ${week.current}">
                                             <h5><strong th:text="${current[0]}"></strong></h5>
                                             <article th:utext="${current[1]}"></article>
                                         </div>
                                     </td>
                                     <td>
-                                        <div th:each="history : ${week.value.history}">
+                                        <div th:each="history : ${week.history}">
                                             <h5><strong th:text="${history[0]}"></strong></h5>
                                             <article th:utext="${history[1]}"></article>
                                         </div>
                                     </td>
+                                    <td></td>
                                 </tr>
                                 </tbody>
                             </table>

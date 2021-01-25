@@ -5,14 +5,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Deprecated
 @Service
 public class WeeklyReportFormatter implements Formatter {
     @Override
-    public Map format(List<Object[]> weeklyReport) {
-        HashMap<String, HashMap<String, List<Object[]>>> result = new HashMap<>();
+    public List format(List<Object[]> weeklyReport) {
+        ArrayList<HashMap<String, List<Object[]>>> result = new ArrayList<>();
         String id = "";
 
         HashMap<String, List<Object[]>> elements = new HashMap<>();
@@ -23,7 +22,7 @@ public class WeeklyReportFormatter implements Formatter {
                 ArrayList<Object[]> values = new ArrayList<>();
                 elements = new HashMap<>();
                 id = item[0].toString();
-                result.put(id, elements);
+                result.add(elements);
 
                 values.add(new Object[]{item[1], item[2], item[7], item[8], item[9], item[10], item[11]});
 

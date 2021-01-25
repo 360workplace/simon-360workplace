@@ -56,9 +56,6 @@ public class BaseLineController {
         return keepSessionService;
     }
 
-    private static final String AJAX_HEADER_NAME = "X-Requested-With";
-    private static final String AJAX_HEADER_VALUE = "XMLHttpRequest";
-
     @GetMapping("baseline/{userId}")
     public String showBaselineForm(
             @PathVariable("userId") Long userId,
@@ -79,7 +76,7 @@ public class BaseLineController {
         return "baseline-form";
     }
 
-    @PostMapping(params = "save", path = {"add", "add/{userId}"})
+    @PostMapping(params = "save", path = "add/{userId}")
     public String addBaseline(
             @PathVariable("userId") Long userId,
             @Valid Source baseLine,
@@ -101,7 +98,7 @@ public class BaseLineController {
         return "redirect:/";
     }
 
-    @RequestMapping(params = "addItem", path = {"add", "add/{userId}"})
+    @RequestMapping(params = "addItem", path = "add/{userId}")
     public String addRow(
             @PathVariable("userId") Long userId,
             Source baseLine,
@@ -109,14 +106,14 @@ public class BaseLineController {
     ) {
         baseLine.getResources().add(new Resource());
 
-        if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
+        if (AjaxRequest.AJAX_HEADER_VALUE.equals(request.getHeader(AjaxRequest.AJAX_HEADER_NAME))) {
             return "baseline-form::#items";
         } else {
             return "baseline-form";
         }
     }
 
-    @RequestMapping(params = "removeItem", path = {"add", "add/{userId}"})
+    @RequestMapping(params = "removeItem", path = "add/{userId}")
     public String removeRow(
             @PathVariable("userId") Long userId,
             final Source baseLine,
@@ -125,7 +122,7 @@ public class BaseLineController {
     ) {
         baseLine.getResources().remove(index);
 
-        if (AJAX_HEADER_VALUE.equals(request.getHeader(AJAX_HEADER_NAME))) {
+        if (AjaxRequest.AJAX_HEADER_VALUE.equals(request.getHeader(AjaxRequest.AJAX_HEADER_NAME))) {
             return "baseline-form::#items";
         } else {
             return "baseline-form";

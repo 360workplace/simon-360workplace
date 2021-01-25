@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -109,14 +110,13 @@ public class ExecutionController {
         return userSupervisor;
     }
 
-    @PostMapping("execution/add/{id}")
+    @PostMapping(params = "save", path = "execution/add/{id}")
     public String addExecution(
             @PathVariable("id") Long sourceId,
             @Valid Execution execution,
             BindingResult bindingResult,
             Model model
     ) {
-        // TODO - It is necessary select the correct source in order to select the correct database to save data.
         Source source = this.getSourceService().findById(sourceId)
                 .orElseThrow(() -> new IllegalArgumentException("The source id is not valid " + sourceId));
         model.addAttribute("source", source);
@@ -132,6 +132,45 @@ public class ExecutionController {
         this.getExecutionService().save(execution);
 
         return "redirect:/data/source/list/" + source.getType();
+    }
+
+    @PostMapping(params = "addItem", path = "execution/add/{id}")
+    public String addResource(
+            @PathVariable("id") Long sourceId,
+            Execution execution,
+            HttpServletRequest request,
+            Model model
+    ) {
+        execution.getResourceExecutions().add(new ResourceExecution());
+
+        model.addAttribute("sourceId", sourceId);
+        model.addAttribute("allUsers", this.getUserService().findAll());
+
+        if (AjaxRequest.AJAX_HEADER_VALUE.equals(request.getHeader(AjaxRequest.AJAX_HEADER_NAME))) {
+            return "execution-creation-form::#resources";
+        } else {
+            return "execution-creation-form";
+        }
+    }
+
+    @PostMapping(params = "removeItem", path = "execution/add/{id}")
+    public String removeResource(
+            @PathVariable("id") Long sourceId,
+            Execution execution,
+            @RequestParam("removeItem") int index,
+            HttpServletRequest request,
+            Model model
+    ) {
+        execution.getResourceExecutions().remove(index);
+
+        model.addAttribute("sourceId", sourceId);
+        model.addAttribute("allUsers", this.getUserService().findAll());
+
+        if (AjaxRequest.AJAX_HEADER_VALUE.equals(request.getHeader(AjaxRequest.AJAX_HEADER_NAME))) {
+            return "execution-creation-form::#resources";
+        } else {
+            return "execution-creation-form";
+        }
     }
 
     @GetMapping("policy/creation/{sourceLabel}/{sourceId}/{userId}")

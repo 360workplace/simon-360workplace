@@ -60,12 +60,24 @@
                                 </div>
 
                                 <div class="form-group col-md-11">
-                                    <label for="resources" class="col-form-label">Detalle Recursos asignados</label> <textarea th:field="*{resources}" class="form-control" id="resources" placeholder="Resources" style="margin-top: 0px; margin-bottom: 0px; height: 106px;"/> <span th:if="${#fields.hasErrors('resources')}" th:errors="*{resources}" class="text-danger"></span>
+                                    <label for="resources" class="col-form-label">Detalle Recursos asignados</label>
+
+                                    <fieldset id="resources">
+                                        <div th:each="resource, stat : ${resources}">
+                                            <label th:for="|resources[${stat.index}].detail|">Name</label>
+                                            <!-- This construct will render field name like this: "items[0].name" -->
+                                            <textarea th:field="${resources[__${stat.index}__].detail}"></textarea>
+
+                                            <button type="button" name="removeItem" th:value="${stat.index}">Remove item</button>
+                                        </div>
+                                    </fieldset>
+
+                                    <button type="button" name="addItem">Add item</button>
                                 </div>
 
                                 <div class="col-md-6">
                                     <input type="hidden" th:field="*{codeFrom}">
-                                    <input type="submit" class="btn btn-primary" value="Registrar">
+                                    <input type="submit" class="btn btn-primary" value="Registrar" name="save">
                                 </div>
                             </div>
                         </form>
@@ -85,6 +97,33 @@
             skin: 'bootstrap',
             menubar: false
         });
+
+        (function(){
+            // jQuery
+            function replaceItems (html) {
+                // Replace the <fieldset id="resources"> with a new one returned by server.
+                $('#resources').replaceWith($(html));
+            }
+
+            $('button[name="addItem"]').click(function (event) {
+                event.preventDefault();
+                var data = $('form').serialize();
+                // Add parameter "addItem" to POSTed form data. Button's name and value is
+                // POSTed only when clicked. Since "event.preventDefault();" prevents from
+                // actual clicking the button, following line will add parameter to form
+                // data.
+                data += 'addItem';
+                $.post('/assign/execution/add', data, replaceItems);
+            });
+
+            $('button[name="removeItem"]').click(function (event) {
+                event.preventDefault();
+                var data = $('form').serialize();
+                // Add parameter and index of item that is going to be removed.
+                data += 'removeItem=' + $(this).val();
+                $.post('/assign/execution/add', data, replaceItems);
+            });
+        })(jQuery)
     </script>
 </th:block>
 </html>

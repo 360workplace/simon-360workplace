@@ -32,6 +32,6 @@ public interface WeeklyOperatingReportRepository extends JpaRepository<WeeklyOpe
             "LEFT JOIN detalle_semana d ON d.weekly_operating_report_id = e.id\n" +
             "LEFT JOIN periodo_semanal p ON d.period_id = p.id\n" +
             "WHERE x.status <> 'C'\n" +
-            "ORDER BY x.id DESC, x.priority DESC", nativeQuery = true)
+            "ORDER BY x.priority DESC, x.id DESC", nativeQuery = true)
     List<Object[]> getWeeklyReportAllStatus();
 }

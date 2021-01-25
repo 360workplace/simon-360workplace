@@ -3,6 +3,8 @@ package com.workplace.simon.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ejecucion")
@@ -38,8 +40,8 @@ public class Execution {
     @Column(name = "status", length = 1)
     private String status;
 
-    @Column(columnDefinition = "text")
-    private String resources;
+    @OneToMany(mappedBy = "execution")
+    private List<ResourceExecution> resourceExecutions = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -113,11 +115,11 @@ public class Execution {
         this.status = status;
     }
 
-    public String getResources() {
-        return resources;
+    public List<ResourceExecution> getResourceExecutions() {
+        return resourceExecutions;
     }
 
-    public void setResources(String resources) {
-        this.resources = resources;
+    public void setResourceExecutions(List<ResourceExecution> resourceExecutions) {
+        this.resourceExecutions = resourceExecutions;
     }
 }
