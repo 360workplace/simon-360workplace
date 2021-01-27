@@ -37,6 +37,9 @@ public class EmployeeReportController {
     @Autowired
     private KeepSessionService keepSessionService;
 
+    @Autowired
+    private CurrentDate currentDate;
+
     public ExecutionService getExecutionService() {
         return executionService;
     }
@@ -59,6 +62,10 @@ public class EmployeeReportController {
 
     public KeepSessionService getKeepSessionService() {
         return keepSessionService;
+    }
+
+    public CurrentDate getCurrentDate() {
+        return currentDate;
     }
 
     @GetMapping("week/report")
@@ -121,7 +128,7 @@ public class EmployeeReportController {
 
     private WeekDetail appendWeeklyDetail(WeeklyOperatingReport weeklyOperatingReport) {
         WeekDetail weekDetail = new WeekDetail();
-        weekDetail.setDate(new Date(System.currentTimeMillis()));
+        weekDetail.setDate(this.getCurrentDate().getDate());
         weekDetail.setPeriod(this.getUtilDate().getPeriod());
 
         weeklyOperatingReport.getWeekDetails().add(
@@ -225,7 +232,7 @@ public class EmployeeReportController {
     ) {
         User currentUser = this.getKeepSessionService().setCurrentUser(userDetails, model);
         WeeklyNews weeklyNews = new WeeklyNews();
-        weeklyNews.setDate(new Date(System.currentTimeMillis()));
+        weeklyNews.setDate(this.getCurrentDate().getDate());
         weeklyNews.setSource(currentUser);
 
         model.addAttribute("weeklyNews", weeklyNews);

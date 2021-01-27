@@ -64,9 +64,9 @@ public class BaseLineController {
         Source baseLine = new Source();
         baseLine.getResources().add(new Resource());
         baseLine.setType(SourceType.BASE_LINE);
-        baseLine.setUserId(userId);
-        User currentUser = this.getUserService().findById(baseLine.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
+        User currentUser = this.getUserService().findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserSource()));
+        baseLine.setUserSource(currentUser);
 
         model.addAttribute("baseLine", baseLine);
         model.addAttribute("currentUser", currentUser);
@@ -84,8 +84,8 @@ public class BaseLineController {
             Model model
     ) {
         if (bindingResult.hasErrors()) {
-            User currentUser = this.getUserService().findById(baseLine.getUserId())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
+            User currentUser = this.getUserService().findById(baseLine.getUserSource().getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserSource()));
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("allUsers", this.getUserService().findAll());
             model.addAttribute("userid", userId);
@@ -138,8 +138,8 @@ public class BaseLineController {
     ) {
         if (bindingResult.hasErrors()) {
             baseLine.setId(id);
-            User currentUser = this.getUserService().findById(baseLine.getUserId())
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
+            User currentUser = this.getUserService().findById(baseLine.getUserSource().getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserSource()));
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("allUsers", this.getUserService().findAll());
 
@@ -180,8 +180,8 @@ public class BaseLineController {
     ) {
         Source baseLine = this.getSourceService().findById(baseLineId)
                 .orElseThrow(() -> new IllegalArgumentException("The id to gets the baseline record is not exists."));
-        User currentUser = this.getUserService().findById(baseLine.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserId()));
+        User currentUser = this.getUserService().findById(baseLine.getUserSource().getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user id : " + baseLine.getUserSource()));
 
         model.addAttribute("baseLine", baseLine);
         model.addAttribute("currentUser", currentUser);

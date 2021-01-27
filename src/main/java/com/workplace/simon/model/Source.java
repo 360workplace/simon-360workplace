@@ -13,8 +13,9 @@ public class Source {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "fuente")
-    private Long userId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fuente", referencedColumnName = "id")
+    private User userSource;
 
     @Column(name = "titulo")
     @NotBlank(message = "The Title is mandatory")
@@ -23,8 +24,9 @@ public class Source {
     @Column(columnDefinition = "text")
     private String detail;
 
-    @Column(name = "responsable")
-    private Long userSupervisor;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "responsable", referencedColumnName = "id")
+    private User userSupervisor;
 
     @Column(name = "fecha_inicial")
     private Date startDate;
@@ -47,12 +49,12 @@ public class Source {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUserSource() {
+        return userSource;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserSource(User userSource) {
+        this.userSource = userSource;
     }
 
     public String getTitle() {
@@ -71,11 +73,11 @@ public class Source {
         this.detail = detail;
     }
 
-    public Long getUserSupervisor() {
+    public User getUserSupervisor() {
         return userSupervisor;
     }
 
-    public void setUserSupervisor(Long userSupervisor) {
+    public void setUserSupervisor(User userSupervisor) {
         this.userSupervisor = userSupervisor;
     }
 

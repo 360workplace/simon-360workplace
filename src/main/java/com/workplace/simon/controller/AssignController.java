@@ -28,6 +28,9 @@ public class AssignController {
     @Autowired
     private KeepSessionService keepSessionService;
 
+    @Autowired
+    private CurrentDate currentDate;
+
     public UserService getUserService() {
         return userService;
     }
@@ -44,6 +47,10 @@ public class AssignController {
         return keepSessionService;
     }
 
+    public CurrentDate getCurrentDate() {
+        return currentDate;
+    }
+
     @GetMapping("request")
     public String showBaselineForm(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -52,8 +59,9 @@ public class AssignController {
         Source source = new Source();
         source.getResources().add(new Resource());
         User user = this.getUserService().findByUsername(userDetails.getUsername());
-        source.setUserId(user.getId());
+        source.setUserSource(user);
         source.setType(SourceType.ASSIGN_REQUEST);
+        source.setStartDate(this.getCurrentDate().getDate());
 
         model.addAttribute("assign", source);
         model.addAttribute("currentUser", user);

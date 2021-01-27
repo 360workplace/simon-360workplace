@@ -46,15 +46,15 @@
                                     <th>Detalle</th>
                                     <th>Responsable</th>
                                     <th>Fecha_inicial</th>
-                                    <th colspan="4"></th>
+                                    <th colspan="5"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="base : ${baseLine}">
                                     <td th:text="${base.title}"></td>
-                                    <td th:text="${base.userId}"></td>
+                                    <td th:text="${base.userId.firstname} + ' ' + ${base.userId.lastname}"></td>
                                     <td th:text="${T(org.jsoup.Jsoup).parse(#strings.abbreviate(base.detail,50)).text()}"></td>
-                                    <td th:text="${base.userSupervisor}"></td>
+                                    <td th:text="${base.userSupervisor.firstname} + ' ' + ${base.userSupervisor.lastname}"></td>
                                     <td th:text="${base.startDate}"></td>
                                     <td>
                                         <a th:href="@{/data/baseline/show/{baseLineId}(baseLineId=${base.id})}"
@@ -78,6 +78,7 @@
                                            class="btn btn-danger btn-sm" data-toggle="tooltip"
                                            data-placement="top"
                                            title="Archivar"><i class="fa fa-unlock-alt"></i></a></td>
+                                    <td></td>
                                 </tr>
                                 </tbody>
                             </table>

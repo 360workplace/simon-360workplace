@@ -18,7 +18,7 @@
                         <form action="#" th:action="@{/assign/add}" th:object="${assign}" method="post">
                             <div class="row">
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <label for="userSupervisor" class="col-form-label">Asignar Solicitud a:</label>
+                                    <label for="userSupervisor" class="col-form-label">Dirigir Solicitud a:</label>
                                     <select th:field="*{userSupervisor}" class="form-control" id="userSupervisor">
                                         <option value="">-- Select --</option>
                                         <option th:each="user : ${allUsers}"
@@ -36,6 +36,7 @@
 
                                 <input type="hidden" th:field="*{userId}" th:value="${userId}">
                                 <input type="hidden" th:field="*{type}">
+                                <input type="hidden" th:field="*{startDate}">
                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                     <input type="submit" class="btn btn-primary" name="save" value="Registrar">
                                 </div>

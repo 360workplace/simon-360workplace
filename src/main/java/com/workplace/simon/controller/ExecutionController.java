@@ -101,7 +101,7 @@ public class ExecutionController {
     private User getUserSupervisor(Source source) {
         User userSupervisor;
         if (source.getUserSupervisor() != null) {
-            userSupervisor = this.getUserService().findById(source.getUserSupervisor())
+            userSupervisor = this.getUserService().findById(source.getUserSupervisor().getId())
                     .orElse(new User());
         } else {
             userSupervisor = new User();
